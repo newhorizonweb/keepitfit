@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/keepitfit/static/css/main.31d6cfe0.css",
+    "main.js": "/keepitfit/static/js/main.9cf19bd7.js",
+    "static/js/453.398c7f09.chunk.js": "/keepitfit/static/js/453.398c7f09.chunk.js",
+    "index.html": "/keepitfit/index.html",
+    "main.9cf19bd7.js.map": "/keepitfit/static/js/main.9cf19bd7.js.map",
+    "453.398c7f09.chunk.js.map": "/keepitfit/static/js/453.398c7f09.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.9cf19bd7.js"
+  ]
+}
