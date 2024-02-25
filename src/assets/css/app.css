@@ -1,0 +1,56 @@
+/* 
+    Keep It Fit - created by uverit
+    Do not copy or distribute
+*/
+
+    /* Media breakpoints */
+    /* Width: 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+
+
+
+    /* General Styles */
+
+body{
+    background-image:url("../img/background-img.svg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+}
+
+.wrapper{
+    width:min(1024px, 100%);
+    margin:0 auto;
+    padding:0 var(--size6);
+}
+
+.glass{
+    --border:var(--size05);
+
+    position:relative;
+    border:none;
+    box-shadow:var(--boxShadow1);
+    border-radius:var(--size4);
+
+    backdrop-filter:blur(3px);
+    transition:var(--trans2);
+
+    &:before{
+        content:"";
+        padding:var(--border);
+        position:absolute;
+        
+        inset:0;
+        mask:linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask:linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite:xor;
+        mask-composite:exclude;
+
+        border-radius:var(--size4);
+        background:var(--grad1);
+        pointer-events:none;
+    }
+
+}

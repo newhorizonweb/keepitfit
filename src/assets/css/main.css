@@ -1,0 +1,105 @@
+/* 
+    Keep It Fit - created by uverit
+    Do not copy or distribute
+*/
+
+    /* Media breakpoints */
+    /* Width: 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+
+
+
+.main-page{
+    height:100dvh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    & .main-content{
+        width:100%;
+        margin-top:var(--size7);
+
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+
+    & .logo{
+        width:min(512px, 100%);
+    }
+
+    & .search-bar{
+        width:100%;
+        height:var(--size9);
+        margin-top:var(--size9);
+
+        display:flex;
+        background-color:var(--layoutWhite);
+
+        & input{
+            flex:1;
+            padding:var(--size6);
+
+            font-size:20px;
+            background-color:transparent;
+            border:none;
+
+            &::placeholder {
+                color:var(--txt-dark3);
+                opacity:1; /* Firefox (ew) */
+            }
+        }
+
+        & button{
+            height:100%;
+            aspect-ratio:1/1;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            background-color:transparent;
+            border:none;
+            cursor:pointer;
+        }
+
+        & button svg{
+            width:var(--size7);
+            
+            & *{
+                stroke:var(--txt-dark3);
+            }
+
+            .valid-search & *{
+                stroke:var(--color1a);
+            }
+
+        }
+ 
+    }
+
+    & .search-msg{
+        margin-top:var(--size6);
+        padding:var(--size4) var(--size9);
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        text-align:center;
+        background-color:var(--color3b);
+        border-radius:var(--size4);
+
+        opacity:0;
+        transition:var(--trans3);
+
+        &.search-msg-active{
+            opacity:1;
+        }
+
+    }
+
+}
+
+
