@@ -28,7 +28,7 @@
     --color4b:rgb(158,224,250,0.15);
 
     /* Layout BG */
-    --layoutWhite:rgb(255,255,255,0.15);
+    --layoutWhite:rgb(240,240,240,0.15);
 
 
         /* Text Colors */
@@ -45,6 +45,8 @@
         /* Box Shadows */
 
     --boxShadow1:0 0 8px 0 #DDD;
+
+    --boxShadowIns1:inset 0 0 8px 0 #c1c1c1;
 
 
     

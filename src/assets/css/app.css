@@ -11,7 +11,10 @@
     /* General Styles */
 
 body{
+    /* Adobe Stock attribution */
+    /* https://stock.adobe.com/pl/images/set-of-fruits-and-vegetables-doodle-vector-healthy-food-doodle-background/313011747?asset_id=313011747 */
     background-image:url("../img/background-img.svg");
+
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -29,11 +32,17 @@ body{
 
     position:relative;
     border:none;
-    box-shadow:var(--boxShadow1);
+    box-shadow:var(--boxShadow1), var(--boxShadowIns1);
     border-radius:var(--size4);
 
-    backdrop-filter:blur(3px);
+    backdrop-filter:blur(4px);
     transition:var(--trans2);
+
+    background-image:url("../img/noise-texture-big.svg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
 
     &:before{
         content:"";
