@@ -2,8 +2,11 @@
 
 
 import PageTransition from '../app/PageTransition';
-
 import version from '../../../package.json';
+
+import useSearchList from '../hooks/useSearchList';
+import SearchList from '../app/SearchList';
+import { searchValid } from '../functions/searchValid';
 
 const Details = () => {
 

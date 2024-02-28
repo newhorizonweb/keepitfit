@@ -7,11 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-// CSS
-import './assets/css/general.css';
-import './assets/css/app.css';
-
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

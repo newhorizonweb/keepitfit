@@ -1,16 +1,17 @@
+
+
+
 /* 
     Keep It Fit - created by uverit
     Do not copy or distribute
 */
 
-    /* Media breakpoints */
-    /* Width: 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+/* Media breakpoints - 1440, 1200, 1024, 900, 768, 540, 440, 320 */
 
 
 
 .main-page{
     height:100dvh;
-
     display:flex;
     justify-content:center;
     align-items:center;
@@ -18,30 +19,46 @@
     & .main-content{
         width:100%;
         height:100%;
-        padding-top:var(--size8);
+        padding-top:var(--size9);
 
         display:flex;
         flex-direction:column;
         justify-content:center;
         align-items:center;
+        transition:0.5s padding;
+
+        &:has(.search-list .list-elem):has(.search-input:focus){
+            padding-top:0;
+            padding-bottom:calc(var(--size10) * 2);
+        }
+
     }
 
     & .logo{
         width:min(512px, 100%);
     }
 
+    & .search-div{
+        width:100%;
+        position:relative;
+        margin-top:var(--size9);
+    }
+
     & .search-bar{
         width:100%;
         height:var(--size9);
-        margin-top:var(--size9);
 
         display:flex;
         background-color:var(--layoutWhite);
 
+        /* Praise the holy :has() */
+        &:has(~ .search-list .list-elem):has(.search-input:focus){
+            border-radius:var(--size4) var(--size4) 0 0;
+        }
+
         & .search-inner{
             flex:1;
             height:100%;
-            padding-left:var(--size6);
             position:relative;
 
             display:flex;
@@ -50,6 +67,7 @@
         }
 
         & .search-placeholder{
+            padding-left:var(--size6);
             position:absolute;
             display:none;
             pointer-events:none;
@@ -74,7 +92,7 @@
                 border-radius:100px;
 
                 &.typed-cursor--blink{
-                    animation:cursorBlink 3s infinite !important;
+                    animation:cursorBlink 1.5s infinite !important;
                 } 
 
             }
@@ -87,14 +105,15 @@
 
         & .search-input{
             width:100%;
-            min-width:0;
+            height:100%;
+            padding-left:var(--size6);
 
             font-size:20px;
             background-color:transparent;
             border:none;
 
-            overflow:hidden;
             white-space:nowrap;
+            overflow:hidden;
     
             & *{
                 display:inline;
@@ -117,7 +136,6 @@
 
             background-color:transparent;
             border:none;
-            cursor:pointer;
 
             & svg{
                 width:var(--size7);
@@ -129,17 +147,22 @@
                 
             }
 
-            &.valid-search svg{
-                animation:searchValidAnim 3s ease-in-out infinite;
+            .main-content:has(.list-link) &.valid-search{
+                cursor:pointer;
 
-                & *{
-                    stroke:var(--txt-dark1);
+                & svg{
+                    animation:searchValidAnim 3s ease-in-out infinite;
+
+                    & *{
+                        stroke:var(--txt-dark1);
+                    }
+
                 }
 
-            }
+                &:hover svg *{
+                    stroke:var(--color1a);
+                }
 
-            &:hover svg *{
-                stroke:var(--color1a);
             }
 
         }
@@ -171,17 +194,46 @@
 
 }
 
+@media screen and (height <= 768px) and (orientation: landscape){
+
+    .main-page{
+
+        & .main-content{
+    
+            &:has(.search-list .list-elem):has(.search-input:focus){
+                padding-top:var(--size6);
+            }
+    
+        }
+
+        & .logo{
+            width:auto;
+            max-height:25dvh;
+        }
+
+        & .search-div{
+            margin-top:var(--size7);
+        }
+        
+    }
+
+}
+
 @media screen and (height <= 540px) and (orientation: landscape){
 
     .main-page{
 
-        & .logo{
-            width:auto;
-            max-height:30dvh;
+        & .main-content{
+            padding-top:var(--size10);
+    
+            &:has(.search-list .list-elem):has(.search-input:focus){
+                padding-bottom:var(--size10);
+            }
+    
         }
 
-        & .search-bar{
-            margin-top:var(--size7);
+        & .logo{
+            max-height:27.5dvh;
         }
 
     }
@@ -193,7 +245,16 @@
     .main-page{
 
         & .main-content{
-            margin-top:0;
+            padding-top:var(--size8);
+    
+            &:has(.search-list .list-elem):has(.search-input:focus){
+                padding-bottom:var(--size9);
+            }
+    
+        }
+
+        & .search-div{
+            margin-top:var(--size6);
         }
 
         & .search-bar{
@@ -250,6 +311,23 @@
 
 }
 
+@media screen and (width <= 440px) and (height <= 540px){
+
+    .main-page{
+
+        & .main-content{
+    
+            &:has(.search-list .list-elem):has(.search-input:focus){
+                padding-top:var(--size6);
+                padding-bottom:var(--size10);
+            }
+    
+        }
+
+    }
+
+}
+
 @keyframes cursorBlink{
     0%, 20%{
         opacity:0;
@@ -278,4 +356,14 @@
     20%{
         transform:rotate(0deg);
     }
+}
+
+.list-elem{
+    display:flex;
+    gap:8px;
+}
+
+.list-img{
+    float:left;
+    height:30px;
 }

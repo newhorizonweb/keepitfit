@@ -10,6 +10,10 @@ import PageTransition from '../app/PageTransition';
 
 import '../../assets/css/main.css';
 import Logo from '../../assets/img/keep-it-fit-logo.svg';
+import useSearchList from '../hooks/useSearchList';
+
+import SearchList from '../app/SearchList';
+import { searchValid } from '../functions/searchValid';
 
 const Main = () => {
 
@@ -35,18 +39,6 @@ const Main = () => {
     // Display message
     const [displayMsg, setDisplayMsg] = useState(false);
 
-    // Validation regex
-    const regex = /^[a-zA-Z0-9,.()\- \p{L}]+$/u;
-    const invalidCharMsg = "Invalid characters detected";
-
-    // Too short
-    const minCharSearch = 3;
-    const tooShortMsg = `Use at least ${minCharSearch} characters`;
-
-    // Too long
-    const maxCharSearch = 128;
-    const tooLongMsg = `Use max ${maxCharSearch} characters`;
-
     // Placeholders (typing animation - typed.js)
     const typingContents = [
         "Brown Rice",
@@ -62,15 +54,13 @@ const Main = () => {
         "Roast^500ed Almonds",
         "Carrots",
         "Cabbage",
-        
         "Shrimp",
         "Maple Syrup",
         "Pea^1000nuts",
         "Peaches",
         "Oregano",
-        "Avodado",
-        "Asparagus"
-
+        "Avocado",
+        "Asparagus",
     ];
 
     const [showPlaceHolder, setShowPlaceholder] = useState(true);
@@ -80,16 +70,18 @@ const Main = () => {
 
         /* Functions */
 
-    // Go to the Details Page
-    // Display a message if the keyword is too short
+    // Go to the Details Page if there are results
+    // Display a message if the validation check was failed
     const goToDetails = () => {
 
-        if (isValid){
-            navigate(`${ urlPath }/details`);
-        } else {
-            setDisplayMsg(true);
+        if (document.querySelector(".main-content .list-link")){
+            if (isValid){
+                navigate(`${ urlPath }/details`);
+            } else {
+                setDisplayMsg(true);
+            }
         }
-        
+
     }
 
     const searchInpKeyDown = (e: KeyboardEvent<HTMLParagraphElement>) => {
@@ -99,18 +91,36 @@ const Main = () => {
         }
     }
 
-    const searchInpChange = (e: FormEvent<HTMLParagraphElement>) => {
+    const searchInpChange = (e: FormEvent<HTMLInputElement>) => {
         
-        const text = e.currentTarget.textContent;
+        // Search keyword
+        const text = (e.currentTarget.value ?? "").trim();
 
-        if (text !== null) {
-            setSearchVal(text);
+        // Search validation
+        const {
+            isValid: isSearchValid,
+            inpMsg: inpSearchMsg,
+            displayMsg: displaySearchMsg
+        } = searchValid(text);
+
+        setIsValid(isSearchValid);
+        setInpMsg(inpSearchMsg);
+
+        if (displaySearchMsg !== undefined){
+            setDisplayMsg(displaySearchMsg);
         }
         
-        if (text != ""){
+        // Update the search keyword & placeholder text behavior
+        if (text !== null && text !== ""){
+            setSearchVal(text);
             setShowPlaceholder(false);
         } else {
             setShowPlaceholder(true);
+        }
+
+        // Save the search to the LS to retrieve it on the details page
+        if (isValid){
+            localStorage.setItem("current-search-val", text);
         }
 
     }
@@ -123,41 +133,7 @@ const Main = () => {
         setIsFocused(false);
     };
 
-    // Update the search value (reactive searchVal -> localstorage)
-    useEffect(() => {
-
-        setIsValid(false);
-
-        switch (true){
-            case searchVal.length < minCharSearch:
-                setInpMsg(tooShortMsg);
-                break;
-
-            case searchVal.length > maxCharSearch:
-                setInpMsg(tooLongMsg);
-                break;
-
-            case !regex.test(searchVal):
-                const invalidChars = new Set(searchVal.match(/[^a-zA-Z0-9,.()\- \p{L}]/gu));
-                const invalidCharList = Array.from(invalidChars).join("");
-                setInpMsg(
-                    `${invalidCharMsg}: 
-                    ${invalidCharList ? invalidCharList : invalidCharList}`
-                );
-                break;
-
-            default:
-                setIsValid(true);
-                setDisplayMsg(false);
-                break;
-        }
-
-        if (isValid){
-            localStorage.setItem("current-search-val", searchVal);
-        }
-
-    }, [searchVal]);
-
+    // Search bar text animation
     const searchPhRef = useRef(null);
 
     useEffect(() => {
@@ -181,59 +157,74 @@ const Main = () => {
 
     }, []);
 
+    // API Data
+    const [listData, setListData] = useState<Partial<{ common: any[] }>>({});
+    const [listError, setListError] = useState("");
+    const { apiData, apiError } = useSearchList(searchVal, isValid);
+
+    useEffect(() => {
+
+        if (apiData){
+            setListData(apiData);
+        } else {
+            setListData({});
+        }
+        
+        if (apiError){
+            setListError(apiError as string);
+        } else {
+            setListError("");
+        }
+
+    }, [ apiData, apiError ]);
 
 
 
-    
+
+
     return (
         <section className="main-page wrapper">
 
             <div className="main-content">
+
                 <img className="logo" src={ Logo } alt="Keep It Fit Logo" />
 
-                {/* <div className="search-bar glass">
-                    <input
-                        type="text"
-                        
+                <div className="search-div">
+                    <div className="search-bar glass">
 
-                        onChange={ (e) => setSearchVal(e.currentTarget.value) }
-                        onKeyDown={ (e) => handleKeyDown(e) }
-                    />
-                    <button className={
-                        `${ isValid ? 'valid-search' : '' }`
-                    }
-                    onClick={ goToDetails }>
-                        { magGlassIcon }
-                    </button>
-                </div> */}
+                        <div className="search-inner">
 
-                <div className="search-bar glass">
+                            <div className={`
+                                search-placeholder
+                                ${ showPlaceHolder ? 'show-placeholder' : ''}
+                                ${ isFocused ? 'hide-cursor' : ''}
+                            `}>
+                                <span ref={searchPhRef}
+                                    className="search-placeholder-txt">
+                                </span>
+                            </div>
 
-                    <div className="search-inner">
+                            <input type="text" className="search-input"
+                                onInput={(e) => searchInpChange(e)}
+                                onKeyDown={ (e) => searchInpKeyDown(e) }
+                                onFocus={ searchInpFocus }
+                                onBlur={ searchInpBlur }></input>
 
-                        <div className={`
-                            search-placeholder
-                            ${ showPlaceHolder ? 'show-placeholder' : ''}
-                            ${ isFocused ? 'hide-cursor' : ''}
-                        `}>
-                            <span ref={searchPhRef}
-                                className="search-placeholder-txt">
-                            </span>
                         </div>
 
-                        <p className="search-input"
-                            onInput={(e) => searchInpChange(e)}
-                            onKeyDown={ (e) => searchInpKeyDown(e) }
-                            onFocus={ searchInpFocus }
-                            onBlur={ searchInpBlur }
-                            contentEditable="true">
-                        </p>
+                        <button className={`${ isValid ? 'valid-search' : '' }`}
+                            onClick={ goToDetails }>
+                            { magGlassIcon }
+                        </button>
+
                     </div>
 
-                    <button className={`${ isValid ? 'valid-search' : '' }`}
-                        onClick={ goToDetails }>
-                        { magGlassIcon }
-                    </button>
+                    { isValid &&
+                        <SearchList
+                            apiData={listData}
+                            apiError={listError}
+                        />
+                    }
 
                 </div>
 
@@ -243,6 +234,7 @@ const Main = () => {
                 }>
                     { inpMsg }
                 </p>
+
             </div>
 
         </section>
