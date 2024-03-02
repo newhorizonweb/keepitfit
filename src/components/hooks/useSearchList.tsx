@@ -13,7 +13,7 @@ const useSearchList = (searchVal: string, isValid: boolean) => {
     const { apiId, apiKey } = useContext(PageContext);
 
     useEffect(() => {
-
+        
         // Validation
         if (searchVal && isValid){
 

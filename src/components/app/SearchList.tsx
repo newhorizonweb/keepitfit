@@ -2,15 +2,25 @@
 
 
 import { useEffect, useState } from 'react';
-import '../../assets/css/searchList.css';
 
 import imgPlaceholder from '../../assets/img/img-placeholder.svg';
 import { nutriVal } from '../functions/nutriVal';
 
-const SearchList = (props: any) => {
+interface PropTypes{
+    page: string;
+    apiData: Partial<{ common: Array<Record<string, any>> }>;
+    apiError: string;
+    goToDetails: (searchVal: string) => void;
+    changeInpVal: (inpVal: string) => void;
+}
 
+const SearchList = (props: PropTypes) => {
+
+    // API Fetch data & error
     const apiData = props.apiData;
     const apiError = props.apiError;
+    const goToDetails = props.goToDetails;
+    const changeInpVal = props.changeInpVal;
 
     // No Results
     const [isNoResults, setIsNoResults] = useState(false);
@@ -18,12 +28,17 @@ const SearchList = (props: any) => {
     // API placeholder image
     const photoCheck = "nix-apple-grey";
 
+
+
+        /* Page Resize */
+
     // Search List on page resize
     const [listH, setListH] = useState(0);
     const [prevPos, setPrevPos] = useState(0);
 
     const handleResize = () => {
-        const searchBar = document.querySelector(".main-content .search-bar");
+
+        const searchBar = document.querySelector(".search-bar");
         const windowH = window.innerHeight;
         const paddings = 16 * 2;
 
@@ -40,8 +55,9 @@ const SearchList = (props: any) => {
                 requestAnimationFrame(handleResize);
             }
         }
+        
     };
-  
+
     useEffect(() => {
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -51,18 +67,46 @@ const SearchList = (props: any) => {
         };
     }, []);
 
+
+
+        /* Results */
+
+    // Display "No Results" when there are no results (who would've thought)
     useEffect(() => {
-        if (apiData && apiData.common?.length === 0) {
+        if (apiData && apiData.common?.length === 0){
             setIsNoResults(true);
         } else {
             setIsNoResults(false);
         }
     }, [apiData]);
 
+    // Call it on mouseDown or the Search Bar will lose focus
+    // Before the click is registered
+    const displayResults = (e: React.MouseEvent<HTMLDivElement>) => {
 
+        e.preventDefault();
+        const target = (e.target as HTMLDivElement).closest('.list-elem');
 
+        if (target){
+            const searchData = (target as HTMLDivElement).dataset.search;
+            if (searchData){
+                localStorage.setItem("current-search-val", searchData);
+                goToDetails(searchData as string);
+                changeInpVal(searchData as string);
+            }
 
+            // Remove the search bar focus = close the search list
+            const activeElement = document.activeElement as HTMLElement;
+            if (activeElement) {
+                activeElement.blur();
+            }
 
+        }
+        
+    };
+    
+
+    
     return (
         <div className="search-list glass">
             <div className="search-list-inner small-scroll"
@@ -71,7 +115,10 @@ const SearchList = (props: any) => {
                 { !apiError && apiData.common &&
                     apiData.common.map((item: any, index: number) => (
 
-                    <div className="list-elem list-link" key={index}>
+                    <div className="list-elem list-link"
+                        onMouseDown={ displayResults }
+                        data-search={ item.food_name }
+                        key={ index }>
                         
                         <div className="list-img">
                             { !item.photo.thumb.includes(photoCheck) &&
@@ -83,7 +130,7 @@ const SearchList = (props: any) => {
                             }
                         </div>
                         
-                        <p className="list-name">{item.food_name}</p>
+                        <p className="list-name">{ item.food_name }</p>
                         <p className="list-kcal">{ nutriVal(item, 208) } kcal</p>
                         
                     </div>

@@ -1,49 +1,69 @@
 
 
 
+import { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+
 import PageTransition from '../app/PageTransition';
 import version from '../../../package.json';
-
-import useSearchList from '../hooks/useSearchList';
-import SearchList from '../app/SearchList';
-import { searchValid } from '../functions/searchValid';
+import SearchBar from '../app/SearchBar';
 
 const Details = () => {
 
-    const searchVal = localStorage.getItem("current-search-val");
-
+    // Keep It Fit version
     const appVersion:string = version.version;
 
-    return (
-        <div className="details-page">
+        /* Search Bar Fetch API */
 
+    // Fetched API Data
+    const { searchedData } = useSelector(
+        ( state:{search:{searchedData:any}} ) => state.search
+    );
 
-            <section className="content">
+    // Error
+    const { searchedError } = useSelector(
+        ( state:{search:{searchedError:any}} ) => state.search
+    );
 
-                <main>
-
-                    <p>Details Page</p>
-                    <h3>Searched: { searchVal }</h3>
-
-                </main>
-
-                <nav>
-
-
-
-                </nav>
-
-            </section>
-
+    // Check if the json element value is not empty
+    const apiVal = (propVal: any) => {
+        return(
+            searchedData?.foods?.[0]?.[propVal]
+        );
+    };
 
 
 
-            
+    return(
+
+        <section className="details-page">
+
+            <main>
+
+                <h2>Food name - { apiVal("food_name") }</h2>
+                <h2>Error - { searchedError }</h2>
+                <p>Nf calories - { apiVal("nf_calories") }</p>
+
+                <p>Details Page</p>
+
+                <SearchBar
+                    page="details"
+                />
+
+            </main>
+
+            <nav>
+
+
+
+            </nav>
 
             <footer>
                 <p>v{ appVersion }</p>
             </footer>
-        </div>
+
+        </section>
+
     );
 }
  
