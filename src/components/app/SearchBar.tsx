@@ -53,6 +53,11 @@ const SearchBar = (props: PropTypes) => {
         localStorage.getItem("current-search-val") ?? ""
     );
 
+    // Change the value (when clicking an item in the search list)
+    const updateSearchLS = (val: string) => {
+        localStorage.setItem("current-search-val", val);
+    }
+
     // Check if the search input value is valid
     const [isValid, setIsValid] = useState(false);
 
@@ -66,9 +71,12 @@ const SearchBar = (props: PropTypes) => {
 
         /* Search Bar Fetch Data */
 
-    function loadData(searchVal: string){
+    function loadData(fetchVal: string){
 
-        searchData(searchVal, apiId, apiKey)
+        // Set the search bar value
+        setSearchInpVal(fetchVal);
+
+        searchData(fetchVal, apiId, apiKey)
         .then(({ apiData, apiError }) => {
 
             if (apiData){
@@ -124,7 +132,7 @@ const SearchBar = (props: PropTypes) => {
     // Page navigation
     const navigate = useNavigate();
 
-    const goToDetails = (searchVal: string) => {
+    const goToDetails = (fetchVal: string) => {
 
         if (isValid && document.querySelector(".list-link")){
 
@@ -139,7 +147,7 @@ const SearchBar = (props: PropTypes) => {
             } else if(page === "details"){
 
                 // Load the data on display page load
-                loadData(searchVal);
+                loadData(fetchVal);
 
             }
 
@@ -172,7 +180,7 @@ const SearchBar = (props: PropTypes) => {
 
     const searchInpKeyDown = (e: KeyboardEvent<HTMLParagraphElement>) => {
         if (e.key === "Enter"){
-            goToDetails(searchVal);
+            goToDetails(firstElem);
         }
     }
 
@@ -200,7 +208,7 @@ const SearchBar = (props: PropTypes) => {
     // Update the localStorage value
     // UseEffect prevents bugs when pasting something (ctrl+v) to the input
     useEffect(() => {
-        localStorage.setItem("current-search-val", searchVal);
+        updateSearchLS(searchVal);
     }, [searchVal]);
 
 
@@ -264,7 +272,23 @@ const SearchBar = (props: PropTypes) => {
 
     const [listData, setListData] = useState<Partial<{ common: any[] }>>({});
     const [listError, setListError] = useState("");
+    const [firstElem, setFirstElem] = useState("");
     const { apiData, apiError } = useSearchList(searchVal, true);
+    
+    // Update the first list element && LS search value
+    const setFirstListElem = (data: { common: any[] }) => {
+        
+        if (data && data.common && data.common.length > 0 && isValid){
+            const foodName = data.common[0].food_name;
+            updateSearchLS(foodName);
+            setFirstElem(foodName)
+        } else {
+            updateSearchLS("");
+            setFirstElem("")
+        }
+
+    }
+    
 
     // Update the search list on page load
     useEffect(() => {
@@ -277,6 +301,9 @@ const SearchBar = (props: PropTypes) => {
             setListData(apiData ?? {});
             setListError(apiError as string ?? "");
 
+            // Update the first list element
+            setFirstListElem((apiData as {common: any[]}))
+
         }
     }, []);
 
@@ -284,10 +311,11 @@ const SearchBar = (props: PropTypes) => {
     useEffect(() => {
         setListData(apiData ?? {});
         setListError(apiError as string ?? "");
+        setFirstListElem((apiData as {common: any[]}))
     }, [ apiData, apiError ]);
 
-    
 
+    
     return (
         <div className="search-section">
 
@@ -315,7 +343,7 @@ const SearchBar = (props: PropTypes) => {
                     </div>
 
                     <button className={`${ isValid ? 'valid-search' : '' }`}
-                        onClick={ () => goToDetails(searchVal) }>
+                        onClick={ () => goToDetails(firstElem) }>
                         { magGlassIcon }
                     </button>
 
