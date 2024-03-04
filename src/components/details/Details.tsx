@@ -20,11 +20,6 @@ const Details = () => {
         ( state:{search:{searchedData:any}} ) => state.search
     );
 
-    // Error
-    const { searchedError } = useSelector(
-        ( state:{search:{searchedError:any}} ) => state.search
-    );
-
     // Check if the json element value is not empty
     const apiVal = (propVal: any) => {
         return(
@@ -41,7 +36,6 @@ const Details = () => {
             <main>
 
                 <h2>Food name - { apiVal("food_name") }</h2>
-                <h2>Error - { searchedError }</h2>
                 <p>Nf calories - { apiVal("nf_calories") }</p>
 
                 <p>Details Page</p>

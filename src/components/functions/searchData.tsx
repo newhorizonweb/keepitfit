@@ -1,13 +1,17 @@
 
 
 
+import { errorResponse } from './errorResponse';
+
 export function searchData(searchVal: string, apiId: string, apiKey: string){
-    return new Promise<{ apiData: any, apiError: string }>((resolve, reject) => {
+    return new Promise<
+        { apiData: any, apiError: string }
+    >((resolve, reject) => {
 
         let apiData = {};
         let apiError = "";
 
-        if (!searchVal) {
+        if (!searchVal){
             resolve({ apiData, apiError });
             return;
         }
@@ -32,43 +36,14 @@ export function searchData(searchVal: string, apiId: string, apiKey: string){
             })
         })
         .then(response => {
+
             if (!response.ok){
-
-                let errorResp = "";
-                switch (response.status){
-                    case 400:
-                        errorResp = "Invalid input, please check your search query";
-                        break;
-                    case 401:
-                        errorResp = "Unauthorized access";
-                        break;
-                    case 403:
-                        errorResp = "Forbidden access";
-                        break;
-                    case 404:
-                        errorResp = "Search not found";
-                        break;
-                    case 409:
-                        errorResp = "Search conflict";
-                        break;
-                    case 500:
-                        errorResp = "Server error, try again later";
-                        break;
-                    default:
-                        errorResp = "Unknown error, try again later";
-                }
-
-                if (response.status) {
-                    apiError = response.status.toString() + " - " + errorResp;
-                } else {
-                    apiError = errorResp;
-                }
-
+                apiError = errorResponse(response.status);
                 reject(apiError);
-
             }
 
             return response.json();
+
         })
         .then(data => {
             apiData = data;

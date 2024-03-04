@@ -9,7 +9,6 @@ import '../../assets/css/searchBar.css';
 import { useDispatch } from 'react-redux';
 import {
     updateSearchedData,
-    updateSearchedError,
     clearSearchedVars
 } from "../redux/search";
 
@@ -33,13 +32,24 @@ const SearchBar = (props: PropTypes) => {
 
 
 
+        /* SVG */
+
+    // Magnifying glass icon
+    const magGlassIcon = (<svg className="search-icon mag-glass-icon" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle className='cls-1' cx='67.8' cy='67.9' r='62.8'/><path className='cls-1' d='M145.7,159,178,191.3c4.3,4.3,10.8,4.8,14.5,1.2h0c3.6-3.7,3.1-10.2-1.1-14.5L159,145.7c-22.1-22.1-43-37.1-46.7-33.4S123.6,136.9,145.7,159Z'/><path className='cls-1' d='M41.8,29.6a45.7,45.7,0,0,1,26-8,46.4,46.4,0,0,1,32.3,13'/></svg>);
+
+    // Loading Icon
+    const loadingIcon=(<svg className="search-icon loading-icon" height="100" width="100" viewBox="0 0 100 100"><circle className="loading-circle loading-bg" cx="50" cy="50" r="45"></circle><circle className="loading-circle loading-loader" cx="50" cy="50" r="45"></circle></svg>);
+
+
+
+
         /* Page */
 
     // Current page
     const page = props.page;
 
     // Page Context Variables
-    const { apiId, apiKey, urlPath, magGlassIcon } = useContext(PageContext);
+    const { apiId, apiKey, urlPath } = useContext(PageContext);
 
     // Redux dispatch (update variables)
     const dispatch = useDispatch();
@@ -61,11 +71,103 @@ const SearchBar = (props: PropTypes) => {
     // Check if the search input value is valid
     const [isValid, setIsValid] = useState(false);
 
-    // Search validation message
+
+
+        /* Loading Icon */
+
+    // Delay for the icon to disappear after the results are loaded
+    const removeLoadingTimeout:number = 500; // in ms
+
+    // Are the results loading (API fetch)
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [loadingTimeout, setLoadingTimeout] =
+        useState(undefined as ReturnType<typeof setTimeout> | undefined);
+
+    const startLoading = () => {
+        setIsLoading(true);
+    }
+
+    const stopLoading = () => {
+    
+        // Clear the previous timeout
+        // If there was another fetch request in the meantime
+        clearTimeout(loadingTimeout);
+
+        setLoadingTimeout(
+            setTimeout(() => {
+                setIsLoading(false)
+            }, removeLoadingTimeout)
+        )
+        
+    }
+
+    const stopLoadingForced = () => {
+
+        // Immediately clear the timeout caused by the search list fetch
+        // When the details results (search fetch) are loaded
+        clearTimeout(loadingTimeout);
+        setIsLoading(false);
+
+    }
+
+
+
+        /* Message Tile */
+
+    // The time after the "too long" message is displayed
+    // Usually it takes around 400ms
+    const delayTreshold = 5000; // in ms
+
+    // Display the message/error tile for this amount of time
+    const msgDisplayTime = 8000; // in ms
+
+    // Search validation/error message
     const [inpMsg, setInpMsg] = useState("");
 
     // Display message
     const [displayMsg, setDisplayMsg] = useState(false);
+
+    // Response delay messages
+    let respApiTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    const setApiMsgTimeout = () => {
+
+        clearTimeout(respApiTimeout);
+
+        respApiTimeout = setTimeout(() => {
+            setInpMsg("Still waiting, feels like paint drying.");
+            setDisplayMsg(true);
+        }, delayTreshold);
+
+    };
+
+    const clearApiMsgTimeout = () => {
+        clearTimeout(respApiTimeout)
+        setDisplayMsg(false);
+    }
+
+    // Error messages
+    const [msgTimeout, setMsgTimeout] =
+        useState<ReturnType<typeof setTimeout> | undefined>();
+
+    const showMsg = (message: string) => {
+
+        setInpMsg(message);
+        setDisplayMsg(true);
+        
+        setMsgTimeout(
+            setTimeout(() => {
+                setDisplayMsg(false);
+            }, msgDisplayTime)
+        );
+
+    }
+
+    const hideMsg = () => {
+        clearTimeout(msgTimeout);
+        setDisplayMsg(false);
+    }
 
 
 
@@ -76,18 +178,49 @@ const SearchBar = (props: PropTypes) => {
         // Set the search bar value
         setSearchInpVal(fetchVal);
 
+        // Delay message
+        setApiMsgTimeout();
+
+        // Loading Icon
+        startLoading();
+
         searchData(fetchVal, apiId, apiKey)
         .then(({ apiData, apiError }) => {
+
+            // Clear the timeout for the "too long response" msg
+            clearApiMsgTimeout();
 
             if (apiData){
                 dispatch(updateSearchedData(apiData));
             }
 
-            dispatch(updateSearchedError(apiError ?? "Unknown error"));
+            if (apiError){
+                showMsg(apiError);
+            }
             
         })
         .catch(error => {
-            dispatch(updateSearchedError(error ?? "Unknown error"));
+
+            // Clear the timeout for the "too long response" msg
+            clearApiMsgTimeout();
+
+            // Show the error message tile
+            if (error){
+                showMsg(error);
+            }
+
+        })
+        .finally(() => {
+
+            // Stop the loading icon
+            stopLoadingForced();
+
+            // Remove the search bar focus = close the search list
+            const activeElement = document.activeElement as HTMLElement;
+            if (activeElement){
+                activeElement.blur();
+            }
+
         });
 
     }
@@ -151,11 +284,6 @@ const SearchBar = (props: PropTypes) => {
 
             }
 
-        } else if (!isValid){
-
-            // Display a message if the validation check was failed
-            setDisplayMsg(true);
-
         }
         
     }
@@ -170,10 +298,11 @@ const SearchBar = (props: PropTypes) => {
         } = searchValid(searchVal);
 
         setIsValid(isSearchValid);
-        setInpMsg(inpSearchMsg);
 
-        if (displaySearchMsg !== undefined){
-            setDisplayMsg(displaySearchMsg);
+        if (displaySearchMsg){
+            showMsg(inpSearchMsg);
+        } else {
+            hideMsg();
         }
 
     }
@@ -273,7 +402,10 @@ const SearchBar = (props: PropTypes) => {
     const [listData, setListData] = useState<Partial<{ common: any[] }>>({});
     const [listError, setListError] = useState("");
     const [firstElem, setFirstElem] = useState("");
-    const { apiData, apiError } = useSearchList(searchVal, true);
+
+    // It's set to true instead of isValid
+    // Because it can't be NOT validated to save it to the localstorage
+    const { apiData, apiError, isListLoading } = useSearchList(searchVal, true);
     
     // Update the first list element && LS search value
     const setFirstListElem = (data: { common: any[] }) => {
@@ -288,10 +420,10 @@ const SearchBar = (props: PropTypes) => {
         }
 
     }
-    
 
     // Update the search list on page load
     useEffect(() => {
+
         if (page === "details"){
             
             // Check the validation
@@ -301,18 +433,36 @@ const SearchBar = (props: PropTypes) => {
             setListData(apiData ?? {});
             setListError(apiError as string ?? "");
 
+            if (apiError){
+                showMsg(apiError);
+            }
+
             // Update the first list element
             setFirstListElem((apiData as {common: any[]}))
 
         }
+        
     }, []);
 
     // Update the search list when the fetch data changes
     useEffect(() => {
+
         setListData(apiData ?? {});
         setListError(apiError as string ?? "");
-        setFirstListElem((apiData as {common: any[]}))
-    }, [ apiData, apiError ]);
+
+        if (isListLoading && isValid){
+            startLoading();
+        } else {
+            stopLoading();
+        }
+
+        if (apiError){
+            showMsg(apiError);
+        }
+      
+        setFirstListElem((apiData as {common: any[]}));
+
+    }, [ apiData, apiError, isListLoading ]);
 
 
     
@@ -344,7 +494,8 @@ const SearchBar = (props: PropTypes) => {
 
                     <button className={`${ isValid ? 'valid-search' : '' }`}
                         onClick={ () => goToDetails(firstElem) }>
-                        { magGlassIcon }
+                        { !isLoading && magGlassIcon }
+                        { isLoading && loadingIcon }
                     </button>
 
                 </div>

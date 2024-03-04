@@ -19,6 +19,8 @@ const SearchList = (props: PropTypes) => {
     // API Fetch data & error
     const apiData = props.apiData;
     const apiError = props.apiError;
+
+    // Functions
     const goToDetails = props.goToDetails;
     const changeInpVal = props.changeInpVal;
 
@@ -50,7 +52,7 @@ const SearchList = (props: PropTypes) => {
             setListH(listHeight);
 
             // If the position has changed, continue updating the height
-            if (prevPos !== listPos) {
+            if (prevPos !== listPos){
                 setPrevPos(listPos);
                 requestAnimationFrame(handleResize);
             }
@@ -97,7 +99,7 @@ const SearchList = (props: PropTypes) => {
 
             // Remove the search bar focus = close the search list
             const activeElement = document.activeElement as HTMLElement;
-            if (activeElement) {
+            if (activeElement){
                 activeElement.blur();
             }
 
@@ -137,15 +139,9 @@ const SearchList = (props: PropTypes) => {
 
                 ))}
 
-                { isNoResults &&
+                { isNoResults && !apiError &&
                     <div className="list-elem search-list-msg">
                         <p>No results</p>
-                    </div>
-                }
-
-                { apiError &&
-                    <div className="list-elem search-list-msg search-error">
-                        <p>{ apiError }</p>
                     </div>
                 }
 

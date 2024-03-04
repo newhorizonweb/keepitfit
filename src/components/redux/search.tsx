@@ -6,12 +6,10 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface SearchState {
 	searchedData: {};
-	searchedError: string | null;
 }
 
 const initialState: SearchState = {
 	searchedData: {},
-	searchedError: null,
 }
 
 export const counterSlice = createSlice({
@@ -25,13 +23,8 @@ export const counterSlice = createSlice({
 			state.searchedData = action.payload;
 		},
 
-		updateSearchedError: (state, action: PayloadAction<string>) => {
-			state.searchedError = action.payload;
-		},
-
 		clearSearchedVars: state => {
             state.searchedData = initialState.searchedData;
-            state.searchedError = initialState.searchedError;
         },
 
 	},
@@ -40,7 +33,6 @@ export const counterSlice = createSlice({
 
 export const {
 	updateSearchedData,
-	updateSearchedError,
 	clearSearchedVars
 } = counterSlice.actions;
 
