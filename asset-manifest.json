@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/keepitfit/static/css/main.e7a29aa2.css",
-    "main.js": "/keepitfit/static/js/main.30b6924d.js",
+    "main.css": "/keepitfit/static/css/main.fba2963e.css",
+    "main.js": "/keepitfit/static/js/main.8c16ea6a.js",
     "static/js/453.398c7f09.chunk.js": "/keepitfit/static/js/453.398c7f09.chunk.js",
     "static/media/keep-it-fit-logo.svg": "/keepitfit/static/media/keep-it-fit-logo.62c5dc7ab2cc6628f44e8d43324ce631.svg",
     "static/media/background-img.svg": "/keepitfit/static/media/background-img.854a7da5e93620dac497.svg",
@@ -10,12 +10,12 @@
     "static/media/img-placeholder.svg": "/keepitfit/static/media/img-placeholder.56bb3c565d81cbca9f4b6026c4c84b3f.svg",
     "static/media/noise-texture-big.svg": "/keepitfit/static/media/noise-texture-big.28d67d198f15858d5c8a.svg",
     "index.html": "/keepitfit/index.html",
-    "main.e7a29aa2.css.map": "/keepitfit/static/css/main.e7a29aa2.css.map",
-    "main.30b6924d.js.map": "/keepitfit/static/js/main.30b6924d.js.map",
+    "main.fba2963e.css.map": "/keepitfit/static/css/main.fba2963e.css.map",
+    "main.8c16ea6a.js.map": "/keepitfit/static/js/main.8c16ea6a.js.map",
     "453.398c7f09.chunk.js.map": "/keepitfit/static/js/453.398c7f09.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e7a29aa2.css",
-    "static/js/main.30b6924d.js"
+    "static/css/main.fba2963e.css",
+    "static/js/main.8c16ea6a.js"
   ]
 }
