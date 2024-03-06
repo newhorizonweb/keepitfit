@@ -14,6 +14,7 @@
 
 .search-section{
     width:100%;
+    position:relative;
 }
 
     /* Search Bar */
@@ -229,10 +230,11 @@
 
     display:none;
     border-radius:0 0 var(--size4) var(--size4);
+    background-color:var(--layoutWhite2);
 
     overflow:clip;
     transition:var(--trans2);
-    z-index:100;
+    z-index:200;
 
     &:has(.list-elem){
         display:block;
@@ -337,6 +339,14 @@
 
 }
 
+.details-page .search-list.glass{
+
+    & .search-list-inner{
+        max-height:max(200px, 50vh) !important;
+    }
+    
+}
+
         /* Search List - Media */
 
 @media screen and (width <= 540px){
@@ -404,6 +414,13 @@
         opacity:1;
     }
 
+}
+
+.details-page .search-msg{
+    position:absolute;
+    top:100%;
+    left:0;
+    z-index:100;
 }
 
         /* Search Message - Media */

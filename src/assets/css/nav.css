@@ -1,0 +1,504 @@
+
+
+
+/* 
+    Keep It Fit - created by uverit
+    Do not copy or distribute
+*/
+
+/* Media breakpoints - 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+
+
+
+.details-page nav{
+    --btnSize:var(--size9);
+    --iconSize:var(--size7);
+
+    width:calc(var(--size9) * 4);
+    position:sticky;
+    top:var(--size7);
+
+    display:flex;
+    flex-direction:column;
+    gap:var(--size7);
+    transition:var(--trans2);
+
+
+
+        /* Nav Buttons */
+
+    & .nav-buttons{
+        width:100%;
+        height:var(--btnSize);
+        display:flex;
+
+        background-color:var(--color4b);
+        overflow:clip;
+
+        & .nav-btn{
+            flex:1;
+            aspect-ratio:1/1;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            cursor:pointer;
+            transition:var(--trans2);
+
+            & svg{
+                height:var(--iconSize);
+
+                & *{
+                    fill:none;
+                    stroke:var(--txt-dark1);
+                    stroke-width:12px;
+                    stroke-linecap:round;
+                    stroke-miterlimit:10;
+                    transition:var(--trans2);
+
+                    &.nostroke{
+                        fill:var(--txt-dark1);
+                        stroke-width:0;
+                    }
+
+                }
+
+            }
+
+            &:hover,
+            &.active{
+                background-color:var(--color2b);
+
+                & *{
+                    stroke:var(--txt-light1);
+
+                    &.nostroke{
+                        fill:var(--txt-light1);
+                    }
+
+                }
+
+            }
+
+            &:hover svg{
+                animation:navAnimElem 0.6s ease-in-out; 
+                
+                .nav-user & .anim-elem1{
+                    animation:navAnimElem1 0.6s ease-in-out;
+                    transform-origin:center;
+                }
+
+                .nav-bookmark & .anim-elem1{
+                    animation:navAnimElem2 0.6s ease-in-out;
+                    transform-origin:center 20%;
+                }
+
+                .nav-favorites & .anim-elem1{
+                    animation:navAnimElem3 0.6s ease-in-out;
+                    transform-origin:144px 4px;
+                }
+
+                .nav-pdf &{
+
+                    & .anim-elem1{
+                        animation:navAnimElem4 0.6s ease-in-out;
+                        transform-origin:159px 39px;
+                    }
+
+                    & .anim-elem2{
+                        animation:navAnimElem4b 0.6s ease-in-out;
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+        /* Nav Content */
+
+    & .nav-content{
+        width:100%;
+        background-color:var(--color4b);
+    }
+
+    & .nav-content .nav-scroll{
+        padding:var(--size7);
+
+        display:flex;
+        flex-direction:column;
+        gap:var(--size4);
+
+        & .scroll-link{
+            padding-left:var(--size2);
+            position:relative;
+            
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
+
+            transition:var(--trans2);
+            cursor:pointer;
+
+            &:hover{
+                color:var(--color2a);
+            }
+
+            &:before{
+                content:"";
+                height:100%;
+                min-width:var(--size05);
+
+                position:absolute;
+                top:0;
+                left:0;
+
+                border-radius:100px;
+                transition:var(--trans2);
+            }
+
+            &.active:before{
+                background-color:var(--color2a);
+            }
+
+        }
+
+    }
+
+}
+
+
+
+        /* Nav - Burger Button */
+
+.details-page nav .nav-buttons .burger-btn{
+    --spanPos:calc( (var(--iconSize) - (var(--size05) * 3)) / 2 );
+
+    display:none;
+
+    & .burger-inner{
+        height:var(--iconSize);
+        aspect-ratio:1/1;
+        position:relative;
+    }
+
+    & span{
+        width:var(--iconSize);
+        height:calc(var(--size05) * 3);
+
+        position:absolute;
+        left:50%;
+        transform:translate(-50%, 0) rotate(0deg);
+
+        border:solid var(--size05) var(--txt-dark1);
+        border-radius:100px;
+        transition:var(--trans2);
+
+        &:is(:nth-child(1), :nth-child(4)){
+            transition:all var(--trans2) 0.05s, border-color var(--trans2) 0s;
+        }
+        &:nth-child(1){
+            top:0;
+        }
+        &:is(:nth-child(2), :nth-child(3)){
+            top:var(--spanPos);
+        }
+        &:nth-child(4){
+            top:calc(var(--spanPos) * 2);
+        }
+
+        &:nth-child(3):after{
+            content:"";
+            width:0;
+            height:0px;
+
+            position:absolute;
+            top:50%;
+            left:50%;
+
+            transform:translate(-50%, -50%) rotate(-135deg);
+            background-color:var(--color4a);
+            transition-delay:0.1s;
+        }
+
+    }
+
+    &:hover{
+
+        & span{
+            border-color:var(--txt-light1);
+
+            &:is(:nth-child(1), :nth-child(4)){
+                width:110%;
+            }
+    
+            &:is(:nth-child(2), :nth-child(3)){
+                width:90%;
+            }
+
+        }
+
+    }
+
+    .nav-open &{
+
+        & span{
+            width:calc(141% - (var(--size05) * 2));
+            background-color:var(--color4a);
+            border-color:var(--txt-dark1);
+        }
+
+        &:hover span{
+            background-color:var(--color2a);
+            border-color:var(--txt-light1);
+
+            &:nth-child(3):after{
+                background-color:var(--color2a);
+            }
+
+        }
+
+        & span:is(:nth-child(1), :nth-child(4)){
+            width:0;
+            border-left:0;
+            border-right:0;
+            transition:0.15s ease-in;
+        }
+
+        & span:is(:nth-child(1), :nth-child(3), :nth-child(4)){
+            transition-property:all, transform;
+            transition-timing-function:ease-in, ease-in;
+            transition-duration:0.1s, 0.2s;
+        }
+        
+        & span:nth-child(2){
+            transform:translate(-50%, 0) rotate(45deg);
+            transition-property:all, transform, width;
+            transition-timing-function:ease-in, ease-in, ease-in;
+            transition-duration:0.1s, 0.2s, 0.4s;
+        }
+        
+        & span:nth-child(3){
+            transform:translate(-50%, 0) rotate(-45deg);
+        }
+        
+        & span:nth-child(3):after{
+            width:var(--size3);
+            height:var(--size05);
+            transform:translate(-50%, -50%) rotate(-90deg);
+        }
+        
+        & span:is(:nth-child(1), :nth-child(4)){
+            width:0;
+        }
+
+    }
+
+}
+
+
+
+    /* Nav - media */
+
+@media screen and (width <= 900px){
+
+    .details-page nav{
+        width:var(--btnSize);
+        position:fixed;
+        top:var(--size6);
+        right:var(--size6);
+
+        align-items:flex-end;
+        z-index:10000;
+
+        & .nav-content{
+            width:0;
+            background-color:var(--color4c);
+            filter:none;
+            animation:navContentClose var(--trans2) forwards;
+        }
+
+        & .nav-buttons{
+            width:100%;
+            background-color:var(--color4c);
+            filter:none;
+
+            & .nav-btn:not(.burger-btn){
+                width:0;
+            }
+
+            & .burger-btn{
+                display:flex;
+            }
+
+        }
+
+            /* Nav Open */
+
+        &.nav-open{
+            width:calc(var(--btnSize) * 5);
+
+            & .nav-content{
+                width:100%;
+                animation:navContentOpen var(--trans2) forwards;
+            }
+
+            & .nav-buttons{
+                width:100%;
+
+                & .nav-btn{
+                    width:var(--btnSize);
+                }
+
+            }
+
+        }
+            
+    }
+
+}
+
+@media screen and (width <= 440px){
+
+    .details-page nav{
+        --btnSize:var(--size8);
+        --iconSize:28px;
+
+        & .nav-content .nav-scroll{
+            padding:var(--size6);
+        }
+
+    }
+
+}
+
+
+
+        /* Nav - Keyframes */
+
+@keyframes navContentOpen{
+    0%{
+        opacity:0;
+    }
+    10%, 100%{
+        opacity:1;
+    }
+}
+@keyframes navContentClose{
+    0%, 90%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+    }
+}
+
+@keyframes navAnimElem{
+    0%{
+        transform:rotate(0deg);
+    }
+    25%{
+        transform:rotate(-15deg);
+    }
+    50%{
+        transform:rotate(10deg);
+    }
+    70%{
+        transform:rotate(-5deg);
+    }
+    100%{
+        transform:rotate(0deg);
+    }
+}
+
+@keyframes navAnimElem1{
+    0%{
+        transform:rotate(0deg);
+    }
+    30%{
+        transform:rotate(-30deg);
+    }
+    55%{
+        transform:rotate(20deg);
+    }
+    80%{
+        transform:rotate(-10deg);
+    }
+    100%{
+        transform:rotate(0deg);
+    }
+}
+
+@keyframes navAnimElem2{
+    0%{
+        transform:perspective(250px) rotateX(0deg) scale(1);
+    }
+    40%{
+        transform:perspective(250px) rotateX(-14deg) scale(0.94);
+    }
+    70%{
+        transform:perspective(250px) rotateX(10deg) scale(0.94);
+    }
+    100%{
+        transform:perspective(250px) rotateX(0deg) scale(1);
+    }
+}
+
+@keyframes navAnimElem3{
+    0%{
+        transform:perspective(250px) rotateX(0deg);
+    }
+    30%{
+        transform:perspective(250px) rotateX(-40deg);
+    }
+    55%{
+        transform:perspective(250px) rotateX(30deg);
+    }
+    80%{
+        transform:perspective(250px) rotateX(-20deg);
+    }
+    100%{
+        transform:perspective(250px) rotateX(0deg);
+    }
+}
+
+@keyframes navAnimElem4{
+    0%{
+        transform:perspective(250px) rotateX(0) rotateY(0);
+    }
+    30%{
+        transform:perspective(250px) rotateX(-40deg) rotateY(-25deg);
+    }
+    55%{
+        transform:perspective(250px) rotateX(-10deg) rotateY(-5deg);
+    }
+    75%{
+        transform:perspective(250px) rotateX(-40deg) rotateY(-25deg);
+    }
+    100%{
+        transform:perspective(250px) rotateX(0) rotateY(0);
+    }
+}
+
+@keyframes navAnimElem4b{
+    0%{
+        transform:translate(0, 0);
+    }
+    30%{
+        transform:translate(24px, 0);
+    }
+    55%{
+        transform:translate(0, 0);
+    }
+    80%{
+        transform:translate(8px, 0);
+    }
+    100%{
+        transform:translate(0, 0);
+    }
+}

@@ -1,17 +1,29 @@
 
 
 
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { useSelector } from 'react-redux';
 
 import PageTransition from '../app/PageTransition';
-import version from '../../../package.json';
+
+import { PageContext } from '../../App';
+import { Link } from 'react-router-dom';
+
 import SearchBar from '../app/SearchBar';
+import DetailsTop from './DetailsTop';
+import Nav from './Nav';
+import Footer from './Footer';
+
+import '../../assets/css/details.css';
+import Logo from '../../assets/img/keep-it-fit-logo.svg';
+
 
 const Details = () => {
 
-    // Keep It Fit version
-    const appVersion:string = version.version;
+    // Page Context Variables
+    const { urlPath } = useContext(PageContext);
+
+
 
         /* Search Bar Fetch API */
 
@@ -20,41 +32,43 @@ const Details = () => {
         ( state:{search:{searchedData:any}} ) => state.search
     );
 
-    // Check if the json element value is not empty
-    const apiVal = (propVal: any) => {
-        return(
-            searchedData?.foods?.[0]?.[propVal]
-        );
-    };
-
 
 
     return(
 
-        <section className="details-page">
+        <section className={
+            "details-page wrapper " +
+            `${ !searchedData.foods ? 'details-placeholder' : ''}`
+        }>
 
-            <main>
+            <header id="header">
+                <Link to={ urlPath }>
+                    <img className="logo" src={ Logo }
+                        alt="Keep It Fit Logo"
+                    />
+                </Link>
+            </header>
 
-                <h2>Food name - { apiVal("food_name") }</h2>
-                <p>Nf calories - { apiVal("nf_calories") }</p>
+            <section className="details-body">
 
-                <p>Details Page</p>
+                <main>
 
-                <SearchBar
-                    page="details"
-                />
+                    <SearchBar
+                        page="details"
+                    />
 
-            </main>
-
-            <nav>
+                    <DetailsTop />
+                    
 
 
 
-            </nav>
+                </main>
 
-            <footer>
-                <p>v{ appVersion }</p>
-            </footer>
+                <Nav />
+                
+            </section>
+
+            <Footer />
 
         </section>
 

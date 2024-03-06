@@ -1,0 +1,83 @@
+
+
+
+/* 
+    Keep It Fit - created by uverit
+    Do not copy or distribute
+*/
+
+/* Media breakpoints - 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+
+
+
+.details-page footer{
+    width:100%;
+    margin-top:var(--size9);
+    padding-top:calc(var(--size9) + var(--size05));
+    padding-bottom:var(--size9);
+
+    display:flex;
+    justify-content:space-between;
+    border-top:solid var(--size05) var(--color1a);
+
+    & .footer-credits{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+
+        & img{
+            height:var(--size9);
+            margin-bottom:var(--size7);
+        }
+
+        & .footer-api-logo{
+            display:none;
+        }
+
+        & h5{
+            text-align:center;
+        }
+
+    }
+
+    & .footer-attrib{
+        & img{
+            height:var(--size9);
+        }
+    }
+
+}
+
+
+
+@media screen and (width <= 768px){
+
+    .details-page footer{
+        justify-content:center;
+    
+        & .footer-credits{
+            align-items:center;
+
+            & a{
+                width:min(256px, 100%);
+            }
+    
+            & img{
+                height:auto;
+                width:100%;
+                margin-bottom:var(--size7);
+            }
+    
+            & .footer-api-logo{
+                display:block;
+            }
+    
+        }
+    
+        & .footer-attrib{
+            display:none;
+        }
+    
+    }
+
+}

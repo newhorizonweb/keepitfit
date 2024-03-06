@@ -3,7 +3,7 @@
 
 // React
 import { FormEvent, KeyboardEvent, useContext, useEffect, useRef, useState } from 'react';
-import '../../assets/css/searchBar.css';
+import '../../assets/css/search-bar.css';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -134,6 +134,7 @@ const SearchBar = (props: PropTypes) => {
     const setApiMsgTimeout = () => {
 
         clearTimeout(respApiTimeout);
+        clearTimeout(msgTimeout);
 
         respApiTimeout = setTimeout(() => {
             setInpMsg("Still waiting, feels like paint drying.");
@@ -152,6 +153,9 @@ const SearchBar = (props: PropTypes) => {
         useState<ReturnType<typeof setTimeout> | undefined>();
 
     const showMsg = (message: string) => {
+
+        clearTimeout(respApiTimeout);
+        clearTimeout(msgTimeout);
 
         setInpMsg(message);
         setDisplayMsg(true);
@@ -172,6 +176,14 @@ const SearchBar = (props: PropTypes) => {
 
 
         /* Search Bar Fetch Data */
+
+    // Search Bar Input Value
+    const [searchInpVal, setSearchInpVal] = useState("");
+
+    // Change the value (when clicking an item in the search list)
+    const changeInpVal = (inpVal: string) => {
+        setSearchInpVal(inpVal)
+    }
 
     function loadData(fetchVal: string){
 
@@ -225,20 +237,14 @@ const SearchBar = (props: PropTypes) => {
 
     }
 
-    // Search Bar Input Value
-    const [searchInpVal, setSearchInpVal] = useState("");
-
-    // Change the value (when clicking an item in the search list)
-    const changeInpVal = (inpVal: string) => {
-        setSearchInpVal(inpVal)
-    }
-
     useEffect(() => {
         
         if (page === "details"){
 
+          
             const { isValid: isSearchValid } = searchValid(searchVal);
-      
+
+            
             if (isSearchValid){
 
                 // Load the API data
@@ -268,6 +274,9 @@ const SearchBar = (props: PropTypes) => {
     const goToDetails = (fetchVal: string) => {
 
         if (isValid && document.querySelector(".list-link")){
+
+            // Update the keyword to the localStorage
+            updateSearchLS(fetchVal);
 
             if (page === "main"){
 
@@ -333,12 +342,6 @@ const SearchBar = (props: PropTypes) => {
         }
 
     }
-
-    // Update the localStorage value
-    // UseEffect prevents bugs when pasting something (ctrl+v) to the input
-    useEffect(() => {
-        updateSearchLS(searchVal);
-    }, [searchVal]);
 
 
 
@@ -412,11 +415,9 @@ const SearchBar = (props: PropTypes) => {
         
         if (data && data.common && data.common.length > 0 && isValid){
             const foodName = data.common[0].food_name;
-            updateSearchLS(foodName);
             setFirstElem(foodName)
         } else {
-            updateSearchLS("");
-            setFirstElem("")
+            setFirstElem("");
         }
 
     }
@@ -470,7 +471,7 @@ const SearchBar = (props: PropTypes) => {
         <div className="search-section">
 
             <div className="search-div">
-                <div className="search-bar glass">
+                <div className="search-bar glass" id="search-bar">
 
                     <div className="search-inner">
 

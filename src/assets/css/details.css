@@ -10,30 +10,40 @@
 
 
 
-    /* General Styles */
+.details-page{
+    
+    & header{
+        width:100%;
+        padding:var(--size7) 0 var(--size9);
 
-html{
-    scroll-behavior:smooth;
+        display:flex;
+        justify-content:center;
+        
+        & .logo{
+            height:var(--size9);
+        }
+
+    }
+
+    & .details-body{
+        max-width:100%;
+        display:flex;
+        align-items:flex-start;
+        gap:var(--size7);
+
+        & main{
+            flex:1;
+        }
+
+    }
+
 }
 
-body{
-    /* Adobe Stock attribution */
-    /* https://stock.adobe.com/pl/images/set-of-fruits-and-vegetables-doodle-vector-healthy-food-doodle-background/313011747?asset_id=313011747 */
-    background-image:url("../img/background-img.svg");
 
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-}
 
-.wrapper{
-    width:min(1024px, 100%);
-    margin:0 auto;
-    padding:0 var(--size6);
-}
+    /* Placeholder */
 
-.glass{
+.details-page.details-placeholder .ph{ /* basically .glass + animation */
     --border:var(--size05);
 
     position:relative;
@@ -46,6 +56,11 @@ body{
     background-position:center;
     background-repeat:no-repeat;
     background-attachment:fixed;
+
+    background:var(--layoutShine1a); /* Fallback */
+
+    background-size:100vw;
+    animation:phAnimation 2s linear forwards infinite;
 
     filter:drop-shadow(-10px 10px 6px var(--txt-light2));
     backdrop-filter:blur(4px);
@@ -69,4 +84,13 @@ body{
         pointer-events:none;
     }
 
+}
+
+@keyframes phAnimation{
+    0%{
+        background-position:-50vw 0;
+    }
+    100%{
+        background-position:50vw 0;
+    }
 }
