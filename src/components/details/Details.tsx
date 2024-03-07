@@ -15,6 +15,7 @@ import Nav from './Nav';
 import Footer from './Footer';
 
 import '../../assets/css/details.css';
+import '../../assets/css/print-pdf.css';
 import Logo from '../../assets/img/keep-it-fit-logo.svg';
 
 
@@ -58,9 +59,6 @@ const Details = () => {
                     />
 
                     <DetailsTop />
-                    
-
-
 
                 </main>
 

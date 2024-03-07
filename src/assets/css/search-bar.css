@@ -408,10 +408,12 @@
     border-radius:var(--size4);
 
     opacity:0;
+    pointer-events:none;
     transition:var(--trans3);
 
     &.search-msg-active{
         opacity:1;
+        pointer-events:all;
     }
 
 }

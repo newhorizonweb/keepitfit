@@ -84,6 +84,16 @@ const SearchBar = (props: PropTypes) => {
     const [loadingTimeout, setLoadingTimeout] =
         useState(undefined as ReturnType<typeof setTimeout> | undefined);
 
+    useEffect(() => {
+
+        if (isLoading){
+            document.body.classList.add("loading-data");
+        } else {
+            document.body.classList.remove("loading-data");
+        }
+        
+    }, [isLoading])
+
     const startLoading = () => {
         setIsLoading(true);
     }
@@ -190,6 +200,9 @@ const SearchBar = (props: PropTypes) => {
         // Set the search bar value
         setSearchInpVal(fetchVal);
 
+        // Set the first list element value
+        setFirstElem(fetchVal);
+
         // Delay message
         setApiMsgTimeout();
 
@@ -241,10 +254,8 @@ const SearchBar = (props: PropTypes) => {
         
         if (page === "details"){
 
-          
             const { isValid: isSearchValid } = searchValid(searchVal);
 
-            
             if (isSearchValid){
 
                 // Load the API data
@@ -471,7 +482,8 @@ const SearchBar = (props: PropTypes) => {
         <div className="search-section">
 
             <div className="search-div">
-                <div className="search-bar glass" id="search-bar">
+                <div className="search-bar glass section-detector" 
+                    id="search-bar" data-scroll="search-scroll-btn">
 
                     <div className="search-inner">
 

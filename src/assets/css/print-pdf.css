@@ -1,0 +1,82 @@
+
+
+
+/* 
+    Keep It Fit - created by uverit
+    Do not copy or distribute
+*/
+
+/* Media breakpoints - 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+
+
+
+    /* Page Cover */
+
+.page-cover{
+    width:100vw;
+    height:100vh;
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    opacity:0;
+    background-color:#FFF;
+    animation:pageCoverFadeOut var(--trans2) forwards;
+    z-index:99999;
+
+    &.page-cover-visible{
+        animation:pageCoverFadeIn var(--trans2) forwards;
+    }
+
+}
+
+@keyframes pageCoverFadeIn{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+
+@keyframes pageCoverFadeOut{
+    0%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+    }
+}
+
+
+
+    /* PDF Print */
+
+@media print{
+    
+    @page{ 
+        margin:0;
+        padding:0;
+        size:var(--printWidth) var(--printHeight);
+    }
+
+    .page-cover{
+        opacity:0 !important;
+    }
+
+    /* The styles have to be applied through the page-print class since the height has to be calculated before the window.print() takes action */
+
+}
+
+.page-print{
+
+    .no-print{
+        display:none !important;
+    }
+
+    body{
+        background-image:none;
+    }
+
+}

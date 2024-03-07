@@ -23,6 +23,10 @@
     gap:var(--size7);
     transition:var(--trans2);
 
+    .loading-data &{
+        pointer-events:none;
+    }
+
 
 
         /* Nav Buttons */
@@ -159,10 +163,10 @@
                 left:0;
 
                 border-radius:100px;
-                transition:var(--trans2);
+                transition:var(--trans1);
             }
 
-            &.active:before{
+            &.closest-section:before{
                 background-color:var(--color2a);
             }
 
@@ -314,6 +318,7 @@
         right:var(--size6);
 
         align-items:flex-end;
+        gap:var(--size6);
         z-index:10000;
 
         & .nav-content{
@@ -368,6 +373,8 @@
     .details-page nav{
         --btnSize:var(--size8);
         --iconSize:28px;
+
+        gap:var(--size2);
 
         & .nav-content .nav-scroll{
             padding:var(--size6);
