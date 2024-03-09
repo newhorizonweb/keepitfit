@@ -2,7 +2,11 @@
 
 
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateFavSearch } from "../redux/favorites";
+
 import { navIcons } from '../functions/navIcons';
+import { printPage } from '../functions/printPage';
 import '../../assets/css/nav.css';
 
 const Nav = () => {
@@ -13,8 +17,14 @@ const Nav = () => {
 
     // Nav Icons
     const { userIcon, bookmarkIcon, favListIcon, pdfIcon } = navIcons();
-
     const [ isBurgerActive, setIsBurgerActive ] = useState(false);
+
+    // Toggle the active button (nav content)
+    const [activeButton, setActiveButton] = useState("");
+
+    const toggleActiveBtn = (button: string) => {
+        setActiveButton(activeButton === button ? "" : button);
+    };
 
     // Collapse Nav & Closest Section
     useEffect(() => {
@@ -119,73 +129,154 @@ const Nav = () => {
 
 
 
-        /* PDF Print */
+        /* Favorites */
 
-    const printWidth = "800px";
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [favList, setFavList] = useState([] as string[]);
 
-    const printPage = () => {
+    // LocalStorage favorites list
+    const getFavList = () => {
+        const favList = localStorage.getItem("fav-list");
+        const splitArray = favList ? favList.split(', ') : [];
+        return(splitArray);
+    }
 
-        // Add the page cover to hide the narrow body
-        const pageCover = document.createElement("div");
-        pageCover.classList.add("page-cover", "page-cover-visible");
-        document.body.appendChild(pageCover);
+    // Check if the current LS search value is added to the fav list
+    const checkFavList = () => {
 
-        setTimeout(() => {
+        const favList = getFavList();
+        const searchVal = localStorage.getItem("current-search-val");
 
-            // Set the body print class to apply the styles
-            document.body.classList.add("page-print");
+        if (searchVal){
 
-            // Set the print width
-            document.body.style.width = printWidth;
+            if (favList.includes(searchVal)){
+                setIsFavorite(true);
+            } else {
+                setIsFavorite(false);
+            }
 
-            // Set the print page dimensions
-            // + 64px for the footer bottom-padding, to ensure everything fits
-            const printHeight:string = `${document.body.scrollHeight + 64}px`;
+        }
 
-            document.documentElement.style.setProperty("--printWidth", printWidth);
-            document.documentElement.style.setProperty("--printHeight", printHeight);
+    }
 
-            // Print the page
-            window.print();
+    // Add the current search value to the favorites list
+    const toggleFavSearch = () => {
 
-            // Remove the print styles
-            document.body.classList.remove("page-print");
+        const favList = getFavList();
+        const searchVal = localStorage.getItem("current-search-val");
 
-            // Set the page body to the normal width
-            document.body.style.width = "100%";
+        if (searchVal){
 
-            // Fade out the page cover
-            pageCover.classList.remove("page-cover-visible");
+            const deleteIndex = favList.indexOf(searchVal);
 
-            // Remove the page cover after the fade-out transition
-            setTimeout(() => {
-                document.body.removeChild(pageCover);
-            }, 150); // CSS - trans2
+            if (!favList.includes(searchVal)){
 
-        }, 150); // CSS - trans2
+                // Add the value
+                favList.push(searchVal);
+                setIsFavorite(true);
 
+            } else if(favList.includes(searchVal) && deleteIndex !== -1){
+
+                // Remove the value
+                favList.splice(deleteIndex, 1);
+                setIsFavorite(false);
+
+            }
+
+            // Update the fav list
+            setFavList(favList);
+
+            // Update the LS fav list
+            const updatedList = favList.join(', ');
+            localStorage.setItem("fav-list", updatedList);
+
+        }
+
+    }
+
+    // Mark the fav search on page load and when searching
+    const { searchedData } = useSelector(
+        ( state:{search:{searchedData:any}} ) => state.search
+    );
+
+    useEffect(checkFavList, [ searchedData ]);
+    useEffect(() => setFavList(getFavList()), []);
+
+
+
+        /* Favorites List */
+
+    // Redux dispatch (update variables)
+    const dispatch = useDispatch(); // redux
+    const [isFavListVisible, setIsFavListVisible] = useState(false);
+
+    const removeFromFavList = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+
+        const elem = e.currentTarget.dataset.elem;
+
+        if (!elem) return;
+ 
+        const favList = getFavList();
+        const deleteIndex = favList.indexOf(elem);
+
+        // Remove the value
+        if (favList.includes(elem) && deleteIndex !== -1){
+            favList.splice(deleteIndex, 1);
+
+            if (elem === localStorage.getItem("current-search-val")){
+                setIsFavorite(false);
+            }
+            
+        }
+
+        // Update the fav list
+        setFavList(favList);
+
+        // Update the LS fav list
+        const updatedList = favList.join(', ');
+        localStorage.setItem("fav-list", updatedList);
+
+    }
+
+    // Search the clicked item from the fav list
+    const searchFav = (val: string) => {
+        dispatch(updateFavSearch(val));
     };
 
 
 
     return(
-        <nav className={`${ isBurgerActive ? 'nav-open' : '' }`}>
+        <nav className={`${ isBurgerActive ? 'nav-open' : ''}
+            ${ isFavListVisible ? ' fav-list-visible' : '' }`}>
 
             <div className="nav-buttons glass">
 
-                <div className="nav-btn nav-user">
+                <div className={`nav-btn nav-btn-check nav-user
+                    ${activeButton === 'user' ? 'active' : ''}
+                `}
+                    onClick={() => toggleActiveBtn("user")}>
                     { userIcon }
                 </div>
 
-                <div className="nav-btn nav-bookmark">
+                <div className={`nav-btn nav-bookmark
+                    ${ isFavorite ? ' active' : '' }`}
+                    onClick={ toggleFavSearch }>
                     { bookmarkIcon }
                 </div>
 
-                <div className="nav-btn nav-favorites">
+                <div className={`nav-btn nav-btn-check nav-fav-list
+                    ${activeButton === 'fav-list' ? 'active' : ''}
+                `}
+                    onClick={ () => {
+                        setIsFavListVisible(!isFavListVisible);
+                        toggleActiveBtn("fav-list");
+                    }
+                }>
                     { favListIcon }
                 </div>
 
-                <div className="nav-btn nav-pdf" onClick={printPage}>
+                <div className="nav-btn nav-pdf"
+                    onClick={ () => printPage("800px") }>
                     { pdfIcon }
                 </div>
 
@@ -230,6 +321,30 @@ const Nav = () => {
                         onClick={() => scrollTo("search-bar")}>
                         Diet Labels
                     </h4>
+                </div>
+
+                <div className="nav-favorites">
+
+                    <h4 className="fav-heading">Favorite Items</h4>
+
+                    <div className="fav-list small-scroll">
+                        {favList.map((elem, index) => (
+
+                            <div className="fav-elem" key={ index }>
+                                <p onClick={() => searchFav(elem)}>
+                                    { elem }
+                                </p>
+
+                                <div className="remove-fav-btn"
+                                    data-elem={ elem }
+                                    onClick={(e) => removeFromFavList(e)}>
+                                    <span></span><span></span>
+                                </div>
+                            </div>
+
+                        ))}
+                    </div>
+
                 </div>
 
             </div>

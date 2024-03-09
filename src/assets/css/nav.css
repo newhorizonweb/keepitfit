@@ -128,15 +128,18 @@
 
     & .nav-content{
         width:100%;
+        padding:var(--size7);
         background-color:var(--color4b);
     }
 
     & .nav-content .nav-scroll{
-        padding:var(--size7);
-
         display:flex;
         flex-direction:column;
         gap:var(--size4);
+
+        .fav-list-visible &{
+            display:none;
+        }
 
         & .scroll-link{
             padding-left:var(--size2);
@@ -168,6 +171,93 @@
 
             &.closest-section:before{
                 background-color:var(--color2a);
+            }
+
+        }
+
+    }
+    
+    & .nav-content .nav-favorites{
+        display:none;
+        flex-direction:column;
+        gap:var(--size4);
+        overflow:auto;
+
+        .fav-list-visible &{
+            display:flex;
+        }
+
+        & .fav-heading{
+            text-align:center;
+        }
+
+        & .fav-list{
+            max-height:min(384px, calc(
+                100dvh - var(--size9) - var(--size4) - var(--size6) -
+                (var(--size7) * 5)
+            ));
+            display:flex;
+            flex-direction:column;
+            gap:var(--size3);
+            overflow:auto;
+        }
+
+        & .fav-elem{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:var(--size2);
+
+            & p{
+                text-transform:capitalize;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+
+                cursor:pointer;
+                transition:var(--trans1);
+                overflow:hidden;
+
+                &:hover{
+                    color:var(--color2a);
+                }
+
+            }
+
+            & .remove-fav-btn{
+                width:var(--size5);
+                min-width:var(--size5);
+                height:var(--size5);
+                position:relative;
+
+                border:solid var(--size05) var(--txt-dark1);
+                border-radius:var(--size1);
+                cursor:pointer;
+
+                & span{
+                    width:100%;
+                    height:var(--size05);
+
+                    position:absolute;
+                    top:50%;
+                    left:50%;
+
+                    background-color:var(--txt-dark1);
+                    border-radius:100px;
+                    transition:var(--trans1);
+
+                    &:nth-child(1){
+                        transform:translate(-50%, -50%) rotate(45deg);
+                    }
+                    &:nth-child(2){
+                        transform:translate(-50%, -50%) rotate(-45deg);
+                    }
+
+                }
+
+                &:hover span{
+                    background-color:var(--warnColor);
+                }
+
             }
 
         }
@@ -343,6 +433,17 @@
 
         }
 
+        & .nav-content .nav-favorites{
+    
+            & .fav-list{
+                max-height:min(384px, calc(
+                    100dvh - var(--size9) - var(--size4) -
+                    (var(--size6) * 4) - (var(--size7) * 2)
+                ));
+            }
+    
+        }
+
             /* Nav Open */
 
         &.nav-open{
@@ -368,6 +469,38 @@
 
 }
 
+@media screen and (height <= 768px){
+
+    .details-page nav{
+
+        & .nav-content .nav-favorites{
+    
+            & .fav-list{
+                /* height:256px; */
+            }
+    
+        }
+
+    }
+
+}
+
+@media screen and (height <= 540px) and (orientation: landscape){
+
+    .details-page nav{
+
+        & .nav-content .nav-favorites{
+    
+            & .fav-list{
+                /* height:192px; */
+            }
+    
+        }
+
+    }
+
+}
+
 @media screen and (width <= 440px){
 
     .details-page nav{
@@ -376,8 +509,15 @@
 
         gap:var(--size2);
 
-        & .nav-content .nav-scroll{
-            padding:var(--size6);
+        & .nav-content .nav-favorites{
+    
+            & .fav-list{
+                max-height:min(384px, calc(
+                    100dvh - var(--size8) - var(--size4) - var(--size2) -
+                    (var(--size6) * 3) - (var(--size7) * 2)
+                ));
+            }
+    
         }
 
     }

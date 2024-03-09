@@ -24,10 +24,6 @@ const Details = () => {
     // Page Context Variables
     const { urlPath } = useContext(PageContext);
 
-
-
-        /* Search Bar Fetch API */
-
     // Fetched API Data
     const { searchedData } = useSelector(
         ( state:{search:{searchedData:any}} ) => state.search

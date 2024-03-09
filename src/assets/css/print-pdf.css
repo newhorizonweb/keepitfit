@@ -70,13 +70,10 @@
 }
 
 .page-print{
+    background-image:none;
 
-    .no-print{
+    & .no-print{
         display:none !important;
-    }
-
-    body{
-        background-image:none;
     }
 
 }

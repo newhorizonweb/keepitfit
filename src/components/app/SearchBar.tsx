@@ -6,7 +6,7 @@ import { FormEvent, KeyboardEvent, useContext, useEffect, useRef, useState } fro
 import '../../assets/css/search-bar.css';
 
 // Redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     updateSearchedData,
     clearSearchedVars
@@ -23,12 +23,13 @@ import SearchList from '../app/SearchList';
 import { searchValid } from '../functions/searchValid';
 import { searchData } from '../functions/searchData';
 
+
 // TS
 interface PropTypes{
     page: string;
 }
 
-const SearchBar = (props: PropTypes) => {
+const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
 
 
 
@@ -47,6 +48,11 @@ const SearchBar = (props: PropTypes) => {
 
     // Current page
     const page = props.page;
+
+    // Fav List Value
+    const { favoriteSearch } = useSelector(
+        ( state:{favorites:{favoriteSearch:string}} ) => state.favorites
+    );
 
     // Page Context Variables
     const { apiId, apiKey, urlPath } = useContext(PageContext);
@@ -353,6 +359,13 @@ const SearchBar = (props: PropTypes) => {
         }
 
     }
+
+    // Search the clicked favorite item from the fav list (nav component)
+    useEffect(() => {
+        if (favoriteSearch){
+            goToDetails(favoriteSearch)
+        }
+    }, [favoriteSearch])
 
 
 
