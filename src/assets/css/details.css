@@ -14,7 +14,7 @@
     
     & header{
         width:100%;
-        padding:var(--size7) 0 var(--size9);
+        padding:var(--size8) 0;
 
         display:flex;
         justify-content:center;

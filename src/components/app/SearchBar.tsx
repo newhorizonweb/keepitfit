@@ -23,7 +23,6 @@ import SearchList from '../app/SearchList';
 import { searchValid } from '../functions/searchValid';
 import { searchData } from '../functions/searchData';
 
-
 // TS
 interface PropTypes{
     page: string;
@@ -509,9 +508,9 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                             </span>
                         </div>
 
-                        <input
+                        <input aria-label="Seach Input"
                             type="text" className="search-input"
-                            value={ searchInpVal }
+                            id="search-input" value={ searchInpVal }
                             onInput={(e) => searchInpChange(e)}
                             onKeyDown={ (e) => searchInpKeyDown(e) }>
                         </input>
@@ -519,6 +518,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                     </div>
 
                     <button className={`${ isValid ? 'valid-search' : '' }`}
+                        aria-label="search-button"
                         onClick={ () => goToDetails(firstElem) }>
                         { !isLoading && magGlassIcon }
                         { isLoading && loadingIcon }

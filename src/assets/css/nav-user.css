@@ -1,0 +1,310 @@
+
+
+
+/* 
+    Keep It Fit - created by uverit
+    Do not copy or distribute
+*/
+
+/* Media breakpoints - 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+
+
+
+.details-page nav .nav-content .nav-user{
+
+    .user-visible &{
+        display:flex;
+    }
+
+    & .user-info-btn{
+        height:var(--size6);
+        aspect-ratio:1/1;
+
+        position:absolute;
+        top:var(--size3);
+        right:var(--size3);
+
+        color:var(--txt-dark1);
+        background-color:var(--txt-light1);
+        border-radius:var(--size1);
+        
+        transition:var(--trans2);
+        z-index:100;
+        cursor:pointer;
+        overflow:clip;
+
+        & span{
+            width:1px;
+            height:70%;
+
+            position:absolute;
+            top:50%;
+            left:50%;
+            display:none;
+
+            background-color:var(--txt-dark1);
+            border-radius:100px;
+
+            &:nth-child(1){
+                transform:translate(-50%, -50%) rotate(45deg);
+            }
+            &:nth-child(2){
+                transform:translate(-50%, -50%) rotate(-45deg);
+            }
+
+        }
+
+        .user-info-open & span{
+            display:block;
+        }
+
+        &:before{
+            transition:var(--trans1);
+            z-index:1000;
+        }
+
+        &:hover:before,
+        .user-info-open &:before{
+            background:var(--color2a);
+        }
+
+        &:after{
+            content:"?";
+            width:100%;
+            height:100%;
+
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        
+        .user-info-open &:after{
+            display:none;
+        }
+
+    }
+
+    & .user-info{
+        width:100%;
+        display:none;
+        flex-direction:column;
+        gap:var(--size2);
+
+        .user-info-open &{
+            display:flex;
+        }
+
+        & .user-info-txt{
+            font-size:16px;
+        }
+
+    }
+
+    & .user-elem{
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+        column-gap:var(--size2);
+
+        & label{
+            width:100%;
+            margin-bottom:var(--size05);
+            font-size:14px;
+            color:var(--txt-dark2);
+        }
+
+        & .calc-btn{
+            width:100%;
+            height:var(--size7);
+
+            background-color:var(--txt-light1);
+            border:solid var(--size05) var(--color2a);
+            border-radius:var(--size2);
+
+            transition:var(--trans1);
+            cursor:pointer;
+
+            &:hover{
+                background-color:var(--color2a);
+                color:var(--txt-light1);
+            }
+
+        }
+
+        & .user-elem-input{
+            flex:1;
+            height:var(--size7);
+            position:relative;
+
+            display:flex;
+            align-items:center;
+            gap:var(--size2);
+
+            background-color:var(--txt-light1);
+            border-radius:var(--size2);
+
+            &:before{
+                transition:var(--trans1);
+            }
+
+            &.empty:before{
+                background:var(--warnColor);
+            }
+
+            & :is(input, select){
+                width:100%;
+                padding-left:var(--size3);
+                appearance:none;
+                background-color:transparent;
+                border:none;
+            }
+
+            &:has( :is(input, select):focus):before{
+                background:var(--color2a);
+            }
+
+            & select{
+                margin-right:calc(var(--size2) * 3);
+                text-transform:capitalize;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                cursor:pointer;
+
+                & option{
+                    font-size:16px;
+                    background-color:var(--txt-light1);
+                }
+
+            }
+
+            & span{
+                padding-right:var(--size3);
+                color:var(--txt-dark3);
+            }
+
+            &.user-elem-select{
+                cursor:pointer;
+
+                & span{
+                    width:var(--size05);
+                    height:var(--size2);
+                    padding:0;
+
+                    position:absolute;
+                    top:50%;
+                    right:var(--size3);
+
+                    background-color:var(--txt-dark3);
+                    border-radius:100px;
+
+                    transition:var(--trans1);
+                    pointer-events:none;
+
+                    &:nth-of-type(1){
+                        transform:translate(0, -50%) rotate(45deg);
+                    }
+
+                    &:nth-of-type(2){
+                        right:calc(
+                            (var(--size2) * 1.41 / 2) + 
+                            var(--size3) - (var(--size05) / 2)
+                        );
+                        transform:translate(0, -50%) rotate(-45deg);
+                    }
+
+                }
+
+                &:has(select:focus) span{
+                    background-color:var(--color2a);
+
+                    &:nth-of-type(1){
+                        transform:translate(0, -50%) rotate(-45deg);
+                    }
+
+                    &:nth-of-type(2){
+                        transform:translate(0, -50%) rotate(45deg);
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    & .user-calories{
+        width:100%;
+        margin-top:var(--size5);
+        padding:var(--size2);
+
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+
+        background-color:var(--txt-light1);
+        border:solid var(--size05) var(--color2a);
+    }
+
+    & .bmi-table{
+        width:100%;
+        position:relative;
+
+        & .table-shadow{
+            width:100%;
+            height:100%;
+
+            position:absolute;
+            top:0;
+            left:0;
+
+            backdrop-filter:none;
+            filter:none;
+            pointer-events:none;
+        }
+
+        & .bmi-row{
+            width:100%;
+            padding:var(--size2);
+
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+
+            &:nth-of-type(1){
+                border:solid var(--size05) var(--color2a);
+            }
+
+            &:nth-of-type(2n + 1){
+                background-color:var(--txt-light1);
+                border-radius:var(--size4);
+            }
+            &:nth-of-type(2n + 2){
+                background-color:var(--color4a);
+            }
+
+            & p{
+                font-size:16px;
+                text-transform:capitalize;
+            }
+
+            &.curr-bmi p{
+                color:var(--color2a);
+                text-shadow:0 0 1px var(--txt-dark3);
+            }
+            &.curr-bmi-att p{
+                color:var(--attColor);
+                text-shadow:0 0 1px var(--txt-dark3);
+            }
+            &.curr-bmi-warn p{
+                color:var(--warnColor);
+                text-shadow:0 0 1px var(--txt-dark3);
+            }
+
+        }
+
+    }
+
+}

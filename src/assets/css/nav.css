@@ -47,8 +47,8 @@
             justify-content:center;
             align-items:center;
 
-            cursor:pointer;
             transition:var(--trans2);
+            cursor:pointer;
 
             & svg{
                 height:var(--iconSize);
@@ -70,7 +70,19 @@
 
             }
 
-            &:hover,
+            &:hover{
+
+                & *{
+                    stroke:var(--color2a);
+
+                    &.nostroke{
+                        fill:var(--color2a)
+                    }
+
+                }
+
+            }
+            
             &.active{
                 background-color:var(--color2b);
 
@@ -98,7 +110,7 @@
                     transform-origin:center 20%;
                 }
 
-                .nav-favorites & .anim-elem1{
+                .nav-fav-list & .anim-elem1{
                     animation:navAnimElem3 0.6s ease-in-out;
                     transform-origin:144px 4px;
                 }
@@ -128,26 +140,49 @@
 
     & .nav-content{
         width:100%;
-        padding:var(--size7);
+        padding:var(--size7) var(--size6);
         background-color:var(--color4b);
+
+        & > div{
+            display:none;
+            flex-direction:column;
+            gap:var(--size4);
+        }
+
+        & .nav-content-head{
+            text-align:center;
+        }
+
+        & .nav-content-inner{
+            max-height:min(384px, calc(
+                100dvh - var(--size9) - var(--size4) - var(--size6) -
+                (var(--size7) * 5)
+            ));
+            display:flex;
+            flex-direction:column;
+            gap:var(--size3);
+            overflow:auto;
+        }
+
     }
 
     & .nav-content .nav-scroll{
-        display:flex;
-        flex-direction:column;
-        gap:var(--size4);
 
-        .fav-list-visible &{
-            display:none;
+        .scroll-visible &{
+            display:flex;
         }
 
         & .scroll-link{
+            min-height:var(--size6);
             padding-left:var(--size2);
             position:relative;
             
             text-overflow:ellipsis;
             white-space:nowrap;
             overflow:hidden;
+
+            display:flex;
+            align-items:center;
 
             transition:var(--trans2);
             cursor:pointer;
@@ -178,28 +213,9 @@
     }
     
     & .nav-content .nav-favorites{
-        display:none;
-        flex-direction:column;
-        gap:var(--size4);
-        overflow:auto;
 
         .fav-list-visible &{
             display:flex;
-        }
-
-        & .fav-heading{
-            text-align:center;
-        }
-
-        & .fav-list{
-            max-height:min(384px, calc(
-                100dvh - var(--size9) - var(--size4) - var(--size6) -
-                (var(--size7) * 5)
-            ));
-            display:flex;
-            flex-direction:column;
-            gap:var(--size3);
-            overflow:auto;
         }
 
         & .fav-elem{
@@ -213,14 +229,20 @@
                 text-overflow:ellipsis;
                 white-space:nowrap;
 
-                cursor:pointer;
                 transition:var(--trans1);
+                cursor:pointer;
                 overflow:hidden;
 
                 &:hover{
                     color:var(--color2a);
                 }
 
+            }
+
+            & .no-favs{
+                flex:1;
+                text-align:center;
+                cursor:text;
             }
 
             & .remove-fav-btn{
@@ -416,6 +438,14 @@
             background-color:var(--color4c);
             filter:none;
             animation:navContentClose var(--trans2) forwards;
+
+            & .nav-content-inner{
+                max-height:min(384px, calc(
+                    100dvh - var(--size9) - var(--size4) -
+                    (var(--size6) * 4) - (var(--size7) * 2)
+                ));
+            }
+
         }
 
         & .nav-buttons{
@@ -431,17 +461,6 @@
                 display:flex;
             }
 
-        }
-
-        & .nav-content .nav-favorites{
-    
-            & .fav-list{
-                max-height:min(384px, calc(
-                    100dvh - var(--size9) - var(--size4) -
-                    (var(--size6) * 4) - (var(--size7) * 2)
-                ));
-            }
-    
         }
 
             /* Nav Open */
@@ -469,38 +488,6 @@
 
 }
 
-@media screen and (height <= 768px){
-
-    .details-page nav{
-
-        & .nav-content .nav-favorites{
-    
-            & .fav-list{
-                /* height:256px; */
-            }
-    
-        }
-
-    }
-
-}
-
-@media screen and (height <= 540px) and (orientation: landscape){
-
-    .details-page nav{
-
-        & .nav-content .nav-favorites{
-    
-            & .fav-list{
-                /* height:192px; */
-            }
-    
-        }
-
-    }
-
-}
-
 @media screen and (width <= 440px){
 
     .details-page nav{
@@ -509,15 +496,11 @@
 
         gap:var(--size2);
 
-        & .nav-content .nav-favorites{
-    
-            & .fav-list{
-                max-height:min(384px, calc(
-                    100dvh - var(--size8) - var(--size4) - var(--size2) -
-                    (var(--size6) * 3) - (var(--size7) * 2)
-                ));
-            }
-    
+        & .nav-content .nav-content-inner{
+            max-height:min(384px, calc(
+                100dvh - var(--size8) - var(--size4) - var(--size2) -
+                (var(--size6) * 3) - (var(--size7) * 2)
+            ));
         }
 
     }

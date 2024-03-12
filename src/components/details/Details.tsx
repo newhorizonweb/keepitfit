@@ -1,7 +1,7 @@
 
 
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useSelector } from 'react-redux';
 
 import PageTransition from '../app/PageTransition';
@@ -18,7 +18,6 @@ import '../../assets/css/details.css';
 import '../../assets/css/print-pdf.css';
 import Logo from '../../assets/img/keep-it-fit-logo.svg';
 
-
 const Details = () => {
 
     // Page Context Variables
@@ -26,9 +25,21 @@ const Details = () => {
 
     // Fetched API Data
     const { searchedData } = useSelector(
-        ( state:{search:{searchedData:any}} ) => state.search
+        ( state:{search:{searchedData: any}} ) => state.search
     );
 
+
+    const { userAMR } = useSelector(
+        ( state:{userData:{userAMR: string}} ) => state.userData
+    );
+    const { userBMI } = useSelector(
+        ( state:{userData:{userBMI: string}} ) => state.userData
+    );
+
+    useEffect(() => {
+        console.log(userAMR)
+        console.log(userBMI)
+    }, [userAMR, userAMR]);
 
 
     return(

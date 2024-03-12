@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateFavSearch } from "../redux/favorites";
 
+import NavUser from './NavUser';
+
 import { navIcons } from '../functions/navIcons';
 import { printPage } from '../functions/printPage';
 import '../../assets/css/nav.css';
@@ -20,10 +22,10 @@ const Nav = () => {
     const [ isBurgerActive, setIsBurgerActive ] = useState(false);
 
     // Toggle the active button (nav content)
-    const [activeButton, setActiveButton] = useState("");
+    const [activeBtn, setActiveBtn] = useState("");
 
     const toggleActiveBtn = (button: string) => {
-        setActiveButton(activeButton === button ? "" : button);
+        setActiveBtn(activeBtn === button ? "" : button);
     };
 
     // Collapse Nav & Closest Section
@@ -212,6 +214,9 @@ const Nav = () => {
 
     const removeFromFavList = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 
+        // Prevent from closing the nav
+        e.stopPropagation();
+
         const elem = e.currentTarget.dataset.elem;
 
         if (!elem) return;
@@ -247,12 +252,15 @@ const Nav = () => {
 
     return(
         <nav className={`${ isBurgerActive ? 'nav-open' : ''}
-            ${ isFavListVisible ? ' fav-list-visible' : '' }`}>
+            ${ activeBtn === '' ? ' scroll-visible' : '' }
+            ${ activeBtn === 'fav-list' ? ' fav-list-visible' : '' }
+            ${ activeBtn === 'user' ? ' user-visible' : '' }
+        `}>
 
             <div className="nav-buttons glass">
 
                 <div className={`nav-btn nav-btn-check nav-user
-                    ${activeButton === 'user' ? 'active' : ''}
+                    ${activeBtn === 'user' ? 'active' : ''}
                 `}
                     onClick={() => toggleActiveBtn("user")}>
                     { userIcon }
@@ -265,7 +273,7 @@ const Nav = () => {
                 </div>
 
                 <div className={`nav-btn nav-btn-check nav-fav-list
-                    ${activeButton === 'fav-list' ? 'active' : ''}
+                    ${activeBtn === 'fav-list' ? 'active' : ''}
                 `}
                     onClick={ () => {
                         setIsFavListVisible(!isFavListVisible);
@@ -297,37 +305,44 @@ const Nav = () => {
             <div className="nav-content glass">
 
                 <div className="nav-scroll">
-                    <h4 className="scroll-link" id="search-scroll-btn"
-                        onClick={() => scrollTo("search-bar")}>
-                        Search
-                    </h4>
-                    
-                    <h4 className="scroll-link" id="nutrition-scroll-btn"
-                        onClick={() => scrollTo("search-bar")}>
-                        Nutrition Facts
-                    </h4>
 
-                    <h4 className="scroll-link" id="charts-scroll-btn"
-                        onClick={() => scrollTo("search-bar")}>
-                        Charts
-                    </h4>
+                    <h4 className="nav-content-head">Sections</h4>
 
-                    <h4 className="scroll-link" id="micronut-scroll-btn"
-                        onClick={() => scrollTo("search-bar")}>
-                        Micronutrients
-                    </h4>
+                    <div className="nav-content-inner small-scroll">
+                        <h5 className="scroll-link" id="search-scroll-btn"
+                            onClick={() => scrollTo("search-bar")}>
+                            Search
+                        </h5>
+                        
+                        <h5 className="scroll-link" id="nutrition-scroll-btn"
+                            onClick={() => scrollTo("search-bar")}>
+                            Nutrition Facts
+                        </h5>
 
-                    <h4 className="scroll-link" id="diet-scroll-btn"
-                        onClick={() => scrollTo("search-bar")}>
-                        Diet Labels
-                    </h4>
+                        <h5 className="scroll-link" id="charts-scroll-btn"
+                            onClick={() => scrollTo("search-bar")}>
+                            Charts
+                        </h5>
+
+                        <h5 className="scroll-link" id="micronut-scroll-btn"
+                            onClick={() => scrollTo("search-bar")}>
+                            Micronutrients
+                        </h5>
+
+                        <h5 className="scroll-link" id="diet-scroll-btn"
+                            onClick={() => scrollTo("search-bar")}>
+                            Diet Labels
+                        </h5>
+                    </div>
                 </div>
+
+                <NavUser />
 
                 <div className="nav-favorites">
 
-                    <h4 className="fav-heading">Favorite Items</h4>
+                    <h4 className="nav-content-head">Favorite Items</h4>
 
-                    <div className="fav-list small-scroll">
+                    <div className="nav-content-inner small-scroll">
                         {favList.map((elem, index) => (
 
                             <div className="fav-elem" key={ index }>
@@ -343,9 +358,17 @@ const Nav = () => {
                             </div>
 
                         ))}
+
+                        {favList.length === 0 &&
+                            <div className="fav-elem">
+                                <p className="no-favs">-----</p>
+                            </div>
+                        }
                     </div>
 
                 </div>
+
+
 
             </div>
 
