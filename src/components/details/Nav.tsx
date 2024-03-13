@@ -28,8 +28,22 @@ const Nav = () => {
         setActiveBtn(activeBtn === button ? "" : button);
     };
 
+
+    // Close navigation on mobile to dekstop resize
+    const closeNavOnResize = () => {
+        if (window.innerWidth > 900){
+            setIsBurgerActive(false);
+        }
+    }
+
     // Collapse Nav & Closest Section
     useEffect(() => {
+
+        const navContent = document.querySelector(".nav-content");
+
+        setTimeout(() => {
+            navContent?.classList.add("nav-content-loaded");
+        }, 2200);
 
         closestSection();
 
@@ -50,7 +64,7 @@ const Nav = () => {
         });
 
         window.addEventListener('resize', () => {
-            setIsBurgerActive(false);
+            closeNavOnResize();
             closestSection();
         });
 

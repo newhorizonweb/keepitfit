@@ -25,6 +25,7 @@
     /* Main BG */
     --color3a:#FBFFF4;
     --color3b:rgb(221,255,163,0.15);
+    --color3c:rgba(250, 255, 237, 0.75);
 
     /* Accent BG */
     --color4a:#F1FBFF;
@@ -36,7 +37,7 @@
     --layoutWhite2:rgb(252,252,252,0.75);
 
     --layoutShine1a:rgb(245,245,245,0.25);
-    --layoutShine1b:rgb(220,220,220,0.7);
+    --layoutShine1b:rgb(220,220,220,0.6);
 
     --layoutShadow:rgb(196,196,196);
 
@@ -97,6 +98,23 @@
     --trans2:0.15s ease-in-out;
     --trans3:0.25s ease-in-out;
     --trans4:0.35s ease-in-out;
+
+}
+
+@media screen and (width <= 900px){
+
+    /* no backdrop filter blur = less tranparent bg colors */
+
+    :root{
+        --color3c:rgba(248, 253, 238, 0.95);
+        --color3b:var(--color3c);
+
+        --color4c:rgba(239, 247, 252, 0.95);
+        --color4b:var(--color4c);
+
+        --layoutWhite2:rgb(252,252,252,0.9);
+        --layoutWhite:var(--layoutWhite2);
+    }
 
 }
 

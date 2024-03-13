@@ -250,6 +250,7 @@
     & .bmi-table{
         width:100%;
         position:relative;
+        background-color:var(--color4a);
 
         & .table-shadow{
             width:100%;
@@ -280,9 +281,6 @@
             &:nth-of-type(2n + 1){
                 background-color:var(--txt-light1);
                 border-radius:var(--size4);
-            }
-            &:nth-of-type(2n + 2){
-                background-color:var(--color4a);
             }
 
             & p{

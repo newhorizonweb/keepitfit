@@ -58,9 +58,14 @@
     background-attachment:fixed;
 
     background:var(--layoutShine1a); /* Fallback */
+    background:linear-gradient(to right,
+        var(--layoutShine1a) 30%,
+        var(--layoutShine1b) 55%,
+        var(--layoutShine1a) 70%
+    );
 
-    background-size:100vw;
-    animation:phAnimation 2s linear forwards infinite;
+    background-size:200vw;
+    animation:phAnimation 1.2s linear forwards infinite;
 
     filter:drop-shadow(-10px 10px 6px var(--txt-light2));
     backdrop-filter:blur(4px);
@@ -88,9 +93,9 @@
 
 @keyframes phAnimation{
     0%{
-        background-position:-50vw 0;
+        background-position:-100vw 0;
     }
     100%{
-        background-position:50vw 0;
+        background-position:100vw 0;
     }
 }

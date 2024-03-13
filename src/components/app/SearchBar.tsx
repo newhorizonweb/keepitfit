@@ -76,6 +76,9 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
     // Check if the search input value is valid
     const [isValid, setIsValid] = useState(false);
 
+    // Check if there was a search bar value change
+    const [wasSearchFocused, setWasSearchFocused] = useState(false);
+
 
 
         /* Loading Icon */
@@ -222,6 +225,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
 
             if (apiData){
                 dispatch(updateSearchedData(apiData));
+                setWasSearchFocused(false);
             }
 
             if (apiError){
@@ -512,12 +516,16 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                             type="text" className="search-input"
                             id="search-input" value={ searchInpVal }
                             onInput={(e) => searchInpChange(e)}
-                            onKeyDown={ (e) => searchInpKeyDown(e) }>
+                            onKeyDown={(e) => searchInpKeyDown(e)}
+                            onClick={() => {setWasSearchFocused(true)}}>
                         </input>
 
                     </div>
 
-                    <button className={`${ isValid ? 'valid-search' : '' }`}
+                    <button className={`
+                        ${ isValid && wasSearchFocused ?
+                            'valid-search' : '' }`
+                        }
                         aria-label="search-button"
                         onClick={ () => goToDetails(firstElem) }>
                         { !isLoading && magGlassIcon }

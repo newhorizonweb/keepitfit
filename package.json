@@ -1,7 +1,7 @@
 {
   "homepage": "https://newhorizonweb.github.io/keepitfit",
   "name": "keepitfit",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",

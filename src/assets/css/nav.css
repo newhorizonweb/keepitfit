@@ -36,7 +36,7 @@
         height:var(--btnSize);
         display:flex;
 
-        background-color:var(--color4b);
+        background-color:var(--color3b);
         overflow:clip;
 
         & .nav-btn{
@@ -140,13 +140,16 @@
 
     & .nav-content{
         width:100%;
-        padding:var(--size7) var(--size6);
+        padding:var(--size7) 0;
+
         background-color:var(--color4b);
+        transition:var(--trans2);
 
         & > div{
             display:none;
             flex-direction:column;
             gap:var(--size4);
+            overflow:hidden;
         }
 
         & .nav-content-head{
@@ -158,10 +161,12 @@
                 100dvh - var(--size9) - var(--size4) - var(--size6) -
                 (var(--size7) * 5)
             ));
+            padding:0 var(--size6);
+
             display:flex;
             flex-direction:column;
             gap:var(--size3);
-            overflow:auto;
+            overflow-x:auto;
         }
 
     }
@@ -223,6 +228,10 @@
             justify-content:space-between;
             align-items:center;
             gap:var(--size2);
+
+            -webkit-touch-callout:none; /* iOS Safari */
+            -webkit-user-select:none;   /* Safari */
+            user-select:none;
 
             & p{
                 text-transform:capitalize;
@@ -347,7 +356,7 @@
     &:hover{
 
         & span{
-            border-color:var(--txt-light1);
+            border-color:var(--color2a);
 
             &:is(:nth-child(1), :nth-child(4)){
                 width:110%;
@@ -370,11 +379,11 @@
         }
 
         &:hover span{
-            background-color:var(--color2a);
-            border-color:var(--txt-light1);
+            background-color:var(--color4a);
+            border-color:var(--color2a);
 
             &:nth-child(3):after{
-                background-color:var(--color2a);
+                background-color:var(--color4a);
             }
 
         }
@@ -435,9 +444,20 @@
 
         & .nav-content{
             width:0;
+            height:0;
+            
             background-color:var(--color4c);
             filter:none;
             animation:navContentClose var(--trans2) forwards;
+
+            &:before{
+                display:none;
+            }
+
+            & > div{
+                opacity:0;
+                transition:var(--trans1);
+            }
 
             & .nav-content-inner{
                 max-height:min(384px, calc(
@@ -450,7 +470,6 @@
 
         & .nav-buttons{
             width:100%;
-            background-color:var(--color4c);
             filter:none;
 
             & .nav-btn:not(.burger-btn){
@@ -470,7 +489,21 @@
 
             & .nav-content{
                 width:100%;
+                height:100%;
                 animation:navContentOpen var(--trans2) forwards;
+
+                &:before{
+                    display:block;
+                }
+
+                & > div{
+                    opacity:1;
+                }
+
+                & .nav-content-inner{
+                    padding:0 var(--size6);
+                }
+                
             }
 
             & .nav-buttons{
