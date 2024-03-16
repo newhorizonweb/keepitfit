@@ -88,6 +88,15 @@
             justify-content:center;
             align-items:center;
 
+            color:var(--txt-dark2);
+            font-family:mainFont, Roboto, Arial, sans-serif;
+            font-size:22px;
+            font-weight:800;
+
+            text-align:center;
+            text-transform:capitalize;
+            transition:inherit;
+
             background-color:var(--layoutWhite);
             transition:var(--trans2);
             cursor:pointer;
@@ -97,23 +106,8 @@
             }
 
             &:hover{
+                color:var(--txt-light1);
                 background-color:var(--color1a);
-
-                & a{
-                    color:var(--txt-light1)
-                }
-
-            }
-
-            & a{
-                color:var(--txt-dark2);
-                font-family:mainFont, Roboto, Arial, sans-serif;
-                font-size:22px;
-                font-weight:800;
-
-                text-align:center;
-                text-transform:capitalize;
-                transition:inherit;
             }
 
         }
@@ -142,11 +136,7 @@
             }
     
             & .go-back{
-
-                & a{
-                    font-size:20px;
-                }
-    
+                font-size:20px;
             }
     
         }
@@ -218,11 +208,7 @@
                 width:min(100%, 352px);
                 margin-top:var(--size6);
                 padding:var(--size4);
-
-                & a{
-                    font-size:16px;
-                }
-
+                font-size:16px;
             }
     
         }
@@ -269,11 +255,7 @@
             }
     
             & .go-back{
-
-                & a{
-                    font-size:18px;
-                }
-    
+                font-size:18px;
             }
     
         }

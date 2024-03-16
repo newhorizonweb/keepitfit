@@ -38,9 +38,9 @@ const NotFound = () => {
                     <h4>{ t("404.wrong_page1") }</h4>
                     <h4>{ t("404.wrong_page2") }</h4>
 
-                    <div className="go-back glass">
-                        <Link to={ urlPath }>{ t("404.go_back") }</Link>
-                    </div>
+                    <Link to={ urlPath } className="go-back glass">
+                        { t("404.go_back") }
+                    </Link>
 
                 </div>
 
