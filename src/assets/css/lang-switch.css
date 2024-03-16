@@ -63,7 +63,7 @@
             }
 
             &.curr-lang p{
-                padding-left:var(--size1);
+                padding-left:var(--size2);
                 color:var(--color2a);
             }
 

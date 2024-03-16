@@ -28,7 +28,6 @@ const Details = () => {
         ( state:{search:{searchedData: any}} ) => state.search
     );
 
-
     const { userAMR } = useSelector(
         ( state:{userData:{userAMR: string}} ) => state.userData
     );

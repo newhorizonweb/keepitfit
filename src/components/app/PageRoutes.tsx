@@ -1,14 +1,16 @@
 
 
 
+// React
 import { useContext } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-
 import { PageContext } from '../../App';
 
+// Pages
 import Details from '../details/Details';
 import Main from '../main/Main';
+import NotFound from '../app/NotFound';
 
 const PageRoutes = () => {
 
@@ -29,6 +31,10 @@ const PageRoutes = () => {
 
                 <Route path={`${urlPath}/details`} element={
                     <Details />
+                } />
+
+                <Route path={'*'} element={
+                    <NotFound />
                 } />
 
             </Routes>

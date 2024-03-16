@@ -4,7 +4,6 @@
 import { motion } from 'framer-motion';
 
 const PageTransition = (Component: React.ComponentType) => {
-    
     return () => (
         <>
             <motion.div
