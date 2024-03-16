@@ -1,0 +1,54 @@
+{
+    "sections":{
+        "section_name": "Abschnitte",
+        "search": "Suchleiste",
+        "nutri_facts": "Nährwertangaben",
+        "charts": "Diagramme",
+        "micronutrients": "Mikronährstoffe",
+        "diet_labels": "Diätkennzeichen"
+    },
+
+    "user":{
+        "section_name": "Körperdaten",
+        "info1": "Mifflin St Jeor - Diese Gleichung liefert Ihnen eine personalisierte Schätzung Ihres Grundumsatzes (BMR) - der täglichen Kalorienmenge, die Ihr Körper einfach durch Existieren verbrennt.",
+        "info2": "Obwohl sie nicht perfekt ist, kann sie Ihnen helfen, Ziele für Ihr Gewichtsmanagement zu setzen und Ihre tägliche Nährstoffzufuhr zu optimieren, einschließlich sowohl Makronährstoffe (Kohlenhydrate, Protein usw.) als auch Mikronährstoffe (Vitamine, Mineralien).",
+    
+        "units": "Einheiten",
+        "metric": "Metrisch",
+        "imperial": "Imperial",
+    
+        "sex": "Geschlecht",
+        "select": "auswählen",
+        "male": "Männlich",
+        "female": "Weiblich",
+    
+        "age": "Alter",
+        "yrs": "Jahre",
+    
+        "height": "Größe",
+        "weight": "Gewicht",
+    
+        "activity": "Aktivität",
+        "activ_bmr": "Grundumsatz (BMR)",
+        "activ_sedentary": "Bewegungsarm (wenig bis keine Bewegung)",
+        "activ_light": "Leicht aktiv",
+        "activ_moderate": "Mäßig aktiv",
+        "activ_very": "Sehr aktiv",
+        "activ_extra": "Extra aktiv",
+    
+        "calculate": "Berechnen",
+        "daily_intake": "Tageskalorienbedarf",
+    
+        "your_bmi": "Ihr BMI",
+        "bmi_lvl1": "Starkes Untergewicht",
+        "bmi_lvl2": "Mäßiges Untergewicht",
+        "bmi_lvl3": "Leichtes Untergewicht",
+        "bmi_lvl4": "Normalbereich",
+        "bmi_lvl5": "Übergewicht",
+        "bmi_lvl6": "Adipositas (Klasse I)",
+        "bmi_lvl7": "Adipositas (Klasse II)",
+        "bmi_lvl8": "Adipositas (Klasse III)"
+    },
+
+    "fav_items": "Favoriten"
+}

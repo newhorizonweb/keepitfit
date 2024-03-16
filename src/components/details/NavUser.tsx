@@ -3,7 +3,6 @@
 
 // React
 import { useState } from "react";
-
 import BmiTable from './BmiTable';
 import '../../assets/css/nav-user.css';
 
@@ -14,11 +13,17 @@ import {
     updateUserBMI,
 } from "../redux/userData";
 
+// Locales
+import { useTranslation } from 'react-i18next';
+
 // TS
 type inpChng = React.ChangeEvent<HTMLInputElement>;
 type selChng = React.ChangeEvent<HTMLSelectElement>;
 
 const NavUser = () => {
+
+    // Translation
+    const { t } = useTranslation(['nav']);
 
         /* Body Metrics */
 
@@ -272,28 +277,33 @@ const NavUser = () => {
     return (
         <div className="nav-user">
         
-            <h4 className="nav-content-head">Body Metrics</h4>
+            <h4 className="nav-content-head">
+                { t("user.section_name") }
+            </h4>
 
             <div className={`nav-content-inner small-scroll-acc
-                ${isInfoOpen ? 'user-info-open' : ''}`}>
+                ${isInfoOpen ? 'nav-info-open' : ''}`}>
 
-                <button className="user-info-btn glass"
-                    aria-label="Calculate AMR and BMI"
+                <button className="nav-info-btn glass"
+                    aria-label="AMR equation"
                     onClick={() => {setIsInfoOpen(!isInfoOpen)}}>
                     <span></span><span></span>
                 </button>
 
-                <div className={`user-info ${isInfoOpen ? 'user-info-open' : ''}`}>
-                    <p className="user-info-txt">
-                        Mifflin St Jeor - this equation gives you a personalized estimate of your Basal Metabolic Rate (BMR) - the daily calories your body burns just existing.
+                <div className={`nav-info glass
+                    ${isInfoOpen ? 'nav-info-open' : ''}`}>
+
+                    <p className="nav-info-txt">
+                        { t("user.info1") }
                     </p>
-                    <p className="user-info-txt">
-                        While not perfect, it can help you set goals for weight management and fine-tune your daily nutrient intake, including both macronutrients (carbs, protein, etc.) and micronutrients (vitamins, minerals).
+                    <p className="nav-info-txt">
+                        { t("user.info2") }
                     </p>
+                    
                 </div>
 
                 <div className="user-elem">
-                    <label htmlFor="units">Units</label>
+                    <label htmlFor="units">{ t("user.units") }</label>
                     
                     <div className="user-elem-input user-elem-select glass">
                         <select id="units" value={ userUnits }
@@ -302,8 +312,12 @@ const NavUser = () => {
                                 setLS("user-units", e.target.value);
                             }}>
 
-                            <option value="metric">Metric</option>
-                            <option value="imperial">Imperial</option>
+                            <option value="metric">
+                                { t("user.metric") }
+                            </option>
+                            <option value="imperial">
+                                { t("user.imperial") }
+                            </option>
 
                         </select>
                         <span></span><span></span>
@@ -311,7 +325,7 @@ const NavUser = () => {
                 </div>
 
                 <div className="user-elem">
-                    <label htmlFor="sex">Sex</label>
+                    <label htmlFor="sex">{ t("user.sex") }</label>
 
                     <div className="user-elem-input user-elem-select glass">
                         <select id="sex" value={ userSex }
@@ -319,16 +333,16 @@ const NavUser = () => {
                                 setUserSex(e.target.value);
                                 setLS("user-sex", e.target.value);
                             }}>
-                            <option value="" hidden>Select</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="" hidden>{ t("user.select") }</option>
+                            <option value="male">{ t("user.male") }</option>
+                            <option value="female">{ t("user.female") }</option>
                         </select>
                         <span></span><span></span>
                     </div>
                 </div>
 
                 <div className="user-elem">
-                    <label htmlFor="age">Age</label>
+                    <label htmlFor="age">{ t("user.age") }</label>
 
                     <div className="user-elem-input glass">
                         <input type="number" id="age"
@@ -337,13 +351,13 @@ const NavUser = () => {
                                 setUserAge(e.target.value);
                                 setLS("user-age", e.target.value);
                             }}/>
-                        <span>yrs</span>
+                        <span>{ t("user.yrs") }</span>
                     </div>
                 </div>
                 
                 <div className="user-elem">
                     { userUnits === "metric" && <>
-                        <label htmlFor="height">Height</label>
+                        <label htmlFor="height">{ t("user.height") }</label>
 
                         <div className="user-elem-input glass">
                             <input type="number" id="height"
@@ -357,7 +371,7 @@ const NavUser = () => {
                     </>}
 
                     { userUnits === "imperial" && <>
-                        <label htmlFor="height-ft">Height</label>
+                        <label htmlFor="height-ft">{ t("user.height") }</label>
 
                         <div className="user-elem-input glass">
                             <input type="number" id="height-ft"
@@ -384,7 +398,7 @@ const NavUser = () => {
 
                 <div className="user-elem">
                     { userUnits === "metric" && <>
-                        <label htmlFor="weight">Weight</label>
+                        <label htmlFor="weight">{ t("user.weight") }</label>
 
                         <div className="user-elem-input glass">
                             <input type="number" id="weight"
@@ -398,7 +412,7 @@ const NavUser = () => {
                     </>}
 
                     { userUnits === "imperial" && <>
-                        <label htmlFor="weight-lbs">Weight</label>
+                        <label htmlFor="weight-lbs">{ t("user.weight") }</label>
 
                         <div className="user-elem-input glass">
                             <input type="number" id="weight-lbs"
@@ -413,7 +427,7 @@ const NavUser = () => {
                 </div>
 
                 <div className="user-elem">
-                    <label htmlFor="activ">Activity</label>
+                    <label htmlFor="activ">{ t("user.activity") }</label>
 
                     <div className="user-elem-input user-elem-select glass">
                         <select id="activ" value={ userActiv }
@@ -423,22 +437,22 @@ const NavUser = () => {
                             }}>
 
                             <option value="1">
-                                Basal Metabolic Rate (BMR)
+                                { t("user.activ_bmr") }
                             </option>
                             <option value="1.2">
-                                Sedentary (low/no exercise)
+                                { t("user.activ_sedentary") }
                             </option>
                             <option value="1.375">
-                                Lightly Active
+                                { t("user.activ_light") }
                             </option>
                             <option value="1.55">
-                                Moderately Active
+                                { t("user.activ_moderate") }
                             </option>
                             <option value="1.725">
-                                Very Active
+                                { t("user.activ_very") }
                             </option>
                             <option value="1.9">
-                                Extra Active
+                                { t("user.activ_extra") }
                             </option>
 
                         </select>
@@ -449,7 +463,7 @@ const NavUser = () => {
                 <div className="user-elem">
                     <button className="calc-btn"
                         onClick={ calcUserValues }>
-                        Calculate
+                        { t("user.calculate") }
                     </button>
                 </div>
 
@@ -457,7 +471,7 @@ const NavUser = () => {
                     userBMI !="" && userBMI !=="0" && <>
 
                     <div className="user-calories glass">
-                        <span>Daily Calorie Intake</span>
+                        <span>{ t("user.daily_intake") }</span>
                         <span>{ userAMR } kcal</span>
                     </div>
 

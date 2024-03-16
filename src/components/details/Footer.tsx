@@ -4,10 +4,17 @@
 import version from '../../../package.json';
 import '../../assets/css/footer.css';
 
+// Images
 import Logo from '../../assets/img/keep-it-fit-logo.svg';
 import ApiLogo from '../../assets/img/nutritionix-logo-attribution.svg';
 
+// Locales
+import { useTranslation } from 'react-i18next';
+
 const Footer = () => {
+
+    // Translation
+    const { t } = useTranslation(['app']);
 
     // Keep It Fit version
     const appVersion:string = version.version;
@@ -27,7 +34,7 @@ const Footer = () => {
                 </a>
 
                 <h5>Keep It Fit v{ appVersion }</h5>
-                <h5>© Created by uverit 2024</h5>
+                <h5>{ t("created_by") }</h5>
 
             </div>
 

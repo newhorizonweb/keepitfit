@@ -60,8 +60,11 @@
 
         /* Box Shadows */
 
-    --boxShadow1:0 0 8px 0 #EEE;
-    --boxShadowIns1:inset 0 0 8px 0 #c1c1c1;
+    --shadowColor2:#A1A1A1;
+    --shadowColor3:#C1C1C1;
+
+    --boxShadow1:0 0 8px 0 var(--txt-light2);
+    --boxShadowIns1:inset 0 0 8px 0 var(--shadowColor3);
 
 
     

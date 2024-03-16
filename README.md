@@ -1,6 +1,6 @@
 # Keep It Fit
 
-Your ultimate app for accessing comprehensive nutritional data.
+[Keep It Fit](https://newhorizonweb.github.io/keepitfit/) - Your ultimate app for accessing comprehensive nutritional data.
 
 ## Technologies
 
@@ -11,6 +11,9 @@ Your ultimate app for accessing comprehensive nutritional data.
         - Framer Motion 11.0.6 - Library
     - Redux Toolkit 2.2.1 (Redux 9.1.0)
     - Typed.js 2.1.0 - Library
+    - i18next for React 14.1.0 (translation library)
+        - i18next browser language detector 7.2.0
+        - i18next http backend 2.5.0
     - GH-Pages 6.1.1
     - CSS 3
 

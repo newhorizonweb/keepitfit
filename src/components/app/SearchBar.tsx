@@ -17,6 +17,9 @@ import { PageContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import Typed from "typed.js";
 
+// Locales
+import { useTranslation } from 'react-i18next';
+
 // Search
 import useSearchList from '../hooks/useSearchList';
 import SearchList from '../app/SearchList';
@@ -42,11 +45,13 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
 
 
 
-
         /* Page */
 
     // Current page
     const page = props.page;
+
+    // Translation
+    const { t } = useTranslation(['search_ph', 'errors']);
 
     // Fav List Value
     const { favoriteSearch } = useSelector(
@@ -74,10 +79,74 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
     }
 
     // Check if the search input value is valid
-    const [isValid, setIsValid] = useState(false);
+    const {isValid: initValid} = searchValid(searchVal);
+    const [isValid, setIsValid] = useState(initValid);
 
     // Check if there was a search bar value change
     const [wasSearchFocused, setWasSearchFocused] = useState(false);
+
+
+
+        /* Language Switch */
+
+    // Clear the search when switching the language
+    const { userLang } = useSelector(
+        ( state:{userLang:{userLang:string}} ) => state.userLang
+    );
+
+    const clearSearch = () => {
+        setSearchInpVal("");
+        updateSearchLS("");
+        setShowPlaceholder(true);
+    }
+
+    // Language code for API data fetching
+    const switchApiLang = (userLang: string) => {
+
+        let langCode = "";
+
+        switch(userLang){
+            case "en":
+                langCode = "en_US";
+                break;
+            case "de":
+                langCode = "de_DE";
+                break;
+            case "es":
+                langCode = "es_ES";
+                break;
+            case "fr":
+                langCode = "fr_FR";
+                break;
+            case "pl":
+                langCode = "pl_PL";
+                break;
+            default:
+                langCode = "en_US";
+        }
+
+        return langCode;
+
+    }
+
+    const [apiLang, setApiLang] = useState(switchApiLang(userLang));
+    
+    // Do NOT call the function on page load
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+
+        setApiLang(switchApiLang(userLang));
+
+        if (isMounted){
+            clearSearch();
+        } else {
+            setIsMounted(true);
+        }
+
+        setInpMsg(errorHandler(currError));
+
+    }, [ userLang ]);
 
 
 
@@ -155,7 +224,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
         clearTimeout(msgTimeout);
 
         respApiTimeout = setTimeout(() => {
-            setInpMsg("Still waiting, feels like paint drying.");
+            setInpMsg(t("errors:waiting"));
             setDisplayMsg(true);
         }, delayTreshold);
 
@@ -183,6 +252,30 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                 setDisplayMsg(false);
             }, msgDisplayTime)
         );
+
+    }
+
+    const [ currError, setCurrError ] = useState("");
+
+    const errorHandler = (error: string) => {
+
+        // Set the current error to change the language of the message
+        setCurrError(error);
+
+        let errorMsg = error;
+
+        // Check if the error is a code, e.g. 400, 401
+        if (/^\d+$/.test(error)){
+            errorMsg = `${error} - ${t("errors:" + error)}`;
+
+            // If the error code doesn't match the pre-defined codes
+            if (/^\d+$/.test(errorMsg)){
+                errorMsg = t("errors:unknown");
+            }
+
+        }
+
+        return errorMsg;
 
     }
 
@@ -217,7 +310,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
         // Loading Icon
         startLoading();
 
-        searchData(fetchVal, apiId, apiKey)
+        searchData(fetchVal, apiId, apiKey, apiLang)
         .then(({ apiData, apiError }) => {
 
             // Clear the timeout for the "too long response" msg
@@ -229,7 +322,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
             }
 
             if (apiError){
-                showMsg(apiError);
+                showMsg(errorHandler(apiError));
             }
             
         })
@@ -240,7 +333,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
 
             // Show the error message tile
             if (error){
-                showMsg(error);
+                showMsg(errorHandler(error));
             }
 
         })
@@ -379,32 +472,33 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
 
     // Placeholders
     const typingContents = [
-        "Brown Rice",
-        "Bro^1500ccoli",
-        "Honey",
-        "Pork Chop",
-        "Pork Tenderloin",
-        "Tomato",
-        "Greek Yogurt",
-        "Chicken^500 Breast",
-        "Chic^500kpe^500as",
-        "Apricot",
-        "Roast^500ed Almonds",
-        "Carrots",
-        "Cabbage",
-        "Shrimp",
-        "Maple Syrup",
-        "Pea^1000nuts",
-        "Peaches",
-        "Oregano",
-        "Avocado",
-        "Asparagus",
+        t("search_ph:ph0"),
+        t("search_ph:ph1"),
+        t("search_ph:ph2"),
+        t("search_ph:ph3"),
+        t("search_ph:ph4"),
+        t("search_ph:ph5"),
+        t("search_ph:ph6"),
+        t("search_ph:ph7"),
+        t("search_ph:ph8"),
+        t("search_ph:ph9"),
+        t("search_ph:ph10"),
+        t("search_ph:ph11"),
+        t("search_ph:ph12"),
+        t("search_ph:ph13"),
+        t("search_ph:ph14"),
+        t("search_ph:ph15"),
+        t("search_ph:ph16"),
+        t("search_ph:ph17"),
+        t("search_ph:ph18"),
+        t("search_ph:ph19")
     ];
 
     const [showPlaceHolder, setShowPlaceholder] = useState(true);
 
     // Typing animation - typed.js
     useEffect(() => {
+
         const typed = new Typed(searchPhRef.current, {
             strings: typingContents,
             
@@ -423,7 +517,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
             typed.destroy();
         };
 
-    }, []);
+    }, [ typingContents ]);
 
 
 
@@ -433,9 +527,8 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
     const [listError, setListError] = useState("");
     const [firstElem, setFirstElem] = useState("");
 
-    // It's set to true instead of isValid
-    // Because it can't be NOT validated to save it to the localstorage
-    const { apiData, apiError, isListLoading } = useSearchList(searchVal, true);
+    const { apiData, apiError, isListLoading } =
+        useSearchList(searchVal, isValid, apiLang);
     
     // Update the first list element && LS search value
     const setFirstListElem = (data: { common: any[] }) => {
@@ -462,7 +555,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
             setListError(apiError as string ?? "");
 
             if (apiError){
-                showMsg(apiError);
+                showMsg(errorHandler(apiError));
             }
 
             // Update the first list element
@@ -485,7 +578,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
         }
 
         if (apiError){
-            showMsg(apiError);
+            showMsg(errorHandler(apiError));
         }
       
         setFirstListElem((apiData as {common: any[]}));
@@ -512,7 +605,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                             </span>
                         </div>
 
-                        <input aria-label="Seach Input"
+                        <input aria-label="Seach Input" autoComplete="off"
                             type="text" className="search-input"
                             id="search-input" value={ searchInpVal }
                             onInput={(e) => searchInpChange(e)}
@@ -531,10 +624,10 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                         { !isLoading && magGlassIcon }
                         { isLoading && loadingIcon }
                     </button>
-
+                    
                 </div>
 
-                { isValid &&
+                { isValid && searchInpVal != "" &&
                     <SearchList
                         page={page}
                         apiData={listData}

@@ -3,9 +3,8 @@
 
 import { useState, useEffect, useContext } from "react";
 import { PageContext } from '../../App';
-import { errorResponse } from '../functions/errorResponse';
 
-const useSearchList = (searchVal: string, isValid: boolean) => {
+const useSearchList = (searchVal: string, isValid: boolean, apiLang: string) => {
 
     const [apiData, setApiData] = useState<unknown>(null);
     const [apiError, setApiError] = useState("");
@@ -17,9 +16,9 @@ const useSearchList = (searchVal: string, isValid: boolean) => {
     useEffect(() => {
         
         // Validation
-        if (searchVal && isValid){
+        if (searchVal && isValid && apiLang){
 
-            const dataUrl = 'https://trackapi.nutritionix.com/v2/search/instant/?query=' + searchVal + '&branded=false&detailed=true';
+            const dataUrl = `https://trackapi.nutritionix.com/v2/search/instant/?query=${searchVal}&locale=${apiLang}&branded=false&detailed=true`;
 
             setIsListLoading(true);
 
@@ -36,7 +35,7 @@ const useSearchList = (searchVal: string, isValid: boolean) => {
             .then(response => {
 
                 if (!response.ok){
-                    setApiError(errorResponse(response.status))
+                    setApiError(response.status.toString())
                 }
 
                 return response.json();

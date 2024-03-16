@@ -1,5 +1,7 @@
 
 
+
+// React
 import { createContext } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
@@ -7,6 +9,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import './assets/css/general.css';
 import './assets/css/app.css';
 
+// Page Switch
 import PageRoutes from './components/app/PageRoutes';
 
 // Github Repo Name
@@ -31,17 +34,19 @@ function App(){
 
     return (
         <Router>
-            <div className="App">
-                {/* <nav>
-                    <Link to={ urlPath }>Home</Link>
-					<Link to={`${urlPath}/details`}>Details</Link>
-                </nav> */}
+            
+                <div className="App">
+                    {/* <nav>
+                        <Link to={ urlPath }>Home</Link>
+                        <Link to={`${urlPath}/details`}>Details</Link>
+                    </nav> */}
 
-                <PageContext.Provider value={ ContextContent }>
-                    <PageRoutes />
-                </PageContext.Provider>
+                    <PageContext.Provider value={ ContextContent }>
+                        <PageRoutes />
+                    </PageContext.Provider>
 
-            </div>
+                </div>
+        
         </Router>
     );
 

@@ -1,9 +1,7 @@
 
 
 
-import { errorResponse } from './errorResponse';
-
-export function searchData(searchVal: string, apiId: string, apiKey: string){
+export function searchData(searchVal: string, apiId: string, apiKey: string, apiLang: string){
     return new Promise<
         { apiData: any, apiError: string }
     >((resolve, reject) => {
@@ -11,13 +9,13 @@ export function searchData(searchVal: string, apiId: string, apiKey: string){
         let apiData = {};
         let apiError = "";
 
-        if (!searchVal){
+        if (!searchVal || !apiLang){
             resolve({ apiData, apiError });
             return;
         }
 
-        const dataUrl = 'https://trackapi.nutritionix.com/v2/natural/nutrients/?query=' + searchVal;
-
+        const dataUrl = 'https://trackapi.nutritionix.com/v2/natural/nutrients/';
+        
         fetch(dataUrl, {
             method: 'POST',
             headers: {
@@ -27,6 +25,7 @@ export function searchData(searchVal: string, apiId: string, apiKey: string){
             },
             body: JSON.stringify({
                 "query": searchVal,
+                "locale": apiLang,
                 'claims': true,
                 'include_subrecipe': true,
                 'ingredient_statement': true,
@@ -38,7 +37,7 @@ export function searchData(searchVal: string, apiId: string, apiKey: string){
         .then(response => {
 
             if (!response.ok){
-                apiError = errorResponse(response.status);
+                apiError = response.status.toString();
                 reject(apiError);
             }
 

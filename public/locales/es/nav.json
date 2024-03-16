@@ -1,0 +1,54 @@
+{
+    "sections":{
+        "section_name": "Secciones",
+        "search": "Búsqueda",
+        "nutri_facts": "Nutrición",
+        "charts": "Gráficos de Torta",
+        "micronutrients": "Micronutrientes",
+        "diet_labels": "Etiquetas"
+    },
+
+    "user":{
+        "section_name": "Medidas",
+        "info1": "Mifflin St Jeor - esta ecuación proporciona una estimación personalizada de su Tasa Metabólica Basal (TMB) - las calorías diarias que quema su cuerpo simplemente por existir.",
+        "info2": "Si bien no es perfecta, puede ayudarlo a establecer objetivos para el control de peso y ajustar su consumo diario de nutrientes, incluidos macronutrientes (carbohidratos, proteínas, etc.) y micronutrientes (vitaminas, minerales).",
+    
+        "units": "unidades",
+        "metric": "métrico",
+        "imperial": "imperial",
+    
+        "sex": "sexo",
+        "select": "seleccionar",
+        "male": "masculino",
+        "female": "femenino",
+    
+        "age": "edad",
+        "yrs": "años",
+    
+        "height": "altura",
+        "weight": "peso",
+    
+        "activity": "actividad",
+        "activ_bmr": "Tasa Metabólica Basal (TMB)",
+        "activ_sedentary": "Sedentario (poco o ningún ejercicio)",
+        "activ_light": "Actividad Ligera",
+        "activ_moderate": "Actividad Moderada",
+        "activ_very": "Muy Activo",
+        "activ_extra": "Extra Activo",
+    
+        "calculate": "Calcular",
+        "daily_intake": "Calorías diarias",
+    
+        "your_bmi": "Tu IMC",
+        "bmi_lvl1": "Delgadez Severa",
+        "bmi_lvl2": "Delgadez Moderada",
+        "bmi_lvl3": "Delgadez Leve",
+        "bmi_lvl4": "Rango Normal",
+        "bmi_lvl5": "Sobrepeso",
+        "bmi_lvl6": "Obeso (Clase I)",
+        "bmi_lvl7": "Obeso (Clase II)",
+        "bmi_lvl8": "Obeso (Clase III)"
+    },
+    
+    "fav_items": "Articulos Favoritos"
+}

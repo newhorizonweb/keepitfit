@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateFavSearch } from "../redux/favorites";
 
+// Locales
+import { useTranslation } from 'react-i18next';
+
+import LangSwitch from './LangSwitch';
 import NavUser from './NavUser';
 
 import { navIcons } from '../functions/navIcons';
@@ -12,6 +16,12 @@ import { printPage } from '../functions/printPage';
 import '../../assets/css/nav.css';
 
 const Nav = () => {
+
+    // Languages Icon
+    const langIcon = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle className="cls-1" cx="100" cy="100" r="95"/><path className="cls-1" d="M100,195c29.4,0,53.2-42.5,53.2-95S129.4,5,100,5"/><path className="cls-1" d="M100,5C70.6,5,46.8,47.5,46.8,100s23.8,95,53.2,95"/><path className="cls-1" d="M176.6,43.8C159.3,57,131.4,65.6,100,65.6S40.7,57,23.4,43.8"/><path className="cls-1" d="M176.6,156.2c-17.3-13.2-45.2-21.8-76.6-21.8S40.7,143,23.4,156.2"/><line className="cls-1" x1="100" y1="5" x2="100" y2="195"/></svg>);
+
+    // Translation
+    const { t } = useTranslation(['nav']);
 
 
 
@@ -28,6 +38,8 @@ const Nav = () => {
         setActiveBtn(activeBtn === button ? "" : button);
     };
 
+    // Toggle the nav language selector
+    const [isInfoOpen, setIsInfoOpen] = useState(false);
 
     // Close navigation on mobile to dekstop resize
     const closeNavOnResize = () => {
@@ -152,7 +164,8 @@ const Nav = () => {
 
     // LocalStorage favorites list
     const getFavList = () => {
-        const favList = localStorage.getItem("fav-list");
+        const currLang = localStorage.getItem("i18nextLng");
+        const favList = localStorage.getItem(`fav-list-${currLang}`);
         const splitArray = favList ? favList.split(', ') : [];
         return(splitArray);
     }
@@ -204,10 +217,21 @@ const Nav = () => {
 
             // Update the LS fav list
             const updatedList = favList.join(', ');
-            localStorage.setItem("fav-list", updatedList);
+            const currLang = localStorage.getItem("i18nextLng");
+            localStorage.setItem(`fav-list-${currLang}`, updatedList);
 
         }
 
+    }
+
+    // Load the favorites list
+    const loadFavSearch = () => {
+
+        // Unmark the bookmark button
+        checkFavList();
+
+        // Load the favorites list
+        setFavList(getFavList());
     }
 
     // Mark the fav search on page load and when searching
@@ -253,7 +277,8 @@ const Nav = () => {
 
         // Update the LS fav list
         const updatedList = favList.join(', ');
-        localStorage.setItem("fav-list", updatedList);
+        const currLang = localStorage.getItem("i18nextLng");
+        localStorage.setItem(`fav-list-${currLang}`, updatedList);
 
     }
 
@@ -281,19 +306,22 @@ const Nav = () => {
                 </div>
 
                 <div className={`nav-btn nav-bookmark
-                    ${ isFavorite ? ' active' : '' }`}
-                    onClick={ toggleFavSearch }>
+                    ${ isFavorite ? ' active-bookmark' : '' }`}
+                    onClick={() => {
+                        loadFavSearch();
+                        toggleFavSearch();
+                    }}>
                     { bookmarkIcon }
                 </div>
 
                 <div className={`nav-btn nav-btn-check nav-fav-list
                     ${activeBtn === 'fav-list' ? 'active' : ''}
                 `}
-                    onClick={ () => {
-                        setIsFavListVisible(!isFavListVisible);
-                        toggleActiveBtn("fav-list");
-                    }
-                }>
+                onClick={() => {
+                    loadFavSearch();
+                    setIsFavListVisible(!isFavListVisible);
+                    toggleActiveBtn("fav-list");
+                }}>
                     { favListIcon }
                 </div>
 
@@ -320,32 +348,47 @@ const Nav = () => {
 
                 <div className="nav-scroll">
 
-                    <h4 className="nav-content-head">Sections</h4>
+                    <h4 className="nav-content-head">
+                        { t("sections.section_name") }
+                    </h4>
 
-                    <div className="nav-content-inner small-scroll">
+                    <div className={`nav-content-inner small-scroll-acc
+                        ${isInfoOpen ? 'nav-info-open' : ''}`}>
+                        
+                        <button className="nav-info-btn glass"
+                            aria-label="Calculate AMR and BMI"
+                            onClick={() => {setIsInfoOpen(!isInfoOpen)}}>
+                            { langIcon }
+                        </button>
+
+                        <LangSwitch
+                            isInfoOpen={isInfoOpen}
+                            loadFavSearch={loadFavSearch}
+                        />
+
                         <h5 className="scroll-link" id="search-scroll-btn"
                             onClick={() => scrollTo("search-bar")}>
-                            Search
+                            { t("sections.search") }
                         </h5>
                         
                         <h5 className="scroll-link" id="nutrition-scroll-btn"
                             onClick={() => scrollTo("search-bar")}>
-                            Nutrition Facts
+                            { t("sections.nutri_facts") }
                         </h5>
 
                         <h5 className="scroll-link" id="charts-scroll-btn"
                             onClick={() => scrollTo("search-bar")}>
-                            Charts
+                            { t("sections.charts") }
                         </h5>
 
                         <h5 className="scroll-link" id="micronut-scroll-btn"
                             onClick={() => scrollTo("search-bar")}>
-                            Micronutrients
+                            { t("sections.micronutrients") }
                         </h5>
 
                         <h5 className="scroll-link" id="diet-scroll-btn"
                             onClick={() => scrollTo("search-bar")}>
-                            Diet Labels
+                            { t("sections.diet_labels") }
                         </h5>
                     </div>
                 </div>
@@ -354,9 +397,11 @@ const Nav = () => {
 
                 <div className="nav-favorites">
 
-                    <h4 className="nav-content-head">Favorite Items</h4>
+                    <h4 className="nav-content-head">
+                        { t("fav_items") }
+                    </h4>
 
-                    <div className="nav-content-inner small-scroll">
+                    <div className="nav-content-inner small-scroll-acc">
                         {favList.map((elem, index) => (
 
                             <div className="fav-elem" key={ index }>
@@ -381,8 +426,6 @@ const Nav = () => {
                     </div>
 
                 </div>
-
-
 
             </div>
 

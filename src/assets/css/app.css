@@ -47,7 +47,7 @@ body{
     background-repeat:no-repeat;
     background-attachment:fixed;
 
-    filter:drop-shadow(-8px 8px 4px rgb(0,0,0,0.05));
+    filter:drop-shadow(-6px 6px 3px rgb(0,0,0,0.05));
     backdrop-filter:blur(4px);
     transition:all var(--trans2), border-radius 0s;
     
