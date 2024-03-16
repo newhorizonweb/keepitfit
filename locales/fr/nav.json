@@ -1,0 +1,54 @@
+{
+    "sections":{
+        "section_name": "Sections",
+        "search": "Rechercher",
+        "nutri_facts": "Valeur nutritive",
+        "charts": "Camemberts",
+        "micronutrients": "Micronutriments",
+        "diet_labels": "Mots clés"
+    },
+
+    "user":{
+        "section_name": "Mensurations",
+        "info1": "Mifflin St Jeor - cette équation vous donne une estimation personnalisée de votre taux métabolique basal (BMR) - les calories quotidiennes que votre corps brûle simplement en existant.",
+        "info2": "Bien qu'elle ne soit pas parfaite, elle peut vous aider à définir des objectifs de gestion du poids et à affiner votre apport quotidien en nutriments, y compris les macronutriments (glucides, protéines, etc.) et les micronutriments (vitamines, minéraux).",
+
+        "units": "unités",
+        "metric": "métrique",
+        "imperial": "impérial",
+
+        "sex": "sexe",
+        "select": "sélectionner",
+        "male": "homme",
+        "female": "femme",
+
+        "age": "âge",
+        "yrs": "ans",
+
+        "height": "taille",
+        "weight": "poids",
+
+        "activity": "activité",
+        "activ_bmr": "Taux métabolique basal (BMR)",
+        "activ_sedentary": "Sédentaire (peu ou pas d'exercice)",
+        "activ_light": " Légèrement actif",
+        "activ_moderate": "Modérément actif",
+        "activ_very": "Très actif",
+        "activ_extra": "Extra actif",
+
+        "calculate": "Calculer",
+        "daily_intake": "Apport calorique",
+
+        "your_bmi": "Votre IMC",
+        "bmi_lvl1": "Maigreur sévère",
+        "bmi_lvl2": "Maigreur modérée",
+        "bmi_lvl3": "Maigreur légère",
+        "bmi_lvl4": "Gamme normale",
+        "bmi_lvl5": "Surpoids",
+        "bmi_lvl6": "Obèse (Classe I)",
+        "bmi_lvl7": "Obèse (Classe II)",
+        "bmi_lvl8": "Obèse (Classe III)"
+    },
+
+    "fav_items": "Articles favoris"
+}

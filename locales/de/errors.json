@@ -1,0 +1,10 @@
+{
+    "waiting": "Warten dauert ewig, wie beim Farbtrocknen",
+    "unknown": "Fehler unbekannt, später erneut versuchen",
+    "400": "Ungültige Eingabe, prüfen Sie Ihre Suchanfrage",
+    "401": "Nicht berechtigt",
+    "403": "Zugriff verboten",
+    "404": "Suche nicht gefunden",
+    "409": "Suchkonflikt",
+    "500": "Serverfehler, später erneut versuchen"
+}

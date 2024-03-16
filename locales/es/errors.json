@@ -1,0 +1,10 @@
+{
+    "waiting": "Esperando... ¿se secó la pintura ya?",
+    "unknown": "Error desconocido, inténtelo más tarde",
+    "400": "Entrada no válida, revise su consulta",
+    "401": "Acceso no autorizado",
+    "403": "Acceso prohibido",
+    "404": "Búsqueda no encontrada",
+    "409": "Conflicto de búsqueda",
+    "500": "Error del servidor, inténtelo más tarde"
+  }

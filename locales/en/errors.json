@@ -1,0 +1,10 @@
+{
+    "waiting": "Still waiting, feels like paint drying",
+    "unknown": "Unknown error, try again later",
+    "400": "Invalid input, please check your search query",
+    "401": "Unauthorized access",
+    "403": "Forbidden access",
+    "404": "Search not found",
+    "409": "Search conflict",
+    "500": "Server error, try again later"
+}

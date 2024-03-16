@@ -1,0 +1,54 @@
+{
+    "sections":{
+        "section_name": "Sections",
+        "search": "Search",
+        "nutri_facts": "Nutrition Facts",
+        "charts": "Charts",
+        "micronutrients": "Micronutrients",
+        "diet_labels": "Diet Labels"
+    },
+
+    "user":{
+        "section_name": "Body Metrics",
+        "info1": "Mifflin St Jeor - this equation gives you a personalized estimate of your Basal Metabolic Rate (BMR) - the daily calories your body burns just existing.",
+        "info2": "While not perfect, it can help you set goals for weight management and fine-tune your daily nutrient intake, including both macronutrients (carbs, protein, etc.) and micronutrients (vitamins, minerals).",
+
+        "units": "units",
+        "metric": "metric",
+        "imperial": "imperial",
+
+        "sex": "sex",
+        "select": "select",
+        "male": "male",
+        "female": "female",
+
+        "age": "age",
+        "yrs": "yrs",
+
+        "height": "height",
+        "weight": "weight",
+
+        "activity": "activity",
+        "activ_bmr": "Basal Metabolic Rate (BMR)",
+        "activ_sedentary": "Sedentary (low/no exercise)",
+        "activ_light": "Lightly Active",
+        "activ_moderate": "Moderately Active",
+        "activ_very": "Very Active",
+        "activ_extra": "Extra Active",
+
+        "calculate": "Calculate",
+        "daily_intake": "Daily Calorie Intake",
+
+        "your_bmi": "Your BMI",
+        "bmi_lvl1": "Severe thinness",
+        "bmi_lvl2": "Moderate thinness",
+        "bmi_lvl3": "Mild thinness",
+        "bmi_lvl4": "Normal range",
+        "bmi_lvl5": "Overweight",
+        "bmi_lvl6": "Obese (Class I)",
+        "bmi_lvl7": "Obese (Class II)",
+        "bmi_lvl8": "Obese (Class III)"
+    },
+
+    "fav_items": "Favorite Items"
+}
