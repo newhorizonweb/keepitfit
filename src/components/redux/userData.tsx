@@ -10,8 +10,8 @@ export interface typeState{
 }
 
 const initialState: typeState = {
-	userAMR: "",
-	userBMI: "",
+	userAMR: localStorage.getItem("user-amr") ?? "2000", // default 2000 kcal
+	userBMI: localStorage.getItem("user-bmi") ?? "",
 }
 
 export const counterSlice = createSlice({

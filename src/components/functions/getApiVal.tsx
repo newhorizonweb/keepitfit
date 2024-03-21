@@ -9,7 +9,7 @@ export function getApiVal(data: any, propPath: string){
     // Use reduce to traverse the nested properties
     return keys.reduce((value, key) => {
         if (!value || !(key in value)){
-            return undefined;
+            return "";
         } else {
             return value[key];
         }

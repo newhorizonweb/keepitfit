@@ -1,16 +1,17 @@
 
 
 
+// React & Redux
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateFavSearch } from "../redux/favorites";
 
 // Locales
 import { useTranslation } from 'react-i18next';
-
 import LangSwitch from './LangSwitch';
-import NavUser from './NavUser';
 
+// Assets
+import NavUser from './NavUser';
 import { navIcons } from '../functions/navIcons';
 import { printPage } from '../functions/printPage';
 import '../../assets/css/nav.css';

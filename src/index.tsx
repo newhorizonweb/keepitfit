@@ -20,7 +20,6 @@ i18next.use(initReactI18next).use(LanguageDetector).use(HttpApi)
 .init({
     supportedLngs: ["en", "de", "es", "fr", "pl"],
     fallbackLng: "en",
-    
     detection: {
         order: ['localStorage', 'navigator', 'htmlTag'],
         caches: ['localStorage'],

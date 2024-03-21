@@ -85,7 +85,7 @@ const NavUser = () => {
     );
 
     const [userAMR, setUserAMR] = useState(
-        valLS("user-amr", "0")
+        valLS("user-amr", "2000") // 2000 = recommended daily kcal value
     );
     const [userBMI, setUserBMI] = useState(
         valLS("user-bmi", "0")
@@ -97,6 +97,17 @@ const NavUser = () => {
     
     const userValValid = () => {
 
+        markEmptyStr("units", userUnits);
+        markEmptyStr("sex", userSex);
+        markEmptyStr("activ", userActiv);
+
+        markEmptyNum("age", userAge);
+        markEmptyNum("height", userHeight);
+        markEmptyNum("height-ft", userHeightFt);
+        markEmptyNum("height-in", userHeightIn);
+        markEmptyNum("weight", userWeight);
+        markEmptyNum("weight-lbs", userWeightLbs);
+
         const isEmpty =
             userUnits === "" || userSex === "" || userActiv === "" ||
             !markEmptyNum("age", userAge) ||
@@ -107,20 +118,6 @@ const NavUser = () => {
 
             (!markEmptyNum("weight", userWeight) &&
             !markEmptyNum("weight-lbs", userWeightLbs));
-    
-        if (isEmpty){
-            // Add the "empty" class to the empty element's parent
-            markEmptyStr("units", userUnits);
-            markEmptyStr("sex", userSex);
-            markEmptyStr("activ", userActiv);
-
-            markEmptyNum("age", userAge);
-            markEmptyNum("height", userHeight);
-            markEmptyNum("height-ft", userHeightFt);
-            markEmptyNum("height-in", userHeightIn);
-            markEmptyNum("weight", userWeight);
-            markEmptyNum("weight-lbs", userWeightLbs);
-        }
     
         return !isEmpty;
 
@@ -221,8 +218,19 @@ const NavUser = () => {
 
             AMR = Math.round(BMR * parseFloat(userActiv)).toString();
 
+            // Scroll to the calorie element
+            const parentElem = document.getElementById("nav-user-inner");
+            const calorieElem = document.getElementById("user-calories");
+
+            if (calorieElem && parentElem){
+                parentElem.scrollTo({
+                    top: calorieElem.offsetTop - calorieElem.offsetHeight - 32,
+                    behavior: 'smooth'
+                });
+            }
+
         } else {
-            AMR = "0";
+            AMR = "2000";
         }
 
         setLS("user-amr", AMR);
@@ -282,7 +290,7 @@ const NavUser = () => {
             </h4>
 
             <div className={`nav-content-inner small-scroll-acc
-                ${isInfoOpen ? 'nav-info-open' : ''}`}>
+                ${isInfoOpen ? 'nav-info-open' : ''}`} id="nav-user-inner">
 
                 <button className="nav-info-btn glass"
                     aria-label="AMR equation"
@@ -470,7 +478,7 @@ const NavUser = () => {
                 { userAMR !="" && userAMR !=="0" &&
                     userBMI !="" && userBMI !=="0" && <>
 
-                    <div className="user-calories glass">
+                    <div className="user-calories glass" id="user-calories">
                         <span>{ t("user.daily_intake") }</span>
                         <span>{ userAMR } kcal</span>
                     </div>

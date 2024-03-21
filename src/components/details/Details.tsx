@@ -1,19 +1,22 @@
 
 
 
-import { useContext, useEffect } from "react";
+// React & Redux
+import { useContext } from "react";
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import { PageContext } from '../../App';
 import PageTransition from '../app/PageTransition';
 
-import { PageContext } from '../../App';
-import { Link } from 'react-router-dom';
-
+// Components
 import SearchBar from '../app/SearchBar';
 import DetailsTop from './DetailsTop';
+import NutriTable from "./NutriTable";
 import Nav from './Nav';
 import Footer from './Footer';
 
+// Assets
 import '../../assets/css/details.css';
 import '../../assets/css/print-pdf.css';
 import Logo from '../../assets/img/keep-it-fit-logo.svg';
@@ -28,17 +31,6 @@ const Details = () => {
         ( state:{search:{searchedData: any}} ) => state.search
     );
 
-    const { userAMR } = useSelector(
-        ( state:{userData:{userAMR: string}} ) => state.userData
-    );
-    const { userBMI } = useSelector(
-        ( state:{userData:{userBMI: string}} ) => state.userData
-    );
-
-    useEffect(() => {
-        console.log(userAMR)
-        console.log(userBMI)
-    }, [userAMR, userAMR]);
 
 
     return(
@@ -65,6 +57,14 @@ const Details = () => {
                     />
 
                     <DetailsTop />
+
+                    <NutriTable
+                        tableName="macro"
+                    />
+
+                    <NutriTable
+                        tableName="micro"
+                    />
 
                 </main>
 

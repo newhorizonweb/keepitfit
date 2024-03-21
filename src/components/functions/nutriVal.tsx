@@ -12,7 +12,7 @@ interface Item {
 }
 
 export function nutriVal(item: Item, attrId: number){
-
+    
     if (item.full_nutrients && item.serving_weight_grams){
 
         const nutriVal = item.full_nutrients.find(nutrient => nutrient.attr_id === attrId)?.value;

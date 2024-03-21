@@ -1,0 +1,62 @@
+{
+
+    "table":{
+        "macro_name": "Macronutrients",
+        "micro_name": "Micronutrients",
+
+        "nutri_facts": "Nutrition Facts",
+        "serving_size": "Serving Size",
+        "per_val": "Per",
+        "percent_daily": "% DV*"
+    },
+
+    "macro":{
+        "calories": "Calories",
+
+        "total_fat": "Total Fat",
+        "satur_fat": "Saturated",
+        "trans_fat": "Trans",
+        "mono_fat": "Monounsatur.",
+        "poly_fat": "Polyunsatur.",
+
+        "total_carbs": "Total Carbs",
+        "net_carbs": "Net Carbs",
+        "sugars": "Sugars",
+        "fiber": "Dietary Fiber",
+
+        "protein": "Protein",
+        
+        "cholesterol": "Cholesterol",
+        "sodium": "Sodium",
+        "caffeine": "Caffeine"
+    },
+
+    "micro":{
+        "vit_A": "Vitamin A",
+        "vit_C": "Vitamin C",
+        "vit_D": "Vitamin D",
+        "vit_E": "Vitamin E",
+        "vit_K": "Vitamin K",
+        "vit_B1": "Vitamin B1",
+        "vit_B2": "Vitamin B2",
+        "vit_B3": "Vitamin B3",
+        "vit_B5": "Vitamin B5",
+        "vit_B6": "Vitamin B6",
+        "vit_B9": "Vitamin B9",
+        "vit_B12": "Vitamin B12",
+        "choline": "Choline",
+
+        "calcium": "Calcium",
+        "copper": "Copper",
+        "fluoride": "Fluoride",
+        "folate": "Folate",
+        "iron": "Iron",
+        "magnesium": "Magnesium",
+        "manganese": "Manganese",
+        "phosphorus": "Phosphorus",
+        "potassium": "Potassium",
+        "selenium": "Selenium",
+        "zinc": "Zinc"
+    }
+
+}

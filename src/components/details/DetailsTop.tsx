@@ -26,7 +26,7 @@ const DetailsTop = () => {
             <div className="details-image glass">
                 { apiVal("photo.highres") &&
                     <img src={ apiVal("photo.highres") }
-                        alt={ apiVal("food_name") + "photo" } />
+                        alt={ apiVal("food_name") + " photo" } />
                 }
                 { !apiVal("photo.highres") &&
                     <img src={ imgPlaceholder } alt="Placeholder Image" />

@@ -285,7 +285,7 @@ h6{
 
 .small-scroll::-webkit-scrollbar{
     width:calc((var(--size1) * 2) + var(--size1));
-    height:0;
+    height:calc((var(--size1) * 2) + var(--size1));
 }
 .small-scroll::-webkit-scrollbar-thumb{
     background:transparent !important;
@@ -298,7 +298,7 @@ h6{
 
 .small-scroll-acc::-webkit-scrollbar{
     width:calc((var(--size1) * 2) + var(--size1));
-    height:0;
+    height:calc((var(--size1) * 2) + var(--size1));
 }
 .small-scroll-acc::-webkit-scrollbar-thumb{
     background:transparent !important;

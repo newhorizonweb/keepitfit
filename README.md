@@ -15,6 +15,7 @@
         - i18next browser language detector 7.2.0
         - i18next http backend 2.5.0
     - GH-Pages 6.1.1
+    - Nutritionix REST API
     - CSS 3
 
 - Graphics & Icons

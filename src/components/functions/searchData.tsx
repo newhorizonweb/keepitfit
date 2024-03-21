@@ -8,7 +8,7 @@ export function searchData(searchVal: string, apiId: string, apiKey: string, api
 
         let apiData = {};
         let apiError = "";
-
+        
         if (!searchVal || !apiLang){
             resolve({ apiData, apiError });
             return;

@@ -2,7 +2,7 @@
 
 
 // React
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -76,7 +76,13 @@ const LangSwitch = (props: PropTypes) => {
         loadFavSearch();
     };
 
+    // Update the language on page load
+    // AFTER the localStorage is set by the i18next
+    useEffect(() => {
+        chngLang(localStorage.getItem("i18nextLng") ?? "en")
+    }, []);
 
+    
     
     return (
         <div className={`nav-info lang-switch glass
