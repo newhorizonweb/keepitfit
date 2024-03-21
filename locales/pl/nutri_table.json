@@ -1,0 +1,62 @@
+{
+
+    "table":{
+        "macro_name": "Makroskładniki",
+        "micro_name": "Mikroskładniki",
+
+        "nutri_facts": "Wartości odżywcze",
+        "serving_size": "Porcja",
+        "per_val": "W",
+        "percent_daily": "% RWS*"
+    },
+
+    "macro":{
+        "calories": "Kalorie",
+
+        "total_fat": "Tłuszcz ogółem",
+        "satur_fat": "Nasycony",
+        "trans_fat": "Trans",
+        "mono_fat": "Jednonienasycone",
+        "poly_fat": "Wielonienasycone",
+
+        "total_carbs": "Węgle ogółem",
+        "net_carbs": "Węgle netto",
+        "sugars": "Cukry",
+        "fiber": "Błonnik",
+
+        "protein": "Białko",
+ 
+        "cholesterol": "Cholesterol",
+        "sodium": "Sód",
+        "caffeine": "Kofeina"
+    },
+
+    "micro":{
+        "vit_A": "Witamina A",
+        "vit_C": "Witamina C",
+        "vit_D": "Witamina D",
+        "vit_E": "Witamina E",
+        "vit_K": "Witamina K",
+        "vit_B1": "Witamina B1",
+        "vit_B2": "Witamina B2",
+        "vit_B3": "Witamina B3",
+        "vit_B5": "Witamina B5",
+        "vit_B6": "Witamina B6",
+        "vit_B9": "Witamina B9",
+        "vit_B12": "Witamina B12",
+        "choline": "Cholina",
+
+        "calcium": "Wapń",
+        "copper": "Miedź",
+        "fluoride": "Fluor",
+        "folate": "Folan",
+        "iron": "Żelazo",
+        "magnesium": "Magnez",
+        "manganese": "Mangan",
+        "phosphorus": "Fosfor",
+        "potassium": "Potas",
+        "selenium": "Selen",
+        "zinc": "Cynk"
+    }
+
+}

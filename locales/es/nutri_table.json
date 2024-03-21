@@ -1,0 +1,62 @@
+{
+
+    "table":{
+        "macro_name": "Macronutrientes",
+        "micro_name": "Micronutrientes",
+
+        "nutri_facts": "Datos Nutricionales",
+        "serving_size": "Porción",
+        "per_val": "Por",
+        "percent_daily": "% VD*"
+    },
+
+    "macro":{
+        "calories": "Calorías",
+
+        "total_fat": "Grasa total",
+        "satur_fat": "Saturada",
+        "trans_fat": "Trans",
+        "mono_fat": "Monoinsaturada",
+        "poly_fat": "Poliinsaturada",
+
+        "total_carbs": "Carbohidratos totales",
+        "net_carbs": "Carbohidratos netos",
+        "sugars": "Azúcares",
+        "fiber": "Fibra dietética",
+
+        "protein": "Proteína",
+
+        "cholesterol": "Colesterol",
+        "sodium": "Sodio",
+        "caffeine": "Cafeína"
+    },
+
+    "micro":{
+        "vit_A": "Vitamina A",
+        "vit_C": "Vitamina C",
+        "vit_D": "Vitamina D",
+        "vit_E": "Vitamina E",
+        "vit_K": "Vitamina K",
+        "vit_B1": "Vitamina B1",
+        "vit_B2": "Vitamina B2",
+        "vit_B3": "Vitamina B3",
+        "vit_B5": "Vitamina B5",
+        "vit_B6": "Vitamina B6",
+        "vit_B9": "Vitamina B9",
+        "vit_B12": "Vitamina B12",
+        "choline": "Colina",
+
+        "calcium": "Calcio",
+        "copper": "Cobre",
+        "fluoride": "Fluoruro",
+        "folate": "Folato",
+        "iron": "Hierro",
+        "magnesium": "Magnesio",
+        "manganese": "Manganeso",
+        "phosphorus": "Fósforo",
+        "potassium": "Potasio",
+        "selenium": "Selenio",
+        "zinc": "Zinc"
+    }
+
+}
