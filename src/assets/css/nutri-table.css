@@ -41,6 +41,7 @@
         filter:none;
         backdrop-filter:none;
         pointer-events:none;
+        z-index:1000;
     }
 
     & .table-top{
@@ -130,11 +131,6 @@
 
         & tr{
             height:var(--size7);
-            background-color:var(--layoutWhite);
-
-            & :is(th, td):nth-child(1){
-                text-transform:capitalize;
-            }
 
             .table-macro &:nth-child(1){
                 height:var(--size8);
@@ -145,8 +141,63 @@
 
             }
 
-            &:nth-child(2n + 2){
+                /* Cells */
+            
+            & :is(th, td){
+                will-change:background-position;
+
+                &:nth-child(1){
+                    text-transform:capitalize;
+                }
+
+            }
+
+            .table-micro & :is(th, td):nth-child(1){
+                padding-left:var(--size5);
+            }
+
+            .details-page.details-placeholder & td.ph{
+                filter:none !important;
+                backdrop-filter:none !important;
+                box-shadow:none !important;
+                border-radius:0 !important;
+
+                &:before,
+                & p{
+                    display:none;
+                }
+    
+            }
+
+            &:nth-child(2n + 1) :is(th, td){
+                background-color:var(--layoutWhite);
+
+                .details-page.details-placeholder &.ph{
+                    background:linear-gradient(to right,
+                        var(--layoutShine1a) 30%,
+                        var(--layoutShine1b) 55%,
+                        var(--layoutShine1a) 70%
+                    );
+                
+                    background-size:200vw;
+                    animation:phAnimation 1.2s linear forwards infinite;
+                }
+
+            }
+
+            &:nth-child(2n + 2) td{
                 background-color:var(--bg);
+
+                .details-page.details-placeholder &.ph{
+                    background:linear-gradient(to right,
+                        var(--color3b) 30%,
+                        var(--layoutShine1b) 55%,
+                        var(--color3b) 70%
+                    );
+                    background-size:200vw;
+                    animation:phAnimation 1.2s linear forwards infinite;
+                }
+
             }
 
         }
@@ -171,6 +222,16 @@
         }
 
         .table-micro &{
+
+            .details-page.details-placeholder & tr:nth-child(2n + 2) td.ph{
+                background:linear-gradient(to right,
+                    var(--color4b) 30%,
+                    var(--layoutShine1b) 55%,
+                    var(--color4b) 70%
+                );
+                background-size:200vw;
+                animation:phAnimation 1.2s linear forwards infinite;
+            }
                 
             & thead tr{
                 height:var(--size8);
@@ -204,6 +265,39 @@
 
         }
 
+        & .amr-cell-info{
+            position:relative;
+            transition:var(--trans1);
+            cursor:help;
+
+            &:hover{
+                color:var(--mainColor);
+            }
+
+            & div{
+                width:min(320px, calc(calc(100vw - (var(--size6) * 2))));
+                padding:var(--size4);
+
+                position:absolute;
+                top:100%;
+                right:0;
+
+                text-wrap:wrap;
+                opacity:0;
+                background-color:var(--layoutWhite2);
+
+                transition:var(--trans1);
+                pointer-events:none;
+            }
+
+            &:hover div{
+                opacity:1;
+                pointer-events:all;
+                z-index:1000;
+            }
+
+        }
+        
     }
 
 }
@@ -215,7 +309,7 @@
 
         & .nutri-table{
     
-            & :is(th, td):not(.t-span){
+            & :is(th, td):not(.t-span) p{
                 width:auto;
                 font-size:16px;
     

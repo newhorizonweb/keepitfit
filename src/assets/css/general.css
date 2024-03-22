@@ -33,11 +33,11 @@
     --color4c:rgba(232, 244, 250, 0.75);
 
     /* Layout */
-    --layoutWhite:rgb(240,240,240,0.15);
-    --layoutWhite2:rgb(252,252,252,0.75);
+    --layoutWhite:rgb(250,250,250,0.15);
+    --layoutWhite2:rgb(253,253,253,0.75);
 
-    --layoutShine1a:rgb(245,245,245,0.25);
-    --layoutShine1b:rgb(220,220,220,0.6);
+    --layoutShine1a:rgb(250,250,250,0.25);
+    --layoutShine1b:rgb(235,235,235,0.6);
 
     --layoutShadow:rgb(196,196,196);
 
@@ -61,12 +61,13 @@
         /* Box Shadows */
 
     --shadowColor2:#A1A1A1;
-    --shadowColor3:#C1C1C1;
+    --shadowColor3:#CfCfCf;
 
     --boxShadow1:0 0 8px 0 var(--txt-light2);
-    --boxShadowIns1:inset 0 0 8px 0 var(--shadowColor3);
-
-
+    --boxShadowIns1:inset 2px 2px 8px -2px var(--layoutShadow);
+    --boxShadowIns2:inset -4px -4px 12px -4px var(--shadowColor3);
+    
+    
     
         /* Gradients */
 
@@ -128,7 +129,6 @@
     }
 
 }
-
 
 
 
@@ -338,8 +338,13 @@ h6{
     outline:0 !important;
 }
 
-*::selection{
-    background:var(--color1a) !important;
+::selection{
+    background:var(--color1a);
+}
+
+.acc-select::selection,
+.acc-select *::selection{
+    background:var(--color2a);
 }
 
 html{

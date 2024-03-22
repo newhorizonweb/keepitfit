@@ -1,5 +1,10 @@
 {
 
+    "amr_info":{
+        "amr_info1": "La ingesta diaria recomendada se basa en tu Tasa Metabólica Activa (AMR) o en una estimación para la persona promedio si el valor de AMR no se calcula.",
+        "amr_info2": "Aunque no es perfecto, te proporciona una base sólida para comprender cómo se ajusta el nutriente a tus necesidades diarias."
+    },
+    
     "table":{
         "macro_name": "Macronutrientes",
         "micro_name": "Micronutrientes",

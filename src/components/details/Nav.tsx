@@ -291,7 +291,8 @@ const Nav = () => {
 
 
     return(
-        <nav className={`${ isBurgerActive ? 'nav-open' : ''}
+        <nav className={`acc-select
+            ${ isBurgerActive ? ' nav-open' : ''}
             ${ activeBtn === '' ? ' scroll-visible' : '' }
             ${ activeBtn === 'fav-list' ? ' fav-list-visible' : '' }
             ${ activeBtn === 'user' ? ' user-visible' : '' }

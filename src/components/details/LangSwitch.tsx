@@ -79,7 +79,7 @@ const LangSwitch = (props: PropTypes) => {
     // Update the language on page load
     // AFTER the localStorage is set by the i18next
     useEffect(() => {
-        chngLang(localStorage.getItem("i18nextLng") ?? "en")
+        chngLang(localStorage.getItem("i18nextLng") ?? "")
     }, []);
 
     

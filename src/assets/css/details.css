@@ -48,7 +48,7 @@
 
     position:relative;
     border:none;
-    box-shadow:var(--boxShadow1), var(--boxShadowIns1);
+    box-shadow:var(--boxShadow1), var(--boxShadowIns2), var(--boxShadowIns1);
     border-radius:var(--size4);
 
     background-image:url("../img/noise-texture-big.svg");
@@ -67,7 +67,7 @@
     background-size:200vw;
     animation:phAnimation 1.2s linear forwards infinite;
 
-    filter:drop-shadow(-10px 10px 6px var(--txt-light2));
+    filter:drop-shadow(-10px 10px 6px rgb(0,0,0,0.05));
     backdrop-filter:blur(4px);
     transition:all var(--trans2), border-radius 0s;
     
@@ -88,6 +88,15 @@
         background:var(--grad1);
         pointer-events:none;
     }
+
+}
+
+@media screen and (width <= 900px){
+
+    .details-page.details-placeholder .ph{
+        filter:drop-shadow(-6px 6px 3px rgb(0,0,0,0.05));
+        backdrop-filter:none;
+    }  
 
 }
 

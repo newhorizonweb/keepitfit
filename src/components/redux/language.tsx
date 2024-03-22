@@ -9,7 +9,7 @@ export interface typeState{
 }
 
 const initialState: typeState = {
-	userLang: localStorage.getItem("i18nextLng") ?? "en",
+	userLang: localStorage.getItem("i18nextLng") ?? "",
 }
 
 export const counterSlice = createSlice({

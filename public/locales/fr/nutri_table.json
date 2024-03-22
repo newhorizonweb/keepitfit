@@ -1,5 +1,10 @@
 {
 
+    "amr_info":{
+        "amr_info1": "L'apport quotidien recommandé est basé sur votre Taux Métabolique Actif (AMR) ou une estimation pour la personne moyenne si la valeur de l'AMR n'est pas calculée.",
+        "amr_info2": "Bien que ce ne soit pas parfait, cela vous donne une base solide pour comprendre comment le nutriment s'intègre dans vos besoins quotidiens."
+    },
+
     "table":{
         "macro_name": "Macronutriments",
         "micro_name": "Micronutriments",

@@ -77,8 +77,6 @@ const useTableData = () => {
 
     useEffect(() => {
 
-        console.log(userLang)
-
         // Table Info
         setTableInfo({
             macro_name: t("table.macro_name"),

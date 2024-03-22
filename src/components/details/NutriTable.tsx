@@ -8,6 +8,9 @@ import { FormEvent, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateServWght } from "../redux/apiData";
 
+// Locales
+import { useTranslation } from 'react-i18next';
+
 // Assets
 import useTableData from '../hooks/useTableData';
 import { tableContents } from '../functions/tableContents';
@@ -22,6 +25,18 @@ const NutriTable = (props: PropTypes) => {
 
     // Redux dispatch (update variables)
     const dispatch = useDispatch();
+
+
+
+        /* Translation */
+
+    // User Language
+    const { userLang } = useSelector(
+        ( state:{userLang:{userLang:string}} ) => state.userLang
+    );
+
+    // Translation
+    const { t } = useTranslation(['nutri_table']);
 
 
 
@@ -93,7 +108,7 @@ const NutriTable = (props: PropTypes) => {
     return (
         <div className={`table-div
             ${tableName === "macro" ? 'table-macro' : ''}
-            ${tableName === "micro" ? 'table-micro' : ''}`}>
+            ${tableName === "micro" ? 'table-micro acc-select' : ''}`}>
 
             <div className="table-shadow glass"></div>
 
@@ -107,7 +122,8 @@ const NutriTable = (props: PropTypes) => {
                     <p>{ servSize }</p>
 
                     <div className="serv-inp">
-                        <input type="number" autoComplete="off"
+                        <input type="number" autoComplete="off" id="serv-size"
+                            aria-label="Serving Size - enter weight in grams"
                             value={ servWght === null ? '' : servWght }
                             onChange={(e) => servWghtChange(e)}
                             onBlur={ setZeroWght }
@@ -119,8 +135,9 @@ const NutriTable = (props: PropTypes) => {
             </div>
 
 <div className={`table-inner small-scroll
-        ${tableName === "macro" ? 'small-scroll' : ''}
-        ${tableName === "micro" ? 'small-scroll-acc' : ''}`}>
+    ${tableName === "macro" ? 'small-scroll' : ''}
+    ${tableName === "micro" ? 'small-scroll-acc' : ''}`}>
+
     <table className="nutri-table">
 
     <thead>
@@ -130,12 +147,18 @@ const NutriTable = (props: PropTypes) => {
             <th className="t-span"></th>
 
             <th>{ per } 100g</th>
-            <th className="s-cell">{ daily }</th>
+            <th className="s-cell amr-cell-info">{ daily }</th>
 
             <th className="t-span"></th>
             
             <th>{ per } { servWght ? servWght : 0 }g</th>
-            <th className="s-cell">{ daily }</th>
+            <th className="s-cell amr-cell-info">
+                { daily }
+                <div className="glass">
+                    <p>{ t("amr_info.amr_info1") }</p>
+                    <p>{ t("amr_info.amr_info2") }</p>
+                </div>
+            </th>
         </tr>
     </thead>
 
@@ -150,17 +173,27 @@ const NutriTable = (props: PropTypes) => {
 
             return (
                 <tr key={elemKey}>
-                    <td>{name}</td>
+                    <td>
+                        <p>{ name }</p>
+                    </td>
                     
                     <td className="t-span"></td>
 
-                    <td>{val100 + unit}</td>
-                    <td className="s-cell">{DI100 ? DI100 + "%" : ""}</td>
+                    <td className="ph">
+                        <p>{ val100 + unit }</p>
+                    </td>
+                    <td className="s-cell ph">
+                        <p>{ DI100 ? DI100 + "%" : "" }</p>
+                    </td>
 
                     <td className="t-span"></td>
 
-                    <td>{valServ + unit}</td>
-                    <td className="s-cell">{DIserv ? DIserv + "%" : ""}</td>
+                    <td className="ph">
+                        <p>{ valServ + unit }</p>
+                    </td>
+                    <td className="s-cell ph">
+                        <p>{ DIserv ? DIserv + "%" : "" }</p>
+                    </td>
                 </tr>
             );
         }) }
@@ -178,17 +211,27 @@ const NutriTable = (props: PropTypes) => {
 
             return (
                 <tr key={elemKey}>
-                    <td>{name}</td>
+                    <td>
+                        <p>{ name }</p>
+                    </td>
+                    
+                    <td className="t-span"></td>
+
+                    <td className="ph">
+                        <p>{ val100 + unit }</p>
+                    </td>
+                    <td className="s-cell ph">
+                        <p>{ DI100 ? DI100 + "%" : "" }</p>
+                    </td>
 
                     <td className="t-span"></td>
 
-                    <td>{val100 + unit}</td>
-                    <td className="s-cell">{DI100 ? DI100 + "%" : ""}</td>
-
-                    <td className="t-span"></td>
-
-                    <td>{valServ + unit}</td>
-                    <td className="s-cell">{DIserv ? DIserv + "%" : ""}</td>
+                    <td className="ph">
+                        <p>{ valServ + unit }</p>
+                    </td>
+                    <td className="s-cell ph">
+                        <p>{ DIserv ? DIserv + "%" : "" }</p>
+                    </td>
                 </tr>
             );
         })}
@@ -197,6 +240,7 @@ const NutriTable = (props: PropTypes) => {
     )}
 
     </table>
+
 </div>
 
         </div>
