@@ -1,4 +1,10 @@
 {
+
+    "amr_info":{
+        "amr_info1": "Die empfohlene tägliche Aufnahme basiert auf Ihrer Aktiven Stoffwechselrate (AMR) oder einer Schätzung für den durchschnittlichen Menschen, falls der AMR-Wert nicht berechnet wird.",
+        "amr_info2": "Obwohl nicht perfekt, bietet es Ihnen eine solide Grundlage, um zu verstehen, wie der Nährstoff in Ihre täglichen Bedürfnisse passt."
+    },
+
     "table":{
         "macro_name": "Makronährstoffe",
         "micro_name": "Mikronährstoffe",
@@ -57,4 +63,5 @@
         "selenium": "Selen",
         "zinc": "Zink"
     }
+    
 }

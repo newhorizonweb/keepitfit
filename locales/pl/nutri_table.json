@@ -1,5 +1,10 @@
 {
 
+    "amr_info":{
+        "amr_info1": "Zalecane dzienne spożycie jest oparte na Twojej aktywnej przemianie materii (AMR) lub szacunkowej wartości dla przeciętnej osoby, jeśli wartość AMR nie została obliczona.",
+        "amr_info2": "Chociaż nie jest to idealne rozwiązanie, daje solidną podstawę do zrozumienia, jak składnik odżywczy wpisuje się w Twoje codzienne potrzeby."
+    },
+
     "table":{
         "macro_name": "Makroskładniki",
         "micro_name": "Mikroskładniki",
