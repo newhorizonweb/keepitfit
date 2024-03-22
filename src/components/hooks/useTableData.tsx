@@ -27,14 +27,12 @@ const useTableData = () => {
     const { searchedData } = useSelector(
         ( state:{search:{searchedData: any}} ) => state.search
     );
-
-    // User Language
-    const { userLang } = useSelector(
-        ( state:{userLang:{userLang:string}} ) => state.userLang
-    );
-
+    
     // Translation
     const { t, i18n } = useTranslation(['nutri_table']);
+
+    // User Language
+    const userLang = i18n.language;
 
     // Tables
     const [tableInfo, setTableInfo] = useState({});
@@ -392,12 +390,8 @@ const useTableData = () => {
             }
         });
 
-    }, [searchedData, i18n.language]);
-
-    useEffect(() => {
-        i18n.changeLanguage(userLang);
-    }, [userLang, i18n]);
-
+    }, [ searchedData, userLang ]);
+    
     return{
         tableInfo,
         macroTable,

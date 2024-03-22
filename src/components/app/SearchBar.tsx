@@ -51,7 +51,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
     const page = props.page;
 
     // Translation
-    const { t } = useTranslation(['search_ph', 'errors']);
+    const { t, i18n } = useTranslation(['search_ph', 'errors']);
 
     // Fav List Value
     const { favoriteSearch } = useSelector(
@@ -90,9 +90,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
         /* Language Switch */
 
     // Clear the search when switching the language
-    const { userLang } = useSelector(
-        ( state:{userLang:{userLang:string}} ) => state.userLang
-    );
+    const userLang = i18n.language;
 
     const clearSearch = () => {
         setSearchInpVal("");

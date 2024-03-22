@@ -3,10 +3,6 @@
 
 // React
 import { useEffect, useState } from 'react';
-
-// Redux
-import { useDispatch } from 'react-redux';
-import { updateLang } from "../redux/language";
 import '../../assets/css/lang-switch.css';
 
 // Locales
@@ -30,9 +26,6 @@ const LangSwitch = (props: PropTypes) => {
     // Props
     const isInfoOpen = props.isInfoOpen;
     const loadFavSearch = props.loadFavSearch;
-
-    // Redux dispatch (update variables)
-    const dispatch = useDispatch();
 
     // Language List
     const langList = [
@@ -71,7 +64,6 @@ const LangSwitch = (props: PropTypes) => {
     // Change language
     const chngLang = (langCode: string) => {
         i18next.changeLanguage(langCode);
-        dispatch(updateLang(langCode));
         setCurrLang(langCode);
         loadFavSearch();
     };

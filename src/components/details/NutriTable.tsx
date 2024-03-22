@@ -25,16 +25,7 @@ const NutriTable = (props: PropTypes) => {
 
     // Redux dispatch (update variables)
     const dispatch = useDispatch();
-
-
-
-        /* Translation */
-
-    // User Language
-    const { userLang } = useSelector(
-        ( state:{userLang:{userLang:string}} ) => state.userLang
-    );
-
+    
     // Translation
     const { t } = useTranslation(['nutri_table']);
 
