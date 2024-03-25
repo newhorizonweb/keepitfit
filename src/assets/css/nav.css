@@ -501,6 +501,7 @@
         position:fixed;
         top:var(--size6);
         right:var(--size6);
+        pointer-events:none;
 
         align-items:flex-end;
         gap:var(--size6);
@@ -542,6 +543,7 @@
 
             & .burger-btn{
                 display:flex;
+                pointer-events:all;
             }
 
         }
@@ -550,6 +552,7 @@
 
         &.nav-open{
             width:calc(var(--btnSize) * 5);
+            pointer-events:all;
 
             & .nav-content{
                 width:100%;

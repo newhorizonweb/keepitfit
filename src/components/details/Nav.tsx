@@ -89,7 +89,7 @@ const Nav = () => {
 
     // "activation point"
     // e.g. 0.3 = 30vh from the top edge of the screen
-    const topScrollPadding = window.innerHeight * 0.3; 
+    const topScrollPadding = window.innerHeight * 0.4; 
 
     const closestSection = () => {
 
@@ -373,23 +373,23 @@ const Nav = () => {
                             { t("sections.search") }
                         </h5>
                         
-                        <h5 className="scroll-link" id="nutrition-scroll-btn"
-                            onClick={() => scrollTo("search-bar")}>
+                        <h5 className="scroll-link" id="macro-scroll-btn"
+                            onClick={() => scrollTo("table-macro")}>
                             { t("sections.nutri_facts") }
                         </h5>
 
                         <h5 className="scroll-link" id="charts-scroll-btn"
-                            onClick={() => scrollTo("search-bar")}>
+                            onClick={() => scrollTo("nutri-charts")}>
                             { t("sections.charts") }
                         </h5>
 
-                        <h5 className="scroll-link" id="micronut-scroll-btn"
-                            onClick={() => scrollTo("search-bar")}>
+                        <h5 className="scroll-link" id="micro-scroll-btn"
+                            onClick={() => scrollTo("table-micro")}>
                             { t("sections.micronutrients") }
                         </h5>
 
-                        <h5 className="scroll-link" id="diet-scroll-btn"
-                            onClick={() => scrollTo("search-bar")}>
+                        <h5 className="scroll-link" id="labels-scroll-btn"
+                            onClick={() => scrollTo("diet-labels")}>
                             { t("sections.diet_labels") }
                         </h5>
                     </div>

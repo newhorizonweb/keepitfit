@@ -97,9 +97,11 @@ const NutriTable = (props: PropTypes) => {
 
 
     return (
-        <div className={`table-div
+        <div className={`table-div section-detector 
             ${tableName === "macro" ? 'table-macro' : ''}
-            ${tableName === "micro" ? 'table-micro acc-select' : ''}`}>
+            ${tableName === "micro" ? 'table-micro acc-select' : ''}`}
+            id={`table-${tableName}`}
+            data-scroll={`${tableName}-scroll-btn`}>
 
             <div className="table-shadow glass"></div>
 
@@ -138,12 +140,18 @@ const NutriTable = (props: PropTypes) => {
             <th className="t-span"></th>
 
             <th>{ per } 100g</th>
-            <th className="s-cell amr-cell-info">{ daily }</th>
+            <th className="s-cell amr-cell-info amr-cell-info1">
+                { daily }
+                <div className="glass">
+                    <p>{ t("amr_info.amr_info1") }</p>
+                    <p>{ t("amr_info.amr_info2") }</p>
+                </div>
+            </th>
 
             <th className="t-span"></th>
             
             <th>{ per } { servWght ? servWght : 0 }g</th>
-            <th className="s-cell amr-cell-info">
+            <th className="s-cell amr-cell-info amr-cell-info2">
                 { daily }
                 <div className="glass">
                     <p>{ t("amr_info.amr_info1") }</p>

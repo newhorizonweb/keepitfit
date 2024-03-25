@@ -10,10 +10,12 @@ import { PageContext } from '../../App';
 import PageTransition from '../app/PageTransition';
 
 // Components
+import Nav from './Nav';
 import SearchBar from '../app/SearchBar';
 import DetailsTop from './DetailsTop';
 import NutriTable from "./NutriTable";
-import Nav from './Nav';
+import ChartsSection from "./ChartsSection";
+import DietLabels from "./DietLabels";
 import Footer from './Footer';
 
 // Assets
@@ -62,9 +64,15 @@ const Details = () => {
                         tableName="macro"
                     />
 
+                    <ChartsSection
+                        searchedData={ searchedData }
+                    />
+
                     <NutriTable
                         tableName="micro"
                     />
+
+                    <DietLabels />
 
                 </main>
 

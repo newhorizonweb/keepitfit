@@ -47,9 +47,7 @@
     & .table-top{
         width:100%;
         min-height:var(--size9);
-        padding:var(--size4) 0;
-        padding-left:var(--size5);
-        padding-right:var(--size4);
+        padding:var(--size4) var(--size4);
 
         display:flex;
         flex-wrap:wrap;
@@ -136,7 +134,7 @@
                 height:var(--size8);
 
                 & :is(th, td):nth-child(1){
-                    padding-left:var(--size5);
+                    padding-left:var(--size4);
                 }
 
             }
@@ -152,8 +150,12 @@
 
             }
 
+            & th{
+               font-size:16px;
+            }
+
             .table-micro & :is(th, td):nth-child(1){
-                padding-left:var(--size5);
+                padding-left:var(--size4);
             }
 
             .details-page.details-placeholder & td.ph{
@@ -203,16 +205,16 @@
         }
 
         & :is(th, td):not(.t-span){
-            width:15%;
-            padding-left:var(--size5);
+            width:13%;
+            padding-left:var(--size4);
 
             text-align:left;
             text-wrap:nowrap;
 
             &:nth-child(1){
-                width:40%;
-                padding-left:var(--size7);
-                padding-right:var(--size4);
+                width:48%;
+                padding-left:calc(var(--size3) + var(--size4));
+                padding-right:var(--size2);
             }
 
             &.s-cell{
@@ -236,11 +238,7 @@
             & thead tr{
                 height:var(--size8);
             }
-
-            & :is(th, td):nth-child(1){
-                padding-left:var(--size7);
-            } 
-
+            
         }
 
         & .t-span{
@@ -288,12 +286,12 @@
 
                 transition:var(--trans1);
                 pointer-events:none;
+                z-index:1000;
             }
 
             &:hover div{
                 opacity:1;
                 pointer-events:all;
-                z-index:1000;
             }
 
         }
@@ -334,6 +332,27 @@
 
 }
 
+@media screen and (width <= 768px){
+
+    .table-div{
+
+        & .nutri-table{
+
+            & .amr-cell-info1{
+
+                & div{
+                    top:100%;
+                    right:50%;
+                    transform:translate(50%, 0);
+                }
+            }
+
+        }
+
+    }  
+
+}
+
 @media screen and (width <= 540px){
 
     .table-div{
@@ -346,6 +365,32 @@
                 width:100%;
             }
     
+        }
+
+        & .nutri-table{
+
+            & .amr-cell-info{
+                position:static;
+
+                & div{
+                    top:calc(var(--size10) + var(--size8));
+                    right:0;
+                    transform:translate(0, 0);
+                }
+            }
+
+        }
+
+    }  
+
+}
+
+@media screen and (width <= 440px){
+
+    .table-div{
+
+        & .nutri-table .amr-cell-info div{
+            top:calc(var(--size10) + var(--size8) - var(--size1));
         }
 
     }  
@@ -364,6 +409,10 @@
                 gap:var(--size05);
             }
     
+        }
+
+        & .nutri-table .amr-cell-info div{
+            top:calc(var(--size10) + var(--size8) + var(--size4));
         }
 
     }  

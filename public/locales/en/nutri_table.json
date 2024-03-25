@@ -21,8 +21,8 @@
         "total_fat": "Total Fat",
         "satur_fat": "Saturated",
         "trans_fat": "Trans",
-        "mono_fat": "Monounsatur.",
-        "poly_fat": "Polyunsatur.",
+        "mono_fat": "Monounsaturated",
+        "poly_fat": "Polyunsaturated",
 
         "total_carbs": "Total Carbs",
         "net_carbs": "Net Carbs",
@@ -35,6 +35,8 @@
         "sodium": "Sodium",
         "caffeine": "Caffeine"
     },
+
+    "water": "water",
 
     "micro":{
         "vit_A": "Vitamin A",
