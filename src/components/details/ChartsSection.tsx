@@ -42,7 +42,7 @@ const ChartsSection = ({ searchedData }: { searchedData: any }) => {
         const fiber = apiVal(291);
 
         if (total && fiber){
-            return total - fiber;
+            return Math.round((total - fiber) * 10) / 10;
         } else {
             return 0;
         }

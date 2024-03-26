@@ -33,8 +33,12 @@ const Footer = () => {
                     <img src={ ApiLogo } alt="Nutritionix API Logo" />
                 </a>
 
-                <h5>Keep It Fit v{ appVersion }</h5>
-                <h5>{ t("created_by") }</h5>
+                <h5 className="no-print">
+                    Keep It Fit v{ appVersion }
+                </h5>
+                <h5 className="no-print">
+                    { t("created_by") }
+                </h5>
 
             </div>
 

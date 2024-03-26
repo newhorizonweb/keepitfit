@@ -18,18 +18,16 @@ import '../../assets/css/nav.css';
 
 const Nav = () => {
 
-    // Languages Icon
-    const langIcon = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle className="cls-1" cx="100" cy="100" r="95"/><path className="cls-1" d="M100,195c29.4,0,53.2-42.5,53.2-95S129.4,5,100,5"/><path className="cls-1" d="M100,5C70.6,5,46.8,47.5,46.8,100s23.8,95,53.2,95"/><path className="cls-1" d="M176.6,43.8C159.3,57,131.4,65.6,100,65.6S40.7,57,23.4,43.8"/><path className="cls-1" d="M176.6,156.2c-17.3-13.2-45.2-21.8-76.6-21.8S40.7,143,23.4,156.2"/><line className="cls-1" x1="100" y1="5" x2="100" y2="195"/></svg>);
-
-    // Translation
-    const { t } = useTranslation(['nav']);
-
 
 
         /* Navigation */
 
+    // Translation
+    const { t } = useTranslation(['nav']);
+
     // Nav Icons
-    const { userIcon, bookmarkIcon, favListIcon, pdfIcon } = navIcons();
+    const { userIcon, bookmarkIcon, favListIcon, pdfIcon, langIcon }
+        = navIcons();
     const [ isBurgerActive, setIsBurgerActive ] = useState(false);
 
     // Toggle the active button (nav content)
@@ -244,6 +242,21 @@ const Nav = () => {
     useEffect(() => setFavList(getFavList()), []);
 
 
+    // Check if the search value is empty
+    const [ bookmarkError, setBookmarkError ] = useState(false);
+    const favBookmark = () => {
+        if (localStorage.getItem("current-search-val") == ""){
+            setBookmarkError(true);
+            setTimeout(() => {
+                setBookmarkError(false);
+            }, 350);
+        } else {
+            loadFavSearch();
+            toggleFavSearch();
+        }
+    }
+
+
 
         /* Favorites List */
 
@@ -290,8 +303,26 @@ const Nav = () => {
 
 
 
+        /* Print PDF */
+
+    const [ pdfError, setPdfError ] = useState(false);
+
+    // Check if the search value is empty
+    const printPDF = () => {
+        if (localStorage.getItem("current-search-val") == ""){
+            setPdfError(true);
+            setTimeout(() => {
+                setPdfError(false);
+            }, 350);
+        } else {
+            printPage("800px");
+        }
+    };
+
+
+
     return(
-        <nav className={`acc-select
+        <nav className={`acc-select no-print 
             ${ isBurgerActive ? ' nav-open' : ''}
             ${ activeBtn === '' ? ' scroll-visible' : '' }
             ${ activeBtn === 'fav-list' ? ' fav-list-visible' : '' }
@@ -308,11 +339,9 @@ const Nav = () => {
                 </div>
 
                 <div className={`nav-btn nav-bookmark
-                    ${ isFavorite ? ' active-bookmark' : '' }`}
-                    onClick={() => {
-                        loadFavSearch();
-                        toggleFavSearch();
-                    }}>
+                    ${ isFavorite ? ' active-bookmark' : '' }
+                    ${bookmarkError && !isFavorite ? 'btn-error' : ''}`}
+                    onClick={favBookmark}>
                     { bookmarkIcon }
                 </div>
 
@@ -327,8 +356,9 @@ const Nav = () => {
                     { favListIcon }
                 </div>
 
-                <div className="nav-btn nav-pdf"
-                    onClick={ () => printPage("800px") }>
+                <div className={`nav-btn nav-pdf
+                    ${pdfError ? 'btn-error' : ''}`}
+                    onClick={ printPDF }>
                     { pdfIcon }
                 </div>
 

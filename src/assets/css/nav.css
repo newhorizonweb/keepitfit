@@ -103,6 +103,15 @@
                 stroke:var(--color2b);
             }
 
+            &.btn-error *{
+                stroke:var(--warnColor);
+
+                &.nostroke{
+                    fill:var(--warnColor);
+                }
+
+            }
+
             &:hover svg{
                 animation:navAnimElem 0.6s ease-in-out; 
                 

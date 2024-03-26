@@ -586,7 +586,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
 
     
     return (
-        <div className="search-section">
+        <div className="search-section no-print">
 
             <div className="search-div">
                 <div className="search-bar glass section-detector" 

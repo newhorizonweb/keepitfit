@@ -110,7 +110,7 @@ const NutriTable = (props: PropTypes) => {
                 <h3>{ tName }</h3>
 
                 { tableName === "macro" &&
-                <div className="serving-adj">
+                <div className="serving-adj no-print">
 
                     <p>{ servSize }</p>
 

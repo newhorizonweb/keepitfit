@@ -206,7 +206,7 @@ const Chart = (props: PropTypes) => {
 
                 }) }
 
-                <circle className="pie load-pie"
+                <circle className="pie load-pie no-print"
                     strokeWidth={ ringWidth }
                     cx={ ringCenter } cy={ ringCenter }
                     r={ ringRad }

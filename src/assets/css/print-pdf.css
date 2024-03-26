@@ -61,6 +61,12 @@
         size:var(--printWidth) var(--printHeight);
     }
 
+    * {
+        -webkit-print-color-adjust:exact !important;
+        color-adjust:exact !important;
+        print-color-adjust:exact !important;
+    }
+
     .page-cover{
         opacity:0 !important;
     }
@@ -74,6 +80,27 @@
 
     & .no-print{
         display:none !important;
+    }
+
+    & .details-page{
+
+        & header .logo{
+            height:calc(var(--size9) + var(--size5));
+        }
+
+        & .details-top{
+            margin-top:0;
+        }
+
+        & footer{
+            padding-bottom:0;
+
+            & .footer-credits img{
+                margin-bottom:0;
+            }
+
+        }
+
     }
 
 }
