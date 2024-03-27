@@ -26,6 +26,7 @@ const DietLabels = (props: any) => {
 
     // Translation
     const { t } = useTranslation(['claims']);
+    const { t: t2 } = useTranslation(['nav']);
 
     // API Data
     const searchedData = props.searchedData;
@@ -69,7 +70,7 @@ const DietLabels = (props: any) => {
             <div className="diet-labels section-detector" 
                 id="diet-labels" data-scroll="labels-scroll-btn">
     
-                <h3>Diet Labels</h3>
+                <h3>{ t2("sections.diet_labels") }</h3>
                 
                 { filterClaims.map((claim:
                 { api: string; name: string; }, index: number) => (
