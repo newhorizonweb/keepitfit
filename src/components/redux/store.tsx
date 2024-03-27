@@ -6,12 +6,14 @@ import searchReducer from "./search";
 import favReducer from "./favorites";
 import userDataReducer from "./userData";
 import apiDataReducer from "./apiData";
+import claimsReducer from "./claims";
 
 export const store = configureStore({
     reducer: {
         search: searchReducer,
         favorites: favReducer,
         userData: userDataReducer,
-        apiData: apiDataReducer
+        apiData: apiDataReducer,
+        claims: claimsReducer
     },
 })

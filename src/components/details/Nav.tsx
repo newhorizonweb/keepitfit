@@ -1,8 +1,10 @@
 
 
 
-// React & Redux
+// React
 import { useState, useEffect } from 'react';
+
+// Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { updateFavSearch } from "../redux/favorites";
 
@@ -18,12 +20,15 @@ import '../../assets/css/nav.css';
 
 const Nav = () => {
 
-
-
         /* Navigation */
 
     // Translation
     const { t } = useTranslation(['nav']);
+
+    // Visible Claims
+    const { visClaims } = useSelector(
+        ( state:{claims:{visClaims : boolean}} ) => state.claims
+    );
 
     // Nav Icons
     const { userIcon, bookmarkIcon, favListIcon, pdfIcon, langIcon }
@@ -106,9 +111,12 @@ const Nav = () => {
 
             // The distance between the top of the page and the section
             const sectionTop = sectionPos.top;
-
+            
             if ((index === 0 && scrollPos < sectionTop) ||
-                sectionTop <= topScrollPadding){
+                sectionTop <= topScrollPadding ||
+                ( index === sections.length - 1 &&
+                (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 64)
+            ){
 
                 // Remove the class from each link button
                 scrollLinks.forEach((link) => {
@@ -261,7 +269,7 @@ const Nav = () => {
         /* Favorites List */
 
     // Redux dispatch (update variables)
-    const dispatch = useDispatch(); // redux
+    const dispatch = useDispatch();
     const [isFavListVisible, setIsFavListVisible] = useState(false);
 
     const removeFromFavList = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -418,10 +426,13 @@ const Nav = () => {
                             { t("sections.micronutrients") }
                         </h5>
 
-                        <h5 className="scroll-link" id="labels-scroll-btn"
-                            onClick={() => scrollTo("diet-labels")}>
-                            { t("sections.diet_labels") }
-                        </h5>
+                        { visClaims &&
+                            <h5 className="scroll-link" id="labels-scroll-btn"
+                                onClick={() => scrollTo("diet-labels")}>
+                                { t("sections.diet_labels") }
+                            </h5>
+                        }
+                        
                     </div>
                 </div>
 

@@ -18,7 +18,7 @@ const urlPath:string = "/keepitfit";
 // API ID & Key
 // Yee, don't bother. It's restricted :)
 const apiId:string = "49b43105";
-const apiKey:string = "3baf03621c0fcf1bf1de2cab55a09c44";
+const apiKey:string = "5ca4c818d8cf741a0cf89300d03f46cc";
 
 // Context Content
 const ContextContent = {

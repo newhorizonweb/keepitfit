@@ -282,6 +282,10 @@
                 transition:var(--trans1);
             }
 
+            &::selection{
+                background:transparent;
+            }
+
             &.closest-section:before{
                 background-color:var(--color2a);
             }

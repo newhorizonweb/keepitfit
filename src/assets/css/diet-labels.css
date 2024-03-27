@@ -1,0 +1,47 @@
+
+
+
+/* 
+    Keep It Fit - created by uverit
+    Do not copy or distribute
+*/
+
+/* Media breakpoints - 1440, 1200, 1024, 900, 768, 540, 440, 320 */
+
+
+
+.diet-labels{
+    width:100%;
+    margin-top:var(--size9);
+
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    gap:var(--size4);
+
+    & h3{
+        width:100%;
+    }
+
+    & .claim{
+        padding:var(--size1) var(--size2);
+        font-size:16px;
+        text-transform:capitalize;
+
+        background-color:var(--color3b);
+        border-radius:var(--size2);
+    }
+
+}
+
+@media screen and (width <= 540px){
+
+    .diet-labels{
+        
+        & .claim{
+            font-size:14px;
+        }
+    
+    }
+
+}

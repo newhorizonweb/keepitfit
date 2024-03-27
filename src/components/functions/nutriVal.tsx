@@ -19,7 +19,7 @@ export function nutriVal(item: Item, attrId: number){
 
         const servingWeight = item.serving_weight_grams;
 
-        let nutriVal100 = "-";
+        let nutriVal100 = "0";
 
         if (nutriVal && servingWeight){
             nutriVal100 =

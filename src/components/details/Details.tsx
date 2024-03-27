@@ -72,7 +72,9 @@ const Details = () => {
                         tableName="micro"
                     />
 
-                    <DietLabels />
+                    <DietLabels
+                        searchedData={ searchedData }
+                    />
 
                 </main>
 
