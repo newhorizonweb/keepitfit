@@ -1,8 +1,9 @@
 
 
 
-// React
+// React & Redux
 import { useRef, useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
 // TS
 interface PropTypes {
@@ -119,13 +120,34 @@ const Chart = (props: PropTypes) => {
 
     const chartRef = useRef(null);
 
+    // Is the page printing (set in the nav)
+    // Was trying to use the "beforeprint" event listener, but it no workey :C
+    // #FixReact #VueSuperiorFramework
+    const { isPrinting } = useSelector(
+        ( state:{pdfPrint:{isPrinting : boolean}} ) => state.pdfPrint
+    );
+
+    // Was the charts section intersected
+    const [ wasIntersected, setWasIntersected ] = useState(false);
+
     // Loading Animation
     const [ loadDasharray, setLoadDasharray ] =
-        useState(`${loadCircum} 0`); // remove 1 px gap
+        useState(`${loadCircum} 0`);
 
+    // Add the chart gap when printing the page
+    useEffect(() => {
+        if (isPrinting === true){
+            setRingGap(chartGapDeg);
+        } else if (wasIntersected === false){
+            setRingGap(0);
+        }
+    }, [ isPrinting ]);
+
+    // Add the chart gap when intersection the charts section (animation)
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting){
+                setWasIntersected(true);
                 setLoadDasharray(`0 ${loadCircum}`);
         
                 setTimeout(() => {

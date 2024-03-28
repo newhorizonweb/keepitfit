@@ -1,7 +1,7 @@
 
 
 
-export function printPage(printWidth: string){
+export function printPage(printWidth: string, callback: () => void) {
 
     // Add the page cover to hide the changed styles
     const pageCover = document.createElement("div");
@@ -86,6 +86,9 @@ export function printPage(printWidth: string){
             // Print the page
             window.print();
 
+            // IsPrinting Callback (for the chart gap)
+            callback();
+
 
 
                 /* Original Stylesheets */
@@ -113,7 +116,7 @@ export function printPage(printWidth: string){
             setTimeout(() => {
                 document.body.removeChild(pageCover);
             }, 150); // CSS - trans2
-
+            
         }, 250);
 
     }, 150); // CSS - trans2

@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { updateFavSearch } from "../redux/favorites";
+import { updateIsPrinting } from "../redux/pdfPrint";
 
 // Locales
 import { useTranslation } from 'react-i18next';
@@ -323,7 +324,8 @@ const Nav = () => {
                 setPdfError(false);
             }, 350);
         } else {
-            printPage("800px");
+            dispatch(updateIsPrinting(true));
+            printPage("800px", () => dispatch(updateIsPrinting(false)));
         }
     };
 

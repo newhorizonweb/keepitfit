@@ -7,6 +7,7 @@ import favReducer from "./favorites";
 import userDataReducer from "./userData";
 import apiDataReducer from "./apiData";
 import claimsReducer from "./claims";
+import claimsPdfPrint from "./pdfPrint";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         favorites: favReducer,
         userData: userDataReducer,
         apiData: apiDataReducer,
-        claims: claimsReducer
+        claims: claimsReducer,
+        pdfPrint: claimsPdfPrint
     },
 })

@@ -65,6 +65,7 @@
         -webkit-print-color-adjust:exact !important;
         color-adjust:exact !important;
         print-color-adjust:exact !important;
+        transition:0s !important;
     }
 
     .page-cover{
@@ -77,6 +78,10 @@
 
 .page-print{
     background-image:none;
+
+    & *{
+        transition:0s !important;
+    }
 
     & .no-print{
         display:none !important;
