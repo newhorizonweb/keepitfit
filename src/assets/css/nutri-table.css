@@ -130,6 +130,10 @@
         & tr{
             height:var(--size7);
 
+            &:nth-child(n + 2) td p{
+                font-size:16px;
+            }
+
             .table-macro &:nth-child(1){
                 height:var(--size8);
 
@@ -233,6 +237,10 @@
                 
             & thead tr{
                 height:var(--size8);
+            }
+
+            & td p{
+                font-size:16px;
             }
             
         }
