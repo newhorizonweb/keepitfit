@@ -18,8 +18,8 @@
     "macro":{
         "calories": "Kalorie",
 
-        "total_fat": "Tłuszcz ogółem",
-        "satur_fat": "Nasycony",
+        "total_fat": "Tłuszcze ogółem",
+        "satur_fat": "Nasycone",
         "trans_fat": "Trans",
         "mono_fat": "Jednonienasycone",
         "poly_fat": "Wielonienasycone",
