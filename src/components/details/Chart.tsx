@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // TS
 interface PropTypes {
     chartName: string;
+    chartLocalName: string;
 
     content: {
         name: string;
@@ -26,6 +27,7 @@ const Chart = (props: PropTypes) => {
 
     // Chart name
     const chartName = props.chartName;
+    const chartLocalName = props.chartLocalName;
 
     // Content (remove objects with a value of 0)
     const content = props.content.filter(obj => obj.val !== 0);
@@ -178,7 +180,7 @@ const Chart = (props: PropTypes) => {
         <div className="pie-chart-div"
             ref={ chartRef }>
 
-            <h3 className="chart-name">{ chartName }</h3>
+            <h3 className="chart-name">{ chartLocalName }</h3>
 
             <svg className="pie-chart glass"
                 viewBox={`0 0 ${chartWidth} ${chartWidth}`}

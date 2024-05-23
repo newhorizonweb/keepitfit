@@ -113,12 +113,14 @@ const ChartsSection = ({ searchedData }: { searchedData: any }) => {
 
             <Chart
                 chartName="weight"
+                chartLocalName={t("weight")}
                 content={ chartWght }
                 totalTarget={ 100 }
             />
             
             <Chart
                 chartName="calories"
+                chartLocalName={t("macro.calories")}
                 content={ chartCalories }
                 totalTarget={ apiVal(208) ?? 0 }
             />
