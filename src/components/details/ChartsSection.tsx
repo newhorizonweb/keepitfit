@@ -108,7 +108,8 @@ const ChartsSection = ({ searchedData }: { searchedData: any }) => {
 
 
     return (
-        <div className="pie-charts section-detector" id="nutri-charts"
+        <div className="pie-charts section-detector" 
+            id="nutri-charts" data-testid="charts-section"
             data-scroll="charts-scroll-btn">
 
             <Chart

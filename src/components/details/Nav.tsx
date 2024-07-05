@@ -336,8 +336,8 @@ const Nav = () => {
             ${ isBurgerActive ? ' nav-open' : ''}
             ${ activeBtn === '' ? ' scroll-visible' : '' }
             ${ activeBtn === 'fav-list' ? ' fav-list-visible' : '' }
-            ${ activeBtn === 'user' ? ' user-visible' : '' }
-        `}>
+            ${ activeBtn === 'user' ? ' user-visible' : '' }`}
+            data-testid="navigation-section">
 
             <div className="nav-buttons glass">
 
@@ -351,6 +351,7 @@ const Nav = () => {
                 <div className={`nav-btn nav-bookmark
                     ${ isFavorite ? ' active-bookmark' : '' }
                     ${bookmarkError && !isFavorite ? 'btn-error' : ''}`}
+                    data-testid="nav-bookmark"
                     onClick={favBookmark}>
                     { bookmarkIcon }
                 </div>
@@ -398,7 +399,7 @@ const Nav = () => {
                         ${isInfoOpen ? 'nav-info-open' : ''}`}>
                         
                         <button className="nav-info-btn glass"
-                            aria-label="Calculate AMR and BMI"
+                            aria-label="Change language"
                             onClick={() => {setIsInfoOpen(!isInfoOpen)}}>
                             { langIcon }
                         </button>
@@ -446,11 +447,14 @@ const Nav = () => {
                         { t("fav_items") }
                     </h4>
 
-                    <div className="nav-content-inner small-scroll-acc">
+                    <div className="nav-content-inner small-scroll-acc"
+                        data-testid="fav-list">
+
                         {favList.map((elem, index) => (
 
                             <div className="fav-elem" key={ index }>
-                                <p onClick={() => searchFav(elem)}>
+                                <p onClick={() => searchFav(elem)}
+                                    data-testid={elem}>
                                     { elem }
                                 </p>
 
@@ -468,6 +472,7 @@ const Nav = () => {
                                 <p className="no-favs">-----</p>
                             </div>
                         }
+
                     </div>
 
                 </div>

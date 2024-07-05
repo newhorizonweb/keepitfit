@@ -111,6 +111,7 @@ const SearchList = (props: PropTypes) => {
     
     return (
         <div className="search-list glass">
+            
             <div className="search-list-inner small-scroll"
                 style={{ maxHeight: `${ listH }px` }}>
 
@@ -118,6 +119,7 @@ const SearchList = (props: PropTypes) => {
                     apiData.common.map((item: any, index: number) => (
 
                     <div className="list-elem list-link"
+                        data-testid="list-item"
                         onMouseDown={ displayResults }
                         data-search={ item.food_name }
                         key={ index }>

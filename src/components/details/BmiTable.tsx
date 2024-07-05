@@ -22,7 +22,7 @@ const BmiTable = (props: PropTypes) => {
 
             <div className="bmi-row">
                 <p>{ t("user.your_bmi") }</p>
-                <p>{userBMI}</p>
+                <p data-testid="user-bmi">{userBMI}</p>
             </div>
 
             <div className={`bmi-row

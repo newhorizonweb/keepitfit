@@ -214,7 +214,7 @@
         background-color:var(--txt-light1);
         border:solid var(--size05) var(--color2a);
 
-        & span{
+        & span:nth-of-type(1){
             text-transform:capitalize;
         }
 

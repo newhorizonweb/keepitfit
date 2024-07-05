@@ -77,14 +77,15 @@ const LangSwitch = (props: PropTypes) => {
     
     
     return (
-        <div className={`nav-info lang-switch glass
-            ${isInfoOpen ? 'nav-info-open' : ''}`}>
+        <div className={"nav-info lang-switch glass"}
+            style={{ display: isInfoOpen ? 'flex' : 'none' }}
+            data-testid="lang-switch-dropdown">
             
             {langList.map(({ langName, code, country }) => (
 
                 <div className={`nav-info-lang
                     ${currLang === code ? 'curr-lang' : ''}`}
-                    
+                    data-testid={`lang-switch-${langName}`}
                     onClick={() => {chngLang(code)}} key={code}>
 
                     <div className="flag-img">

@@ -3,7 +3,30 @@
 
 // React & Redux
 import { useRef, useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import 'intersection-observer';
+
+
+// Define the IntersectionObserverEntry interface if not already provided
+interface IntersectionObserverEntry {
+    boundingClientRect: DOMRectReadOnly;
+    intersectionRatio: number;
+    intersectionRect: DOMRectReadOnly;
+    isIntersecting: boolean;
+    rootBounds: DOMRectReadOnly | null;
+    target: Element;
+    time: number;
+}
+
+// Define the IntersectionObserver interface with required methods
+interface IntersectionObserver {
+    new (callback: IntersectionObserverCallback, options?: IntersectionObserverInit): IntersectionObserver;
+    observe(target: Element): void;
+    unobserve(target: Element): void;
+    disconnect(): void;
+}
+
+
 
 // TS
 interface PropTypes {
@@ -147,31 +170,37 @@ const Chart = (props: PropTypes) => {
 
     // Add the chart gap when intersection the charts section (animation)
     useEffect(() => {
+
+        // Chart Element
+        const chartRefCurrent = chartRef.current;
+        if (!chartRefCurrent) return;
+
+        // Create IntersectionObserver instance
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting){
                 setWasIntersected(true);
                 setLoadDasharray(`0 ${loadCircum}`);
-        
+
                 setTimeout(() => {
                     setRingGap(chartGapDeg);
                 }, 1700); // load-pie transition time 1500 + delay 200
             }
-        },
-        {
+        }, {
             root: null,
             rootMargin: '0px',
             threshold: 0.2,
         });
-    
-        if (chartRef.current){
-            observer.observe(chartRef.current);
-        }
 
+        // Start observing
+        observer.observe(chartRefCurrent);
+
+        // Cleanup function
         return () => {
-            if (chartRef.current){
-                observer.unobserve(chartRef.current);
+            if (observer && chartRefCurrent) {
+                observer.unobserve(chartRefCurrent);
             }
         };
+
     }, []);
 
 

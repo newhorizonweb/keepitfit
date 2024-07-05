@@ -20,8 +20,11 @@ const DetailsTop = () => {
     }
 
     return (
-        <div className="details-top">
-            <h1 className="details-heading ph">{ apiVal("food_name") }</h1>
+        <div className="details-top" data-testid="details-top">
+            <h1 className="details-heading ph"
+                data-testid="details-heading">
+                { apiVal("food_name") }
+            </h1>
 
             <div className="details-image glass">
                 { apiVal("photo.highres") &&

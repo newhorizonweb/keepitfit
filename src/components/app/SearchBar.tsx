@@ -603,7 +603,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                             </span>
                         </div>
 
-                        <input aria-label="Seach Input" autoComplete="off"
+                        <input aria-label="Search Input" autoComplete="off"
                             type="text" className="search-input"
                             id="search-input" value={ searchInpVal }
                             onInput={(e) => searchInpChange(e)}
@@ -617,7 +617,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                         ${ isValid && wasSearchFocused ?
                             'valid-search' : '' }`
                         }
-                        aria-label="search-button"
+                        aria-label="Search Button"
                         onClick={ () => goToDetails(firstElem) }>
                         { !isLoading && magGlassIcon }
                         { isLoading && loadingIcon }
@@ -636,7 +636,7 @@ const SearchBar: React.FC<PropTypes> = (props: PropTypes) => {
                 }
 
             </div>
-
+                
             <p className={
                 `search-msg glass
                 ${ displayMsg ? 'search-msg-active' : '' }`

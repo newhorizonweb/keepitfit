@@ -101,7 +101,8 @@ const NutriTable = (props: PropTypes) => {
             ${tableName === "macro" ? 'table-macro' : ''}
             ${tableName === "micro" ? 'table-micro acc-select' : ''}`}
             id={`table-${tableName}`}
-            data-scroll={`${tableName}-scroll-btn`}>
+            data-scroll={`${tableName}-scroll-btn`}
+            data-testid={`${tableName}-table`}>
 
             <div className="table-shadow glass"></div>
 

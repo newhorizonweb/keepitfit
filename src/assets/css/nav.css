@@ -227,10 +227,6 @@
             gap:var(--size2);
             background-color:var(--txt-light1);
     
-            .nav-info-open &{
-                display:flex;
-            }
-    
             & .nav-info-txt{
                 font-size:15px;
             }

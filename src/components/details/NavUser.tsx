@@ -383,6 +383,7 @@ const NavUser = () => {
 
                         <div className="user-elem-input glass">
                             <input type="number" id="height-ft"
+                            data-testid="height-ft"
                             min="1" max="99" value={ userHeightFt }
                             onInput={(e: inpChng) => {
                                 setUserHeightFt(e.target.value);
@@ -393,7 +394,8 @@ const NavUser = () => {
                         
                         <div className="user-elem-input glass">
                             <input type="number" id="height-in"
-                            aria-label="height-in"
+                            data-testid="height-in"
+                            aria-label="Height (inches)"
                             min="0" max="11" value={ userHeightIn }
                             onInput={(e: inpChng) => {
                                 setUserHeightIn(e.target.value);
@@ -424,6 +426,7 @@ const NavUser = () => {
 
                         <div className="user-elem-input glass">
                             <input type="number" id="weight-lbs"
+                            data-testid="weight-lbs"
                             min="10" max="999" value={ userWeightLbs }
                             onInput={(e: inpChng) => {
                                 setUserWeightLbs(e.target.value);
@@ -478,9 +481,10 @@ const NavUser = () => {
                 { userAMR !="" && userAMR !=="0" &&
                     userBMI !="" && userBMI !=="0" && <>
 
-                    <div className="user-calories glass" id="user-calories">
+                    <div className="user-calories glass" id="user-calories"
+                        data-testid="user-calories">
                         <span>{ t("user.daily_intake") }</span>
-                        <span>{ userAMR } kcal</span>
+                        <span data-testid="kcal-result">{ userAMR } kcal</span>
                     </div>
 
                     <BmiTable

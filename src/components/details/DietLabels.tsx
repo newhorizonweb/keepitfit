@@ -68,7 +68,8 @@ const DietLabels = (props: any) => {
 
         return (
             <div className="diet-labels section-detector" 
-                id="diet-labels" data-scroll="labels-scroll-btn">
+                id="diet-labels" data-testid="diet-labels"
+                data-scroll="labels-scroll-btn">
     
                 <h3>{ t2("sections.diet_labels") }</h3>
                 
