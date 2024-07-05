@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/keepitfit/static/css/main.0176cc09.css",
-    "main.js": "/keepitfit/static/js/main.7bbbea81.js",
+    "main.css": "/keepitfit/static/css/main.c7a0d856.css",
+    "main.js": "/keepitfit/static/js/main.34c286bd.js",
     "static/js/453.398c7f09.chunk.js": "/keepitfit/static/js/453.398c7f09.chunk.js",
     "static/media/keep-it-fit-logo.svg": "/keepitfit/static/media/keep-it-fit-logo.62c5dc7ab2cc6628f44e8d43324ce631.svg",
     "static/media/background-img.svg": "/keepitfit/static/media/background-img.854a7da5e93620dac497.svg",
@@ -13,16 +13,16 @@
     "static/media/noise-texture-big.svg": "/keepitfit/static/media/noise-texture-big.28d67d198f15858d5c8a.svg",
     "index.html": "/keepitfit/index.html",
     "static/media/us.svg": "/keepitfit/static/media/us.912cb4a8f30b24032f0dbf258d674ae9.svg",
-    "static/media/getFetch.cjs": "/keepitfit/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "static/media/getFetch.cjs": "/keepitfit/static/media/getFetch.c4cca45e22bc1b2c7d0d.cjs",
     "static/media/fr.svg": "/keepitfit/static/media/fr.0313c7eacb9633130ffbfac55230c2d2.svg",
     "static/media/de.svg": "/keepitfit/static/media/de.adc6c9b3594fb2f4a4df9a9cea56a1ab.svg",
     "static/media/pl.svg": "/keepitfit/static/media/pl.2b5541c54505328dbc1b264a72369d23.svg",
-    "main.0176cc09.css.map": "/keepitfit/static/css/main.0176cc09.css.map",
-    "main.7bbbea81.js.map": "/keepitfit/static/js/main.7bbbea81.js.map",
+    "main.c7a0d856.css.map": "/keepitfit/static/css/main.c7a0d856.css.map",
+    "main.34c286bd.js.map": "/keepitfit/static/js/main.34c286bd.js.map",
     "453.398c7f09.chunk.js.map": "/keepitfit/static/js/453.398c7f09.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0176cc09.css",
-    "static/js/main.7bbbea81.js"
+    "static/css/main.c7a0d856.css",
+    "static/js/main.34c286bd.js"
   ]
 }
