@@ -35,6 +35,35 @@ const mockNavUser = () => {
 
 describe("NavUser", () => {
 
+    it('should not show the info popup on page load', async () => {
+
+        await act(async () => {
+            render(
+                mockNavUser()
+            );
+        });
+
+        const infoPopup = await screen.findByTestId("equation-info-popup");
+        expect(infoPopup).not.toHaveClass('nav-info-open');
+
+    });
+
+    it('should open the info popup when clicking the button', async () => {
+
+        await act(async () => {
+            render(
+                mockNavUser()
+            );
+        });
+
+        const infoBtn = await screen.findByLabelText(/AMR equation/i);
+        fireEvent.click(infoBtn);
+
+        const infoPopup = screen.getByTestId("equation-info-popup");
+        expect(infoPopup).toHaveClass('nav-info-open');
+
+    });
+
     it('should not calculate anything when the fields are empty', async () => {
 
         await act(async () => {

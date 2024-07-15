@@ -299,7 +299,8 @@ const NavUser = () => {
                 </button>
 
                 <div className={`nav-info glass
-                    ${isInfoOpen ? 'nav-info-open' : ''}`}>
+                    ${isInfoOpen ? 'nav-info-open' : ''}`}
+                    data-testid="equation-info-popup">
 
                     <p className="nav-info-txt">
                         { t("user.info1") }
