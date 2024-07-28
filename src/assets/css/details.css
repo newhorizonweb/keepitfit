@@ -100,6 +100,18 @@
 
 }
 
+@media screen and (width <= 440px){
+
+    .details-page{
+    
+        & header{
+            padding-top:calc(var(--size8) + var(--size8));
+        }
+
+    }
+    
+}
+
 @keyframes phAnimation{
     0%{
         background-position:-100vw 0;
