@@ -45,8 +45,7 @@ body{
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    background-attachment:fixed;
-
+    
     filter:drop-shadow(-6px 6px 3px rgb(0,0,0,0.05));
     backdrop-filter:blur(4px);
     transition:all var(--trans2), border-radius 0s;
@@ -74,7 +73,7 @@ body{
 @media screen and (width <= 900px){
 
     .glass{
-        filter:drop-shadow(-6px 6px 3px rgb(0,0,0,0.05));
+        filter:none;
         backdrop-filter:none;
     }  
 
